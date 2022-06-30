@@ -1,0 +1,73 @@
+
+.m-padded-tb-mini{
+    padding-top: 0.2em !important;
+    padding-bottom: 0.2em !important;
+}
+.m-padded-tb-max{
+    padding-top: 2em !important;
+    padding-bottom: 2em !important;
+}
+/*字体*/
+.m-text-thin{
+    font-weight: 300 !important;
+}
+.m-text-spaced{
+    letter-spacing: 1px !important;
+}
+.m-text-lined{
+    line-height: 1.8;
+}
+.m-opacity-tiny{
+    opacity: 0.8;
+}
+.m-inline-block{
+    display: inline-block !important;
+}
+.m-margin-tb-tiny{
+    margin-top: 0.3em !important;
+    margin-bottom: 0.3em !important;
+}
+.m-margin-tb-big{
+    margin-top: 1em !important;
+    margin-bottom: 1em !important;
+}
+.image-size{
+    width: 200px;
+    height: 120px;
+}
+.m-black{
+    color: #333;
+}
+.m-top-right{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.m-hide{
+    display: none !important;
+}
+
+.m-container-small{
+    max-width: 60em !important;
+    margin: auto !important;
+}
+.m-padded-lr{
+    padding-left: 4em !important;
+    padding-right: 4em !important;
+}
+.img-size{
+    width: 100% !important;
+    height: 300px !important;
+}
+.m-shadow-small{
+    -webkit-box-shadow: 0 4px 8px rgba(0,0,0, 0.2) !important;
+    box-shadow: 0 4px 8px rgba(0,0,0, 0.2) !important;
+}
+@media screen and (max-width: 768px){
+    .m-mobile-hide{
+        display: none !important;
+    }
+    .m-hide{
+        display: block !important;
+    }
+}

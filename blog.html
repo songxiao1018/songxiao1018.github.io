@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博客详情</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css" >
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!--导航-->
+    <nav class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+        <div class="ui container">
+            <div class="ui inverted secondary stackable menu">
+                <h2 class="ui teal header item">个人博客</h2>
+                <a href="#" class="m-item item m-mobile-hide"><i class="home icon"></i>首页</a>
+                <a href="#" class="m-item item m-mobile-hide"><i class="idea icon"></i>分类</a>
+                <a href="#" class="m-item item m-mobile-hide"><i class="tags icon"></i>标签</a>
+                <a href="#" class="m-item item m-mobile-hide"><i class="info icon"></i>关于我</a>
+                <div class="m-item  right item m-mobile-hide">
+                    <div class="ui icon input">
+                        <input type="text"placeholder="Search...">
+                        <i class="search link icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="#" class="ui menu toggle black icon button m-top-right m-hide">
+            <i class="sidebar icon"></i>
+        </a>
+    </nav>
+
+    <!--中间-->
+    <div class="m-padded-tb-max m-container-small">
+        <div class="ui container">
+            <div class="ui top attached segment">
+                <div class="ui horizontal link list">
+                    <div class="item">
+                        <img src="image/pic1.png" alt="" class="ui avatar image">
+                        <div class="content"><a href="#" class="header">戴依婷</a></div>
+                    </div>
+                    <div class="item">
+                        <i class="calendar icon"></i>发布时间:2020-6-11
+                    </div>
+                    <div class="item">
+                        <i class="eye icon"></i>浏览次数:2
+                    </div>
+                </div>
+            </div>
+            <div class="ui attached segment">
+                <!--pic-->
+                <img src="image/pic2.jpg" alt="" class="ui fluid image img-size">
+            </div>
+            <div class="ui attached m-padded-tb-max segment">
+                <!--context-->
+                <div class="ui right aligned basic segment">
+                    <div class="ui orange basic label">原创</div>
+                </div>
+                <h2 class="ui center aligned  header">为什么Line Friends可以这么火？</h2>
+                <br>
+                <div id="content" class="m-padded-lr m-padded-tb-max">
+                    <p>自我认同是人们在不断地探索与选择的过程中逐渐获得的。有时我们会以为，找工作或者找对象等等的尝试，是一个“展现”自我认同的过程——我找的工作/对象反映了我是一个怎样的人、我的喜好、我的价值。</p>
+                    <p>但其实，在我们还在寻找自己的阶段，尤其对于成年初显期的人而言，去做出尝试或选择，更是一个“获得”自我认同的过程——无论喜欢或不喜欢，在每一次做出尝试/选择的时候，我们都会离了解自己更进一步。</p>
+                    <p>有时候，我们看不清自己，或许和我们与身边的人过分亲密，过度依赖与干涉有关。想要真正看清真正属于自己情绪、认知、行为举止，我们需要努力去辨别在一些情境中，哪些是他人的要求，哪些才是我的感受；哪些是他人的期许，哪些是我真正的选择。在这些时刻，不妨试着在内心向自己提出这些问题，做出一些思考。</p>
+                    <p>你有没有想象过，二十年后你理想中的一天的生活是什么样子？你的生活是已经充满了规律吗？还是你的生活中仍有很多不规律、新鲜又有挑战的事情？你结婚了吗？你定居在哪里？你有孩子吗？你的经济条件是什么样子，你日常生活中使用哪些物品和服务？你有很多新认识的朋友、还是只和一小圈子人一直保持着深厚的友谊……</p>
+                    <p>你对于这一天生活的想象越深入、越细节，越能帮你了解，你究竟渴望什么样的生活，你在生活各个方面的价值取向和偏好是什么样的。而这种了解，反过来又能帮你重新做出今天眼下的种种选择</p>
+                    <p>事实上，许多年轻人都对于自我认知方面存在迷茫、困惑和焦虑，你不必因为自己错过了青春期，又或者错过了成年初显期而感到惶恐，也不必为了快一点抵达而焦虑不安。</p>
+                    <p>因为“人生很长，你不用急，也不用慌”。</p>
+                </div>
+                <!--标签-->
+                <div class="m-padded-lr">
+                    <div class="ui basic teal label">自我认识</div>
+                </div>
+                <!--打赏-->
+                <div class="ui center aligned basic segment">
+                    <button class="ui basic orange circular button">打赏</button>
+                </div>
+            </div>
+            <div id="comment-container" class="ui bottom attached segment">
+                <!--留言区域列表-->
+                <div class="ui teal segment">
+                    <div class="ui threaded comments">
+                        <h3 class="ui dividing header">Comments</h3>
+                        <div class="comment">
+                            <a class="avatar">
+                                <img src="image/pic1.jpg">
+                            </a>
+                            <div class="content">
+                                <a class="author">匿名用户</a>
+                                <div class="metadata">
+                                    <span class="date">Today at 5:42PM</span>
+                                </div>
+                                <div class="text">
+                                    How artistic!
+                                </div>
+                                <div class="actions">
+                                    <a class="reply">回复</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="comment">
+                            <a class="avatar">
+                                <img src="image/pic2.jpg">
+                            </a>
+                            <div class="content">
+                                <a class="author">匿名用户</a>
+                                <div class="metadata">
+                                    <span class="date">Yesterday at 12:30AM</span>
+                                </div>
+                                <div class="text">
+                                    <p>This has been very useful for my research. Thanks as well!</p>
+                                </div>
+                                <div class="actions">
+                                    <a class="reply">回复</a>
+                                </div>
+                            </div>
+                            <div class="comments">
+                                <div class="comment">
+                                    <a class="avatar">
+                                        <img src="image/pic2.jpg">
+                                    </a>
+                                    <div class="content">
+                                        <a class="author">匿名用户 Hess</a>
+                                        <div class="metadata">
+                                            <span class="date">Just now</span>
+                                        </div>
+                                        <div class="text">
+                                            Elliot you are always so right :)
+                                        </div>
+                                        <div class="actions">
+                                            <a class="reply">回复</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="comment">
+                            <a class="avatar">
+                                <img src="image/pic1.jpg">
+                            </a>
+                            <div class="content">
+                                <a class="author">匿名用户</a>
+                                <div class="metadata">
+                                    <span class="date">5 days ago</span>
+                                </div>
+                                <div class="text">
+                                    Dude, this is awesome. Thanks so much
+                                </div>
+                                <div class="actions">
+                                    <a class="reply">回复</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui form">
+                    <div class="field">
+                        <textarea name="comment" placeholder="请输入..." rows="10"></textarea>
+                    </div>
+                    <div class="fields">
+                        <div class="field">
+                            <input type="text" name="nickname" placeholder="姓名">
+                        </div>
+                        <div class="field">
+                            <input type="text" name="email" placeholder="邮箱">
+                        </div>
+                        <div class="field">
+                            <button class="ui basic orange button">发布</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--底部-->
+    <footer class="ui inverted vertical segment m-padded-tb-max">
+        <div class="ui center aligned container">
+            <div class="ui inverted divided stackable grid">
+                <div class="three wide column">
+                    <div class="ui inverted link list">
+                        <div class="item">
+                            <img src="image/wechat.jpg" class="ui rounded image" alt=""style="width: 100px;">
+                        </div>
+                    </div>
+                </div>
+                <div class="four wide column">
+                    <h5 class="ui inverted header m-text-thin m-text-spaced ">最新博客</h5>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item">人生导师(my story)</a>
+                        <a href="#" class="item">心灵鸡汤(my video)</a>
+                        <a href="#" class="item">自我认知(my feel)</a>
+                    </div>
+                </div>
+                <div class="four wide column">
+                    <h5 class="ui inverted header m-text-thin m-text-spaced ">个人信息</h5>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item">WeChat:Yi-0802</a>
+                        <a href="#" class="item">QQ:1692774581</a>
+                    </div>
+                </div>
+                <div class="five wide column">
+                    <h5 class="ui inverted header m-text-thin m-text-spaced ">博客</h5>
+                    <p class="m-text-thin m-text-spaced m-opacity-tiny">这是我的个人博客，会定期分享我的故事,我对于自身的认识，希望可以给看我博客的人带来快乐</p>
+                </div>
+            </div>
+            <div class="ui inverted section divider"></div>
+            <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © 2020 - 2020 Rownn Designed by Rownn</p>
+        </div>
+    </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+
+    <script>
+        $('.menu.toggle').click(function () {
+            $('.m-item').toggleClass('m-mobile-hide')
+        })
+
+        // document.onmousedown = function(){
+        //     if(event.button == 2){
+        //         alert("当前页面不能使用右键！");
+        //         return false;
+        //     }
+        // }
+    </script>
+</body>
+</html>

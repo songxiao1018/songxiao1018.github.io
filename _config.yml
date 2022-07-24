@@ -1,3 +1,7 @@
+# Hexo Configuration
+## Docs: https://hexo.io/docs/configuration.html
+## Source: https://github.com/hexojs/hexo/
+
 theme: jekyll-theme-minimal
 
 title: 晓晓星空的主页

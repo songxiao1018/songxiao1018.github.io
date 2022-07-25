@@ -22,6 +22,11 @@ address: 南京市江宁区
 ## 近期更新
 
 ---
+
+2022.7.25
+
+> + [基于Micro：bit的吃豆子小游戏](https://songxiao1018.github.io/micro-bit-eat-ben/)
+
 2022.7.24
 
 > + [麦昆小车的遥控器代码](https://songxiao1018.github.io/micro-bit-out-car/)

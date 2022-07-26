@@ -29,5 +29,5 @@ address: 南京市江宁区
 
 2022.7.24
 
-> + [麦昆小车的遥控器代码](https://songxiao1018.github.io/micro-bit-out-car/)
-> + [关于麦昆小车的小车代码](https://songxiao1018.github.io/micro-bit-in-car/)
+> + [麦昆小车--遥控器代码](https://songxiao1018.github.io/micro-bit-out-car/)
+> + [麦昆小车--小车代码](https://songxiao1018.github.io/micro-bit-in-car/)

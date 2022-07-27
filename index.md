@@ -7,7 +7,7 @@
 ---
 name: xiao_xiao_sky | 晓晓星空
 
-email: 21130112@njxzc.edu.cn
+email: 15850618970@163.com
 
 phone: 158-5061-8970
 

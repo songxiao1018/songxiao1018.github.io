@@ -7,7 +7,7 @@
 ---
 name: xiao_xiao_sky | 晓晓星空
 
-email: 15850618970@163.com
+email: skyxiaoxiao@yeah.net
 
 phone: 158-5061-8970
 

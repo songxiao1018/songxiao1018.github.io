@@ -24,6 +24,14 @@ address: 南京市江宁区
 
 ---
 
+2023-5-23
+
+> + [暑期社会实践 活动安排（草案一）](https://songxiao1018.github.io/2023summer/)
+
+2023.2.14
+
+> + [基于Arduino的简易万能遥控器](https://songxiao1018.github.io/keyboard-nano/)
+
 2022.8.3
 
 > + [输出指定正方形](https://songxiao1018.github.io/python-draw/question1)

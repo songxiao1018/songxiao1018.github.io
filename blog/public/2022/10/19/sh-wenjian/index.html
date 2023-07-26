@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>linux中sh文件书写格式 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="linux下执行.sh文件的方法 .sh文件就是文本文件，如果要执行，需要使用chmod a+x xxx.sh来给可执行权限。   是bash脚本么 可以用touch test.sh创建test.sh文件vi test.sh编辑test.sh文件 加入内容 12#！&#x2F;bin&#x2F;bashmkdir test 保存退出。 chmod a+x test.sh给test.sh可执行权限 如test.sh文件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux中sh文件书写格式">
+<meta property="og:url" content="http://example.com/2022/10/19/sh-wenjian/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="linux下执行.sh文件的方法 .sh文件就是文本文件，如果要执行，需要使用chmod a+x xxx.sh来给可执行权限。   是bash脚本么 可以用touch test.sh创建test.sh文件vi test.sh编辑test.sh文件 加入内容 12#！&#x2F;bin&#x2F;bashmkdir test 保存退出。 chmod a+x test.sh给test.sh可执行权限 如test.sh文件">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-10-19T04:30:04.000Z">
+<meta property="article:modified_time" content="2023-07-23T14:19:12.003Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-sh-wenjian" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/10/19/sh-wenjian/" class="article-date">
+  <time class="dt-published" datetime="2022-10-19T04:30:04.000Z" itemprop="datePublished">2022-10-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      linux中sh文件书写格式
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="linux下执行-sh文件的方法"><a href="#linux下执行-sh文件的方法" class="headerlink" title="linux下执行.sh文件的方法"></a>linux下执行.sh文件的方法</h1><blockquote>
+<p><code>.sh</code>文件就是文本文件，如果要执行，需要使用<code>chmod a+x xxx.sh</code>来给可执行权限。 </p>
+</blockquote>
+<p>是bash脚本么</p>
+<p>可以用<code>touch test.sh</code>创建<code>test.sh</code>文件<code>vi test.sh</code>编辑<code>test.sh</code>文件</p>
+<p>加入内容</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#！/bin/bash</span></span><br><span class="line"><span class="built_in">mkdir</span> <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+<p>保存退出。</p>
+<p><code>chmod a+x test.sh</code>给<code>test.sh</code>可执行权限</p>
+<p>如<code>test.sh</code>文件在<code>/home/work</code>文件下</p>
+<p>执行</p>
+<blockquote>
+<p>方法一 本身目录下运行</p>
+</blockquote>
+<p>进入<code>cd /home/workwen</code>文件下</p>
+<p>执行<code>./test.sh</code></p>
+<p>命令会在当前目录下创建一个<code>“test”</code>目录。</p>
+<blockquote>
+<p>方法二 绝对路劲运行</p>
+</blockquote>
+<p>执行<code>/home/work/test.sh</code></p>
+<blockquote>
+<p>方法三 本身目录下运行</p>
+</blockquote>
+<p><code>sh test.sh</code></p>
+<!-- 
+C代码
+
+1.man sh
+
+man sh 来看看sh 的介绍～
+
+linux.sh语法 
+-->
+
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><ol>
+<li>开头</li>
+</ol>
+<p>程序必须以下面的行开始（必须放在文件的第一行）：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br></pre></td></tr></table></figure>
+
+<p>符号<code>#!</code>用来告诉系统它后面的参数是用来执行该文件的程序。在这个例子中我们使用<code>/bin/sh</code>来执行程序。</p>
+<p>当编写脚本完成时，如果要执行该脚本，还必须使其可执行。</p>
+<p>要使编写脚本可执行：</p>
+<p>编译<code>chmod +x filename</code>这样才能用<code>./filename</code>来运行</p>
+<ol start="2">
+<li>注释</li>
+</ol>
+<p>在进行<code>shell</code>编程时，以#开头的句子表示注释，直到这一行的结束。我们真诚地建议您在程序中使用注释。</p>
+<p>如果您使用了注释，那么即使相当长的时间内没有使用该脚本，您也能在很短的时间内明白该脚本的作用及工作原理。</p>
+<ol start="3">
+<li>变量</li>
+</ol>
+<p>在其他编程语言中您必须使用变量。在shell编程中，所有的变量都由字符串组成，并且您不需要对变量进行声明。要赋值给一个变量，您可以这样写：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"> <span class="comment">#对变量赋值：</span></span><br><span class="line"> a=”hello world”</span><br><span class="line"><span class="comment"># 现在打印变量a的内容：</span></span><br><span class="line"> <span class="built_in">echo</span> “A is:”</span><br><span class="line"> <span class="built_in">echo</span> <span class="variable">$a</span></span><br></pre></td></tr></table></figure>
+
+<p>有时候变量名很容易与其他文字混淆，比如：</p>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">num=<span class="number">2</span></span><br><span class="line"><span class="built_in">echo</span> “this is the $numnd”</span><br></pre></td></tr></table></figure>
+
+<p>这并不会打印出<code>this is the 2nd</code>，而仅仅打印<code>this is the</code>，因为<code>shell</code>会去搜索变量<code>numnd</code>的值，但是这个变量时没有值的。可以使用花括号来告诉<code>shell</code>我们要打印的是<code>num</code>变量：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">num=2</span><br><span class="line"><span class="built_in">echo</span> “this is the <span class="variable">$&#123;num&#125;</span>nd”</span><br></pre></td></tr></table></figure>
+
+<p>这将打印： <code>this is the 2nd</code></p>
+<ol start="4">
+<li>环境变量</li>
+</ol>
+<p>由<code>export</code>关键字处理过的变量叫做环境变量。我们不对环境变量进行讨论，因为通常情况下仅仅在登录脚本中使用环境变量。</p>
+<ol start="5">
+<li>Shell命令和流程控制</li>
+</ol>
+<p>在shell脚本中可以使用三类命令：</p>
+<p>1)Unix 命令:</p>
+<p>虽然在shell脚本中可以使用任意的unix命令，但是还是由一些相对更常用的命令。这些命令通常是用来进行文件和文字操作的。</p>
+<p>常用命令语法及功能</p>
+<p>echo “some text”: 将文字内容打印在屏幕上</p>
+<p>ls: 文件列表</p>
+<p>wc –l file   wc -w file   wc -c file: 计算文件行数；计算文件中的单词数；计算文件中的字符数</p>
+<p>cp sourcefile destfile: 文件拷贝</p>
+<p>mv oldname newname : 重命名文件或移动文件</p>
+<p>rm file: 删除文件</p>
+<p>grep ‘pattern’ file: 在文件内搜索字符串比如：grep ’searchstring’ file.txt</p>
+<p>cut -b colnum file: 指定欲显示的文件内容范围，并将它们输出到标准输出设备比如：输出每行第5个到第9个字符cut -b5-9 file.txt千万不要和cat命令混淆，</p>
+<p>这是两个完全不同的命令</p>
+<p>cat file.txt: 输出文件内容到标准输出设备（屏幕）上</p>
+<p>file somefile: 得到文件类型</p>
+<p>read var: 提示用户输入，并将输入赋值给变量</p>
+<p>sort file.txt: 对file.txt文件中的行进行排序</p>
+<p>uniq: 删除文本文件中出现的重复行，比如： sort file.txt | uniq</p>
+<p>expr: 进行数学运算Example: add 2 and 3   为   expr 2 “+” 3</p>
+<p>find: 搜索文件比如：根据文件名搜索find . -name filename -print</p>
+<p>tee: 将数据输出到标准输出设备(屏幕) 和文件比如：somecommand | tee outfile</p>
+<p>basename file: 返回不包含路径的文件名比如： basename &#x2F;bin&#x2F;tux将返回 tux</p>
+<p>dirname file: 返回文件所在路径比如：dirname &#x2F;bin&#x2F;tux将返回 &#x2F;bin</p>
+<p>head file: 打印文本文件开头几行</p>
+<p>tail file : 打印文本文件末尾几行</p>
+<p>sed: Sed是一个基本的查找替换程序。可以从标准输入（比如命令管道）读入文本，并将结果输出到标准输出（屏幕）。该命令采用正则表达式（见参考）进行搜索。不要和shell中的通配符相混淆。比如：将linuxfocus替换为 LinuxFocus ：cat text.file | sed ’s&#x2F;linuxfocus&#x2F;LinuxFocus&#x2F;’ &gt;newtext.file</p>
+<p>awk: awk 用来从文本文件中提取字段。缺省地，字段分割符是空格，可以使用-F指定其他分割符。</p>
+<p>cat  file.txt | awk -F, ‘{print $1 “,” $3}’这里我们使用，作为字段分割符，同时打印第一个和第三个字段。如果该文件内容如下： Adam Bor, 34, IndiaKerryMiller, 22, USA命令输出结果为：Adam Bor, IndiaKerry Miller, USA</p>
+<ol start="2">
+<li>概念: 管道, 重定向和 backtick</li>
+</ol>
+<p>这些不是系统命令，但是他们真的很重要。</p>
+<p>管道 (|) 将一个命令的输出作为另外一个命令的输入。</p>
+<p>grep “hello” file.txt | wc -l</p>
+<p>在file.txt中搜索包含有”hello”的行并计算其行数。</p>
+<p>在这里grep命令的输出作为wc命令的输入。当然您可以使用多个命令。</p>
+<p>重定向：将命令的结果输出到文件，而不是标准输出（屏幕）。</p>
+<blockquote>
+<p>写入文件并覆盖旧文件</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>追加到文件的尾部，保留旧文件内容。</p>
+</blockquote>
+</blockquote>
+<p>反短斜线</p>
+<p>使用反短斜线可以将一个命令的输出作为另外一个命令的一个命令行参数。</p>
+<p>命令：</p>
+<p>find . -mtime  -1  -type  f  -print</p>
+<p>用来查找过去24小时（-mtime –2则表示过去48小时）内修改过的文件。如果您想将所有查找到的文件打一个包，则可以使用以下linux 脚本：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="comment"># The ticks are backticks (`) not normal quotes (‘):</span></span><br><span class="line">tar -zcvf  lastmod.tar.gz `find . -mtime -1 -<span class="built_in">type</span> f -<span class="built_in">print</span>`</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>流程控制</li>
+</ol>
+<p>1.if</p>
+<p>“if” 表达式 如果条件为真则执行then后面的部分：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ….; <span class="keyword">then</span></span><br><span class="line">….</span><br><span class="line"><span class="keyword">elif</span> ….; <span class="keyword">then</span></span><br><span class="line">….</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">….</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+
+<p>大多数情况下，可以使用测试命令来对条件进行测试。比如可以比较字符串、判断文件是否存在及是否可读等等…</p>
+<p>通常用” [ ] “来表示条件测试。注意这里的空格很重要。要确保方括号的空格。</p>
+<p>[ -f “somefile” ] ：判断是否是一个文件</p>
+<p>[ -x “&#x2F;bin&#x2F;ls” ] ：判断&#x2F;bin&#x2F;ls是否存在并有可执行权限</p>
+<p>[ -n “$var” ] ：判断$var变量是否有值</p>
+<p>[ “$a” &#x3D; “$b” ] ：判断$a和$b是否相等</p>
+<p>执行man test可以查看所有测试表达式可以比较和判断的类型。</p>
+<p>直接执行以下脚本：</p>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line"><span class="keyword">if</span> [ &quot;$SHELL&quot; = &quot;/bin/bash&quot; ]; then</span><br><span class="line"><span class="built_in">echo</span> “your login shell is the bash (bourne again shell)”</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line"><span class="built_in">echo</span> “your login shell is <span class="keyword">not</span> bash but $SHELL”</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<p>变量$SHELL包含了登录shell的名称，我们和&#x2F;bin&#x2F;bash进行了比较。</p>
+<p>快捷操作符</p>
+<p>熟悉C语言的朋友可能会很喜欢下面的表达式：</p>
+<p>[ -f “&#x2F;etc&#x2F;shadow” ] &amp;&amp; echo “This computer uses shadow passwors”</p>
+<p>这里 &amp;&amp; 就是一个快捷操作符，如果左边的表达式为真则执行右边的语句。</p>
+<p>您也可以认为是逻辑运算中的与操作。上例中表示如果&#x2F;etc&#x2F;shadow文件存在则打印” This computer uses shadow passwors”。同样或操作(||)在shell编程中也是可用的。这里有个例子：</p>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">mailfolder=/var/spool/mail/james</span><br><span class="line">[ -r &quot;$mailfolder&quot; ]‘ ‘&#123; <span class="built_in">echo</span> “Can <span class="keyword">not</span> read $mailfolder” ; <span class="keyword">exit</span> <span class="number">1</span>; &#125;</span><br><span class="line"><span class="built_in">echo</span> “$mailfolder has mail from:”</span><br><span class="line">grep “^From ” $mailfolder</span><br></pre></td></tr></table></figure>
+
+<p>该脚本首先判断mailfolder是否可读。如果可读则打印该文件中的”From” 一行。如果不可读则或操作生效，打印错误信息后脚本退出。这里有个问题，那就是我们必须有两个命令：</p>
+<p>◆打印错误信息</p>
+<p>◆退出程序</p>
+<p>我们使用花括号以匿名函数的形式将两个命令放到一起作为一个命令使用。一般函数将在下文提及。</p>
+<p>不用与和或操作符，我们也可以用if表达式作任何事情，但是使用与或操作符会更便利很多。</p>
+<!-- 
+https://blog.csdn.net/ljp812184246/article/details/52585650 
+-->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/10/19/sh-wenjian/" data-id="clkjdd1cy003e98ajctme6yr2" data-title="linux中sh文件书写格式" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/10/19/linux-qidong/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          linux系统开关机基本命令
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/10/19/linux-kaijiqidong/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">linux设置开机启动（待完善）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Minecraft/">Minecraft</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E7%B1%BB/">分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E5%8F%91/">开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A4%BE%E5%9B%A2/">社团</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blander/" rel="tag">Blander</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CAD/" rel="tag">CAD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GUI/" rel="tag">GUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Novelai/" rel="tag">Novelai</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSD1309/" rel="tag">SSD1309</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STEAM/" rel="tag">STEAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STEAM%E7%A4%BE/" rel="tag">STEAM社</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VNC/" rel="tag">VNC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/" rel="tag">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arduino/" rel="tag">arduino</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/colour/" rel="tag">colour</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/learn/" rel="tag">learn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mc/" rel="tag">mc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/micro-bit/" rel="tag">micro:bit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nextcloud/" rel="tag">nextcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag">学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%87%E7%AD%BE/" rel="tag">标签</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" rel="tag">树莓派</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%86%E8%88%AA%E6%9D%AF/" rel="tag">领航杯</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Blander/" style="font-size: 10px;">Blander</a> <a href="/tags/CAD/" style="font-size: 12px;">CAD</a> <a href="/tags/GUI/" style="font-size: 10px;">GUI</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/Novelai/" style="font-size: 10px;">Novelai</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SSD1309/" style="font-size: 12px;">SSD1309</a> <a href="/tags/STEAM/" style="font-size: 10px;">STEAM</a> <a href="/tags/STEAM%E7%A4%BE/" style="font-size: 14px;">STEAM社</a> <a href="/tags/VNC/" style="font-size: 10px;">VNC</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/arduino/" style="font-size: 12px;">arduino</a> <a href="/tags/colour/" style="font-size: 10px;">colour</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/learn/" style="font-size: 10px;">learn</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mc/" style="font-size: 12px;">mc</a> <a href="/tags/micro-bit/" style="font-size: 16px;">micro:bit</a> <a href="/tags/nextcloud/" style="font-size: 10px;">nextcloud</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/python/" style="font-size: 18px;">python</a> <a href="/tags/windows/" style="font-size: 12px;">windows</a> <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 12px;">学习</a> <a href="/tags/%E6%A0%87%E7%AD%BE/" style="font-size: 12px;">标签</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" style="font-size: 12px;">树莓派</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">网络</a> <a href="/tags/%E9%A2%86%E8%88%AA%E6%9D%AF/" style="font-size: 10px;">领航杯</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">July 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">January 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">August 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/1000/12/">December 1000</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/07/26/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-HC-SR04/">linux-pi-HC-SR04</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-python-yolo5/">linux-python-yolo5</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-SSD1309/">linux-pi-SSD1309</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-MPU6050/">MPU6050-pi</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>在linux环境中安装git环境 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Linux下Git和GitHub使用方法总结1. Linux下Git和GitHub环境的搭建 第一步： 安装Git，使用命令 “sudo apt-get install git”  第二步： 创建GitHub帐号  第三步： 生成ssh key，使用命令 “ssh-keygen -t rsa -C “&amp;#x79;&amp;#111;&amp;#x75;&amp;#114;&amp;#95;&amp;#101;&amp;#x6d;&amp;#97;&amp;#x">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在linux环境中安装git环境">
+<meta property="og:url" content="http://example.com/2022/10/19/linux-git/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Linux下Git和GitHub使用方法总结1. Linux下Git和GitHub环境的搭建 第一步： 安装Git，使用命令 “sudo apt-get install git”  第二步： 创建GitHub帐号  第三步： 生成ssh key，使用命令 “ssh-keygen -t rsa -C “&amp;#x79;&amp;#111;&amp;#x75;&amp;#114;&amp;#95;&amp;#101;&amp;#x6d;&amp;#97;&amp;#x">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-10-19T11:03:09.000Z">
+<meta property="article:modified_time" content="2023-07-23T14:19:12.244Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-linux-git" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/10/19/linux-git/" class="article-date">
+  <time class="dt-published" datetime="2022-10-19T11:03:09.000Z" itemprop="datePublished">2022-10-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      在linux环境中安装git环境
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Linux下Git和GitHub使用方法总结"><a href="#Linux下Git和GitHub使用方法总结" class="headerlink" title="Linux下Git和GitHub使用方法总结"></a>Linux下Git和GitHub使用方法总结</h1><h2 id="1-Linux下Git和GitHub环境的搭建"><a href="#1-Linux下Git和GitHub环境的搭建" class="headerlink" title="1. Linux下Git和GitHub环境的搭建"></a>1. Linux下Git和GitHub环境的搭建</h2><ul>
+<li><p>第一步： 安装Git，使用命令 “sudo apt-get install git”</p>
+</li>
+<li><p>第二步： 创建GitHub帐号</p>
+</li>
+<li><p>第三步： 生成ssh key，使用命令 “ssh-keygen -t rsa -C “<a href="mailto:&#x79;&#111;&#x75;&#114;&#95;&#101;&#x6d;&#97;&#x69;&#108;&#x40;&#121;&#111;&#x75;&#x72;&#x65;&#x6d;&#97;&#105;&#x6c;&#x2e;&#99;&#111;&#x6d;">&#x79;&#111;&#x75;&#114;&#95;&#101;&#x6d;&#97;&#x69;&#108;&#x40;&#121;&#111;&#x75;&#x72;&#x65;&#x6d;&#97;&#105;&#x6c;&#x2e;&#99;&#111;&#x6d;</a>“”，your_email是你的email</p>
+</li>
+<li><p>第四步： 回到github，进入Account Settings，左边选择SSH Keys，Add SSH Key,title随便填，粘贴key。</p>
+</li>
+<li><p>第五步： 测试ssh key是否成功，使用命令“ssh -T <a href="mailto:&#x67;&#105;&#x74;&#x40;&#x67;&#105;&#116;&#x68;&#117;&#98;&#46;&#99;&#111;&#109;">&#x67;&#105;&#x74;&#x40;&#x67;&#105;&#116;&#x68;&#117;&#98;&#46;&#99;&#111;&#109;</a>”，如果出现You’ve successfully authenticated, but GitHub does not provide shell access 。这就表示已成功连上github。</p>
+</li>
+</ul>
+<p>第六步： 配置Git的配置文件，username和email</p>
+<p>git config –global user.name “your name” &#x2F;&#x2F;配置用户名</p>
+<p>git config –global user.email “your email” &#x2F;&#x2F;配置email</p>
+<p>2 利用Git从本地上传到GitHub</p>
+<p>第一步： 进入要所要上传文件的目录输入命令 “git init”</p>
+<p>第二步： 创建一个本地仓库origin，使用命令 “git remote add origin <a href="mailto:&#103;&#105;&#116;&#64;&#x67;&#x69;&#x74;&#104;&#x75;&#98;&#46;&#x63;&#x6f;&#109;">&#103;&#105;&#116;&#64;&#x67;&#x69;&#x74;&#104;&#x75;&#98;&#46;&#x63;&#x6f;&#109;</a>:yourName&#x2F;yourRepo.git”<br>youname是你的GitHub的用户名，yourRepo是你要上传到GitHub的仓库</p>
+<p>第三步： 比如你要添加一个文件xxx到本地仓库，使用命令 “git add xxx”，可以使用“git add .”自动判断添加哪些文件</p>
+<p>然后把这个添加提交到本地的仓库，使用命令 ”git commit -m ”说明这次的提交“ “</p>
+<p>最后把本地仓库origin提交到远程的GitHub仓库，使用命令 ”git push origin master“</p>
+<p>3 从GitHub克隆项目到本地</p>
+<p>第一步： 到GitHub的某个仓库，然后复制右边的有个“HTTPS clone url”</p>
+<p>第二步： 回到要存放的目录下，使用命令 “git clone <a target="_blank" rel="noopener" href="https://github.com/chenguolin/scrapy.git%22%EF%BC%8C%E7%BA%A2%E8%89%B2%E7%9A%84url%E5%8F%AA%E6%98%AF%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90">https://github.com/chenguolin/scrapy.git&quot;，红色的url只是一个例子</a></p>
+<p>第三步： 如果本地的版本不是最新的，可以使用命令 “git fetch origin”，origin是本地仓库</p>
+<p>第四步： 把更新的内容合并到本地分支，可以使用命令 “git merge origin&#x2F;master”</p>
+<p>如果你不想手动去合并，那么你可以使用： git pull &lt;本地仓库&gt; master &#x2F;&#x2F; 这个命令可以拉去最新版本并自动合并</p>
+<p>4 GitHub的分支管理</p>
+<p>创建</p>
+<p>1 创建一个本地分支： git branch &lt;新分支名字&gt;</p>
+<p>2 将本地分支同步到GitHub上面： git push &lt;本地仓库名&gt; &lt;新分支名&gt;</p>
+<p>3 切换到新建立的分支： git checkout &lt;新分支名&gt;</p>
+<p>4 为你的分支加入一个新的远程端： git remote add &lt;远程端名字&gt; &lt;地址&gt;</p>
+<p>5 查看当前仓库有几个分支: git branch</p>
+<p>删除</p>
+<p>1 从本地删除一个分支： git branch -d &lt;分支名称&gt;</p>
+<p>2 同步到GitHub上面删除这个分支： git push &lt;本地仓库名&gt; :&lt;GitHub端分支&gt;</p>
+<p>5 常见错误</p>
+<p>1 如果出现报错为ERROR: Repository not found.fatal: The remote end hung up unexpectedly则代表你的 origin 的url 链接有误，可能是创建错误，也可能是这个 <a href="mailto:&#x67;&#105;&#116;&#64;&#103;&#105;&#116;&#104;&#x75;&#x62;&#46;&#99;&#x6f;&#109;">&#x67;&#105;&#116;&#64;&#103;&#105;&#116;&#104;&#x75;&#x62;&#46;&#99;&#x6f;&#109;</a>:xxx&#x2F;new-project.git url 指定不正确。重新创建。</p>
+<p>Git 的详细介绍：请点这里<a target="_blank" rel="noopener" href="https://www.linuxidc.com/Linux/2013-10/91054.htm">https://www.linuxidc.com/Linux/2013-10/91054.htm</a><br>Git 的下载地址：请点这里<a target="_blank" rel="noopener" href="https://www.linuxidc.com/down.aspx?id=1022">https://www.linuxidc.com/down.aspx?id=1022</a></p>
+<p>推荐阅读：</p>
+<p>如何在 GitHub 建立组织 <a target="_blank" rel="noopener" href="http://www.linuxidc.com/Linux/2013-08/88197.htm">http://www.linuxidc.com/Linux/2013-08/88197.htm</a></p>
+<p>GitHub Linux下使用方法 <a target="_blank" rel="noopener" href="http://www.linuxidc.com/Linux/2013-06/86417.htm">http://www.linuxidc.com/Linux/2013-06/86417.htm</a></p>
+<p>Windows下Eclipse搭建GitHub开发环境图文教程 <a target="_blank" rel="noopener" href="http://www.linuxidc.com/Linux/2013-06/85372.htm">http://www.linuxidc.com/Linux/2013-06/85372.htm</a></p>
+<p>R语言 3.0.1 源码已经提交到 GitHub <a target="_blank" rel="noopener" href="http://www.linuxidc.com/Linux/2013-05/84425.htm">http://www.linuxidc.com/Linux/2013-05/84425.htm</a></p>
+<p>Git权威指南 PDF高清中文版 <a target="_blank" rel="noopener" href="http://www.linuxidc.com/Linux/2013-10/91053.htm">http://www.linuxidc.com/Linux/2013-10/91053.htm</a></p>
+<p>linux</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/10/19/linux-git/" data-id="clkjdd1bg000w98ajcbjz9f3d" data-title="在linux环境中安装git环境" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/10/19/linux-sh/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          linux中sh文件使用方法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/10/19/linux-jincheng/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">查看linux系统中的进程</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Minecraft/">Minecraft</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E7%B1%BB/">分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E5%8F%91/">开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A4%BE%E5%9B%A2/">社团</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blander/" rel="tag">Blander</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CAD/" rel="tag">CAD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GUI/" rel="tag">GUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Novelai/" rel="tag">Novelai</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSD1309/" rel="tag">SSD1309</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STEAM/" rel="tag">STEAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STEAM%E7%A4%BE/" rel="tag">STEAM社</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VNC/" rel="tag">VNC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/" rel="tag">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arduino/" rel="tag">arduino</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/colour/" rel="tag">colour</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/learn/" rel="tag">learn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mc/" rel="tag">mc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/micro-bit/" rel="tag">micro:bit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nextcloud/" rel="tag">nextcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag">学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%87%E7%AD%BE/" rel="tag">标签</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" rel="tag">树莓派</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%86%E8%88%AA%E6%9D%AF/" rel="tag">领航杯</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Blander/" style="font-size: 10px;">Blander</a> <a href="/tags/CAD/" style="font-size: 12px;">CAD</a> <a href="/tags/GUI/" style="font-size: 10px;">GUI</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/Novelai/" style="font-size: 10px;">Novelai</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SSD1309/" style="font-size: 12px;">SSD1309</a> <a href="/tags/STEAM/" style="font-size: 10px;">STEAM</a> <a href="/tags/STEAM%E7%A4%BE/" style="font-size: 14px;">STEAM社</a> <a href="/tags/VNC/" style="font-size: 10px;">VNC</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/arduino/" style="font-size: 12px;">arduino</a> <a href="/tags/colour/" style="font-size: 10px;">colour</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/learn/" style="font-size: 10px;">learn</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mc/" style="font-size: 12px;">mc</a> <a href="/tags/micro-bit/" style="font-size: 16px;">micro:bit</a> <a href="/tags/nextcloud/" style="font-size: 10px;">nextcloud</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/python/" style="font-size: 18px;">python</a> <a href="/tags/windows/" style="font-size: 12px;">windows</a> <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 12px;">学习</a> <a href="/tags/%E6%A0%87%E7%AD%BE/" style="font-size: 12px;">标签</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" style="font-size: 12px;">树莓派</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">网络</a> <a href="/tags/%E9%A2%86%E8%88%AA%E6%9D%AF/" style="font-size: 10px;">领航杯</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">July 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">January 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">August 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/1000/12/">December 1000</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/07/26/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-HC-SR04/">linux-pi-HC-SR04</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-python-yolo5/">linux-python-yolo5</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-SSD1309/">linux-pi-SSD1309</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-MPU6050/">MPU6050-pi</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

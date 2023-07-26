@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>linux中配置vnc登录 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="debian vnc 配置 介绍 (Introduction)Virtual Network Computing, or VNC, is a connection system that allows you to use your keyboard and mouse to interact with a graphical desktop environment on a remote ser">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux中配置vnc登录">
+<meta property="og:url" content="http://example.com/2022/10/18/vnc-peizhi/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="debian vnc 配置 介绍 (Introduction)Virtual Network Computing, or VNC, is a connection system that allows you to use your keyboard and mouse to interact with a graphical desktop environment on a remote ser">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-10-18T11:12:12.000Z">
+<meta property="article:modified_time" content="2023-07-23T14:19:11.624Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="VNC">
+<meta property="article:tag" content="GUI">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-vnc-peizhi" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/10/18/vnc-peizhi/" class="article-date">
+  <time class="dt-published" datetime="2022-10-18T11:12:12.000Z" itemprop="datePublished">2022-10-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      linux中配置vnc登录
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>debian vnc 配置</p>
+<p>介绍 (Introduction)<br>Virtual Network Computing, or VNC, is a connection system that allows you to use your keyboard and mouse to interact with a graphical desktop environment on a remote server. It makes managing files, software, and settings on a remote server easier for users who are not yet comfortable with the command line.</p>
+<p>虚拟网络计算 (VNC)是一种连接系统，使您可以使用键盘和鼠标与远程服务器上的图形桌面环境进行交互。 对于尚不熟悉命令行的用户，它使在远程服务器上管理文件，软件和设置更加容易。</p>
+<p>In this guide, you’ll set up a VNC server on a Debian 10 server and connect to it securely through an SSH tunnel. You’ll use TightVNC, a fast and lightweight remote control package. This choice will ensure that our VNC connection will be smooth and stable even on slower internet connections.</p>
+<p>在本指南中，您将在Debian 10服务器上设置VNC服务器，并通过SSH隧道安全地连接到该服务器。 您将使用TightVNC ，这是一种快速，轻便的远程控制程序包。 此选择将确保即使在较慢的Internet连接上，我们的VNC连接也将保持平稳。</p>
+<p>先决条件 (Prerequisites)<br>To complete this tutorial, you’ll need:</p>
+<p>要完成本教程，您需要：</p>
+<p>One Debian 10 server set up by following the Debian 10 initial server setup guide, including a non-root user with sudo access and a firewall.</p>
+<p>按照Debian 10初始服务器设置指南设置一台Debian 10服务器，包括具有sudo访问权限和防火墙的非root用户。</p>
+<p>On Windows, you can use TightVNC, RealVNC, or UltraVNC.</p>
+<p>在Windows上，可以使用TightVNC ， RealVNC或UltraVNC 。</p>
+<p>On macOS, you can use the built-in Screen Sharing program, or can use a cross-platform app like RealVNC.</p>
+<p>在macOS上，您可以使用内置的屏幕共享程序，也可以使用RealVNC之类的跨平台应用程序。</p>
+<p>On Linux, you can choose from many options, including vinagre, krdc, RealVNC, or TightVNC.</p>
+<p>在Linux上，可以从许多选项中进行选择，包括vinagre ， krdc ， RealVNC或TightVNC 。</p>
+<p>步骤1 —安装桌面环境和VNC服务器 (Step 1 — Installing the Desktop Environment and VNC Server)<br>By default, a Debian 10 server does not come with a graphical desktop environment or a VNC server installed, so we’ll begin by installing those. Specifically, we will install packages for the latest Xfce desktop environment and the TightVNC package available in the official Debian repository.</p>
+<p>默认情况下，Debian 10服务器未安装图形桌面环境或VNC服务器，因此我们将从安装它们开始。 具体来说，我们将为最新的Xfce桌面环境安装软件包，并在Debian官方存储库中提供TightVNC软件包。</p>
+<p>On your server, update your list of packages:</p>
+<p>在您的服务器上，更新软件包列表：</p>
+<p>sudo apt update<br>sudo apt更新<br>Now install the Xfce desktop environment on your server:</p>
+<p>现在，在您的服务器上安装Xfce桌面环境：</p>
+<p>sudo apt install xfce4 xfce4-goodies<br>sudo apt安装xfce4 xfce4-goodies<br>During the installation, you’ll be prompted to select your keyboard layout from a list of possible options. Choose the one that’s appropriate for your language and press Enter. The installation will continue.</p>
+<p>在安装过程中，系统会提示您从可能的选项列表中选择键盘布局。 选择适合您的语言的一种，然后按Enter 。 安装将继续。</p>
+<p>Once the installation completes, install the TightVNC server:</p>
+<p>安装完成后，安装TightVNC服务器：</p>
+<p>sudo apt install tightvncserver<br>sudo apt安装tightvncserver<br>To complete the VNC server’s initial configuration after installation, use the vncserver command to set up a secure password and create the initial configuration files:</p>
+<p>要在安装后完成VNC服务器的初始配置，请使用vncserver命令设置安全密码并创建初始配置文件：</p>
+<p>vncserver<br>vncserver<br>You’ll be prompted to enter and verify a password to access your machine remotely:</p>
+<p>系统将提示您输入并验证密码以远程访问您的计算机：</p>
+<pre><code>Output
+</code></pre>
+<p>   You will require a password to access your desktops.</p>
+<p>Password:<br>Verify:<br>The password must be between six and eight characters long. Passwords more than 8 characters will be truncated automatically.</p>
+<p>密码长度必须介于六到八个字符之间。 超过8个字符的密码将被自动截断。</p>
+<p>Once you verify the password, you’ll have the option to create a a view-only password. Users who log in with the view-only password will not be able to control the VNC instance with their mouse or keyboard. This is a helpful option if you want to demonstrate something to other people using your VNC server, but this isn’t required.</p>
+<p>验证密码后，您可以选择创建仅查看密码。 使用仅查看密码登录的用户将无法使用其鼠标或键盘来控制VNC实例。 如果您想向使用VNC服务器的其他人演示某些内容，这是一个有用的选项，但这不是必需的。</p>
+<p>The process then creates the necessary default configuration files and connection information for the server:</p>
+<p>然后，该过程为服务器创建必要的默认配置文件和连接信息：</p>
+<pre><code>Output
+</code></pre>
+<p>   Would you like to enter a view-only password (y&#x2F;n)? n<br>xauth:  file &#x2F;home&#x2F;sammy&#x2F;.Xauthority does not exist</p>
+<p>New ‘X’ desktop is your_hostname:1</p>
+<p>Creating default startup script &#x2F;home&#x2F;sammy&#x2F;.vnc&#x2F;xstartup<br>Starting applications specified in &#x2F;home&#x2F;sammy&#x2F;.vnc&#x2F;xstartup<br>Log file is &#x2F;home&#x2F;sammy&#x2F;.vnc&#x2F;your_hostname:1.log<br>Now let’s configure the VNC server.</p>
+<p>现在，让我们配置VNC服务器。</p>
+<p>步骤2 —配置VNC服务器 (Step 2 — Configuring the VNC Server)<br>The VNC server needs to know which commands to execute when it starts up. Specifically, VNC needs to know which graphical desktop it should connect to.</p>
+<p>VNC服务器启动时需要知道要执行哪些命令。 具体来说，VNC需要知道它应该连接到哪个图形桌面。</p>
+<p>These commands are located in a configuration file called xstartup in the .vnc folder under your home directory. The startup script was created when you ran the vncserver command in the previous step, but we’ll create our own to launch the Xfce desktop.</p>
+<p>这些命令位于主目录下.vnc文件夹中名为xstartup的配置文件中。 在上一步中运行vncserver命令时创建了启动脚本，但是我们将创建自己的脚本来启动Xfce桌面。</p>
+<p>When VNC is first set up, it launches a default server instance on port 5901. This port is called a display port, and is referred to by VNC as :1. VNC can launch multiple instances on other display ports, like :2, :3, and so on.</p>
+<p>首次设置VNC时，它将在端口5901上启动默认服务器实例。 此端口称为显示端口 ，VNC将该端口称为:1 。 VNC可以在其他显示端口上启动多个实例，例如:2 ， :3等。</p>
+<p>Because we are going to be changing how the VNC server is configured, first stop the VNC server instance that is running on port 5901 with the following command:</p>
+<p>因为我们将要更改VNC服务器的配置方式，所以首先使用以下命令停止在端口5901上运行的VNC服务器实例：</p>
+<p>vncserver -kill :1<br>vncserver -kill：1<br>The output should look like this, although you’ll see a different PID:</p>
+<p>输出将看起来像这样，尽管您将看到一个不同的PID：</p>
+<pre><code>Output
+</code></pre>
+<p>   Killing Xtightvnc process ID 17648<br>Before you modify the xstartup file, back up the original:</p>
+<p>在修改xstartup文件之前，请备份原始文件：</p>
+<p>mv ~&#x2F;.vnc&#x2F;xstartup ~&#x2F;.vnc&#x2F;xstartup.bak<br>mv〜&#x2F; .vnc &#x2F; xstartup〜&#x2F; .vnc &#x2F; xstartup.bak<br>Now create a new xstartup file and open it in your text editor:</p>
+<p>现在创建一个新的xstartup文件，并在文本编辑器中将其打开：</p>
+<p>nano ~&#x2F;.vnc&#x2F;xstartup<br>纳米〜&#x2F; .vnc &#x2F; xstartup<br>Commands in this file are executed automatically whenever you start or restart the VNC server. We need VNC to start our desktop environment if it’s not already started. Add these commands to the file:</p>
+<p>每当启动或重新启动VNC服务器时，该文件中的命令就会自动执行。 如果尚未启动桌面环境，我们需要VNC来启动它。 将以下命令添加到文件中：</p>
+<p>~&#x2F;.vnc&#x2F;xstartup<br>〜&#x2F; .vnc &#x2F; xstartup<br>#!&#x2F;bin&#x2F;bash<br>xrdb $HOME&#x2F;.Xresources<br>startxfce4 &amp;<br>The first command in the file, xrdb $HOME&#x2F;.Xresources, tells VNC’s GUI framework to read the user’s .Xresources file. .Xresources is where a user can make changes to certain settings for the graphical desktop, like terminal colors, cursor themes, and font rendering. The second command tells the server to launch Xfce, which is where you will find all of the graphical software that you need to comfortably manage your server.</p>
+<p>文件中的第一个命令xrdb $HOME&#x2F;.Xresources告诉VNC的GUI框架读取用户的.Xresources文件。 用户可以在.Xresources中更改图形桌面的某些设置，例如终端颜色，光标主题和字体渲染。 第二个命令告诉服务器启动Xfce，在这里您将找到轻松管理服务器所需的所有图形软件。</p>
+<p>To ensure that the VNC server will be able to use this new startup file properly, we’ll need to make it executable.</p>
+<p>为了确保VNC服务器能够正确使用此新启动文件，我们需要使其成为可执行文件。</p>
+<p>sudo chmod +x ~&#x2F;.vnc&#x2F;xstartup<br>须藤chmod + x〜&#x2F; .vnc &#x2F; xstartup<br>Now, restart the VNC server.</p>
+<p>现在，重新启动VNC服务器。</p>
+<p>vncserver<br>vncserver<br>You’ll see output similar to this:</p>
+<p>您将看到类似于以下的输出：</p>
+<pre><code>Output
+</code></pre>
+<p>   New ‘X’ desktop is your_hostname:1</p>
+<p>Starting applications specified in &#x2F;home&#x2F;sammy&#x2F;.vnc&#x2F;xstartup<br>Log file is &#x2F;home&#x2F;sammy&#x2F;.vnc&#x2F;your_hostname:1.log<br>With the configuration in place, let’s connect to the server from our local machine.</p>
+<p>完成配置后，让我们从本地计算机连接到服务器。</p>
+<p>步骤3 —安全地连接VNC桌面 (Step 3 — Connecting the VNC Desktop Securely)<br>VNC itself doesn’t use secure protocols when connecting. We’ll use an SSH tunnel to connect securely to our server, and then tell our VNC client to use that tunnel rather than making a direct connection.</p>
+<p>连接时，VNC本身不使用安全协议。 我们将使用SSH隧道安全地连接到我们的服务器，然后告诉我们的VNC客户端使用该隧道，而不是直接建立连接。</p>
+<p>Create an SSH connection on your local computer that securely forwards to the localhost connection for VNC. You can do this via the terminal on Linux or macOS with the following command:</p>
+<p>在本地计算机上创建一个SSH连接，该连接安全地转发到VNC的localhost连接。 您可以使用以下命令通过Linux或macOS上的终端执行此操作：</p>
+<p>ssh -L 5901:127.0.0.1:5901 -C -N -l sammy your_server_ip</p>
+<p>ssh -L 5901 ：127.0.0.1： 5901 -C -N -l sammy your_server_ip</p>
+<p>The -L switch specifies the port bindings. In this case we’re binding port 5901 of the remote connection to port 5901 on your local machine. The -C switch enables compression, while the -N switch tells ssh that we don’t want to execute a remote command. The -l switch specifies the remote login name.</p>
+<p>-L开关指定端口绑定。 在这种情况下，我们绑定端口5901的远程连接端口5901在本地机器上。 -C开关启用压缩，而-N开关告诉ssh我们不想执行远程命令。 -l开关指定远程登录名。</p>
+<p>Remember to replace sammy and your_server_ip with your non-root username and the IP address of your server.</p>
+<p>请记住用非root用户名和服务器的IP地址替换sammy和your_server_ip 。</p>
+<p>If you are using a graphical SSH client, like PuTTY, use your_server_ip as the connection IP, and set localhost:5901 as a new forwarded port in the program’s SSH tunnel settings.</p>
+<p>如果使用的是图形SSH客户端(如PuTTY)，请使用your_server_ip作为连接IP，并在程序的SSH隧道设置中将localhost:5901设置为新的转发端口。</p>
+<p>Once the tunnel is running, use a VNC client to connect to localhost:5901. You’ll be prompted to authenticate using the password you set in Step 1.</p>
+<p>隧道运行后，使用VNC客户端连接到localhost:5901 。 系统将提示您使用在步骤1中设置的密码进行身份验证。</p>
+<p>Once you are connected, you’ll see the default Xfce desktop.</p>
+<p>建立连接后，您将看到默认的Xfce桌面。</p>
+<p>Select Use default config to configure your desktop quickly.</p>
+<p>选择“ 使用默认配置”以快速配置您的桌面。</p>
+<p>You can access files in your home directory with the file manager or from the command line, as seen here:</p>
+<p>您可以使用文件管理器或从命令行访问主目录中的文件，如下所示：</p>
+<p>On your local machine, press CTRL+C in your terminal to stop the SSH tunnel and return to your prompt. This will disconnect your VNC session as well.</p>
+<p>在本地计算机上，在终端中按CTRL+C停止SSH隧道并返回到提示符。 这也将断开您的VNC会话。</p>
+<p>Next let’s set up the VNC server as a service.</p>
+<p>接下来，我们将VNC服务器设置为服务。</p>
+<p>步骤4 —将VNC作为系统服务运行 (Step 4 — Running VNC as a System Service)<br>Next, we’ll set up the VNC server as a systemd service so we can start, stop, and restart it as needed, like any other service. This will also ensure that VNC starts up when your server reboots.</p>
+<p>接下来，我们将VNC服务器设置为系统服务，以便可以像其他任何服务一样根据需要启动，停止和重新启动它。 这还将确保在服务器重新引导时VNC启动。</p>
+<p>First, create a new unit file called &#x2F;etc&#x2F;systemd&#x2F;system&#x2F;vncserver@.service using your favorite text editor:</p>
+<p>首先，使用您喜欢的文本编辑器创建一个名为&#x2F;etc&#x2F;systemd&#x2F;system&#x2F;vncserver@.service的新单元文件：</p>
+<p>sudo nano &#x2F;etc&#x2F;systemd&#x2F;system&#x2F;vncserver@.service<br>须藤纳米&#x2F;etc&#x2F;systemd&#x2F;system&#x2F;vncserver@.service<br>The @ symbol at the end of the name will let us pass in an argument we can use in the service configuration. We’ll use this to specify the VNC display port we want to use when we manage the service.</p>
+<p>名称末尾的@符号将使我们传递可在服务配置中使用的参数。 我们将使用它来指定我们在管理服务时要使用的VNC显示端口。</p>
+<p>Add the following lines to the file. Be sure to change the value of User, Group, WorkingDirectory, and the username in the value of PIDFILE to match your username:</p>
+<p>将以下行添加到文件中。 确保在PIDFILE的值中更改User ， Group ， WorkingDirectory和用户名的值以匹配您的用户名：</p>
+<p>&#x2F;etc&#x2F;systemd&#x2F;system&#x2F;vncserver@.service<br>&#x2F;etc&#x2F;systemd&#x2F;system&#x2F;vncserver@.service<br>[Unit]<br>Description&#x3D;Start TightVNC server at startup<br>After&#x3D;syslog.target network.target</p>
+<p>[Service]<br>Type&#x3D;forking<br>User&#x3D;sammy<br>Group&#x3D;sammy<br>WorkingDirectory&#x3D;&#x2F;home&#x2F;sammy</p>
+<p>PIDFile&#x3D;&#x2F;home&#x2F;sammy&#x2F;.vnc&#x2F;%H:%i.pid<br>ExecStartPre&#x3D;-&#x2F;usr&#x2F;bin&#x2F;vncserver -kill :%i &gt; &#x2F;dev&#x2F;null 2&gt;&amp;1<br>ExecStart&#x3D;&#x2F;usr&#x2F;bin&#x2F;vncserver -depth 24 -geometry 1280x800 :%i<br>ExecStop&#x3D;&#x2F;usr&#x2F;bin&#x2F;vncserver -kill :%i</p>
+<p>[Install]<br>WantedBy&#x3D;multi-user.target</p>
+<p>The ExecStartPre command stops VNC if it’s already running. The ExecStart command starts VNC and sets the color depth to 24-bit color with a resolution of 1280x800. You can modify these startup options as well to meet your needs.</p>
+<p>如果ExecStartPre命令已经在运行，它将停止它。 ExecStart命令启动VNC并将颜色深度设置为24位颜色，分辨率为1280x800。 您也可以修改这些启动选项，以满足您的需求。</p>
+<p>Save and close the file.</p>
+<p>保存并关闭文件。</p>
+<p>Next, make the system aware of the new unit file.</p>
+<p>接下来，使系统知道新的单位文件。</p>
+<p>sudo systemctl daemon-reload<br>sudo systemctl守护进程重新加载<br>Enable the unit file.</p>
+<p>启用单位文件。</p>
+<p>sudo systemctl enable <a href="mailto:&#118;&#110;&#x63;&#x73;&#x65;&#x72;&#x76;&#x65;&#114;&#x40;&#x31;&#x2e;&#x73;&#x65;&#114;&#118;&#105;&#99;&#101;">&#118;&#110;&#x63;&#x73;&#x65;&#x72;&#x76;&#x65;&#114;&#x40;&#x31;&#x2e;&#x73;&#x65;&#114;&#118;&#105;&#99;&#101;</a><br>sudo systemctl启用<a href="mailto:&#x76;&#110;&#99;&#115;&#x65;&#114;&#x76;&#101;&#x72;&#64;&#x31;&#x2e;&#x73;&#x65;&#114;&#118;&#105;&#x63;&#x65;">&#x76;&#110;&#99;&#115;&#x65;&#114;&#x76;&#101;&#x72;&#64;&#x31;&#x2e;&#x73;&#x65;&#114;&#118;&#105;&#x63;&#x65;</a><br>The 1 following the @ sign signifies which display number the service should appear over, in this case the default :1 as was discussed in Step 2..</p>
+<p>@符号后的1表示服务应显示在哪个显示号上，在这种情况下，默认值:1如步骤2所述。</p>
+<p>Stop the current instance of the VNC server if it’s still running.</p>
+<p>如果VNC服务器的当前实例仍在运行，请停止它。</p>
+<p>vncserver -kill :1<br>vncserver -kill：1<br>Then start it as you would start any other systemd service.</p>
+<p>然后像启动其他任何systemd服务一样启动它。</p>
+<p>sudo systemctl start vncserver@1<br>sudo systemctl启动vncserver @ 1<br>You can verify that it started with this command:</p>
+<p>您可以验证它是否使用以下命令启动：</p>
+<p>sudo systemctl status vncserver@1<br>sudo systemctl状态vncserver @ 1<br>If it started correctly, the output should look like this:</p>
+<p>如果正确启动，则输出应如下所示：</p>
+<pre><code>Output
+</code></pre>
+<p>   ● <a href="mailto:&#x76;&#110;&#x63;&#x73;&#x65;&#114;&#118;&#101;&#114;&#64;&#x31;&#x2e;&#115;&#101;&#x72;&#118;&#105;&#99;&#x65;">&#x76;&#110;&#x63;&#x73;&#x65;&#114;&#118;&#101;&#114;&#64;&#x31;&#x2e;&#115;&#101;&#x72;&#118;&#105;&#99;&#x65;</a> - Start TightVNC server at startup<br>   Loaded: loaded (&#x2F;etc&#x2F;systemd&#x2F;system&#x2F;vncserver@.service; enabled; vendor preset: enabled)<br>   Active: active (running) since Thu 2019-10-10 17:56:17 UTC; 5s ago<br>  Process: 935 ExecStartPre&#x3D;&#x2F;usr&#x2F;bin&#x2F;vncserver -kill :1 &gt; &#x2F;dev&#x2F;null 2&gt;&amp;1 (code&#x3D;exited, status&#x3D;2)<br>  Process: 940 ExecStart&#x3D;&#x2F;usr&#x2F;bin&#x2F;vncserver -depth 24 -geometry 1280x800 :1 (code&#x3D;exited, status&#x3D;0&#x2F;SUCCESS)<br> Main PID: 948 (Xtightvnc)<br>. . .<br>Your VNC server will now be available when you reboot the machine.</p>
+<p>重新启动计算机后，您的VNC服务器现在将可用。</p>
+<p>Start your SSH tunnel again:</p>
+<p>再次启动SSH隧道：</p>
+<p>ssh -L 5901:127.0.0.1:5901 -C -N -l sammy your_server_ip</p>
+<p>ssh -L 5901 ：127.0.0.1： 5901 -C -N -l sammy your_server_ip</p>
+<p>Then make a new connection using your VNC client software to localhost:5901 to connect to your machine.</p>
+<p>然后使用您的VNC客户端软件与localhost:5901建立新连接，以连接到您的计算机。</p>
+<p>结论 (Conclusion)<br>You now have a secured VNC server up and running on your Debian 10 server. Now you’ll be able to manage your files, software, and settings with an easy-to-use and familiar graphical interface, and you’ll be able to run graphical software like web browsers remotely.</p>
+<p>现在，您已在Debian 10服务器上启动并运行了安全的VNC服务器。 现在，您将可以使用易于使用且熟悉的图形界面来管理文件，软件和设置，并且可以远程运行Web浏览器等图形软件。</p>
+<p>翻译自: <a target="_blank" rel="noopener" href="https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-vnc-on-debian-10">https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-vnc-on-debian-10</a></p>
+<p>debian vnc 配置</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/10/18/vnc-peizhi/" data-id="clkjdd1d6003u98aj2qy4273t" data-title="linux中配置vnc登录" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GUI/" rel="tag">GUI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VNC/" rel="tag">VNC</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/10/18/minecraft-start/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          我的世界linux和windows启动脚本
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/10/14/python-IMAP/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">python发送邮件</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Minecraft/">Minecraft</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E7%B1%BB/">分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E5%8F%91/">开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A4%BE%E5%9B%A2/">社团</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blander/" rel="tag">Blander</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CAD/" rel="tag">CAD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GUI/" rel="tag">GUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Novelai/" rel="tag">Novelai</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSD1309/" rel="tag">SSD1309</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STEAM/" rel="tag">STEAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STEAM%E7%A4%BE/" rel="tag">STEAM社</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VNC/" rel="tag">VNC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/" rel="tag">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arduino/" rel="tag">arduino</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/colour/" rel="tag">colour</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/learn/" rel="tag">learn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mc/" rel="tag">mc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/micro-bit/" rel="tag">micro:bit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nextcloud/" rel="tag">nextcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag">学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%87%E7%AD%BE/" rel="tag">标签</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" rel="tag">树莓派</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%86%E8%88%AA%E6%9D%AF/" rel="tag">领航杯</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Blander/" style="font-size: 10px;">Blander</a> <a href="/tags/CAD/" style="font-size: 12px;">CAD</a> <a href="/tags/GUI/" style="font-size: 10px;">GUI</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/Novelai/" style="font-size: 10px;">Novelai</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SSD1309/" style="font-size: 12px;">SSD1309</a> <a href="/tags/STEAM/" style="font-size: 10px;">STEAM</a> <a href="/tags/STEAM%E7%A4%BE/" style="font-size: 14px;">STEAM社</a> <a href="/tags/VNC/" style="font-size: 10px;">VNC</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/arduino/" style="font-size: 12px;">arduino</a> <a href="/tags/colour/" style="font-size: 10px;">colour</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/learn/" style="font-size: 10px;">learn</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mc/" style="font-size: 12px;">mc</a> <a href="/tags/micro-bit/" style="font-size: 16px;">micro:bit</a> <a href="/tags/nextcloud/" style="font-size: 10px;">nextcloud</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/python/" style="font-size: 18px;">python</a> <a href="/tags/windows/" style="font-size: 12px;">windows</a> <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 12px;">学习</a> <a href="/tags/%E6%A0%87%E7%AD%BE/" style="font-size: 12px;">标签</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" style="font-size: 12px;">树莓派</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">网络</a> <a href="/tags/%E9%A2%86%E8%88%AA%E6%9D%AF/" style="font-size: 10px;">领航杯</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">July 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">January 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">August 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/1000/12/">December 1000</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/07/26/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-HC-SR04/">linux-pi-HC-SR04</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-python-yolo5/">linux-python-yolo5</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-SSD1309/">linux-pi-SSD1309</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-MPU6050/">MPU6050-pi</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

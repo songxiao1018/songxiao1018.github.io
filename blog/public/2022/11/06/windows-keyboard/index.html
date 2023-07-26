@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>windows系统修改键位 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="不知道大家生活中有没有遇到这些情况：键盘上某个比较重要的键损坏或失灵而要重新更换键盘，或者在一些游戏、办公软件重的一些默认按键不合理，又或者希望自己DIY出一套属于自己的键位布局。那么我想这篇文章对你会很有帮助。 前几个月因心血来潮想尝试一些其他键位布局（例如Dvorak、Norman、Colemak等），需要修改键盘键位。其实，修改键位的方法也有很多，比较常见的是安装第三方辅助软件修改键位映射和">
+<meta property="og:type" content="article">
+<meta property="og:title" content="windows系统修改键位">
+<meta property="og:url" content="http://example.com/2022/11/06/windows-keyboard/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="不知道大家生活中有没有遇到这些情况：键盘上某个比较重要的键损坏或失灵而要重新更换键盘，或者在一些游戏、办公软件重的一些默认按键不合理，又或者希望自己DIY出一套属于自己的键位布局。那么我想这篇文章对你会很有帮助。 前几个月因心血来潮想尝试一些其他键位布局（例如Dvorak、Norman、Colemak等），需要修改键盘键位。其实，修改键位的方法也有很多，比较常见的是安装第三方辅助软件修改键位映射和">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-11-05T16:10:42.000Z">
+<meta property="article:modified_time" content="2023-07-23T14:19:14.143Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="windows">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-windows-keyboard" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/11/06/windows-keyboard/" class="article-date">
+  <time class="dt-published" datetime="2022-11-05T16:10:42.000Z" itemprop="datePublished">2022-11-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      windows系统修改键位
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>不知道大家生活中有没有遇到这些情况：键盘上某个比较重要的键损坏或失灵而要重新更换键盘，或者在一些游戏、办公软件重的一些默认按键不合理，又或者希望自己DIY出一套属于自己的键位布局。那么我想这篇文章对你会很有帮助。</p>
+<p>前几个月因心血来潮想尝试一些其他键位布局（例如Dvorak、Norman、Colemak等），需要修改键盘键位。其实，修改键位的方法也有很多，比较常见的是安装第三方辅助软件修改键位映射和功能。但对于我个人来说，出于简洁安全、自由可控的原因，不太喜欢在自己计算机上安装一些不必要的软件，这个功能完全可以在Windows上通过修改底层的注册表实现。</p>
+<p>先说一下这篇文章的大致内容：</p>
+<p>实现原理<br>自制管理工具（Python3）</p>
+<p>实现原理</p>
+<p>在Windows注册表中有个”Scancode Map”(即扫描码映射)的键，我们可以通过修改这个键的值来实现键位映射的更改。</p>
+<p>“Scancode Map”的值的格式是”hex:00,00,00,00,00,00,00,00,xx,00,00,00,[yy,yy,yy,yy,…,yy,yy,yy,yy,]00,00,00,00”</p>
+<p>前8个16进制的值（即前8组00）表示版本号和头部字节，后4个16进制的值（即最后的4组00）表示结束标志，中间xx表示映射数目，最小值为01（考虑到结束标志的4组00）,中括号内为可写项，也是我们修改键位比较关键的部分，每四个代表一组映射。</p>
+<p>在我们键盘上每一个按键都有其十六进制扫描码，例如A的扫描码为”1e”,其十六进制扫描码修正形式（为了表示方便就这么说吧）就是”001e”,B的扫描码为”0030”,右ctrl键的扫描码为”e01d”,右alt键的扫描码则表示为”e038”，空值的扫描码为”0000”（可实现无效按键或者说是屏蔽按键）。具体其他按键扫描码在源码中贴有。</p>
+<p>既然我们知道键盘上每一个键都具有其对应的扫描码，那么我们假设需要A和B键互换，应该怎么做呢？这个时候就需要我们向中括号中添加我们需要的值，”30,00,1e,00,”就可以实现将B键的功能映射到物理键盘A上（通俗点说就是敲击键盘上的A键会打出B字符，同时要注意值的顺序）。你以为这样就完了吗？不然。”30,00,1e,00,”只能将B键功能映射在物理键盘A键位上，而物理键位B键并未被映射成A！这很危险，相当于键盘上没有一个按键能实现A的功能，所以我们还得添加一项”1e,00,30,00,”。最后我们的”Scancode Map”的完整值就为”hex:00,00,00,00,00,00,00,00,03,00,00,00,30,00,1e,00,1e,00,30,00,00,00,00,00”。就这一串值就可完全调换A，B键的功能。</p>
+<p>再来一个，我们要实现右Alt键能实现右Ctrl键的功能，并且屏蔽掉右Ctrl键，那么其”Scancode Map”值就为”hex:00,00,00,00,00,00,00,00,03,00,00,00,1d,e0,38,e0,00,00,1d,e0,00,00,00,00”。</p>
+<p>那么问题来了，既然我知道这个键位和所谓的键盘扫描码之间的对应关系和Scancode值之后，具体怎么实现呢？</p>
+<p>别急，我们一步步来，先打开Windows注册表编辑器（在cmd或powershell命令行下键入regedit回车即可打开），然后在”HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Keyboard Layout”这个项下新建一个名为”ScanCode Map”键（右键新建二进制值），然后再右键名称列下的这个”ScanCode Map”修改，这时就可以依次键入编辑那一串hex值了，最后确定就完成了注册表的修改了！</p>
+<p>图示如下，先新建这个ScanCode Map的键（右键Keyboard Layout或空白处，然后选择新建二进制值）</p>
+<p>然后修改值（我的这个hex值功能是实现左Ctrl和CapsLock互换，毕竟Emacs党）</p>
+<p>但是，修改完了后并不能立即生效，因为是通过注册表修改底层键位映射所以需要重启计算机，重启资源管理器也是没有用的。</p>
+<p>那么，要还原按键怎么办？也很简单，有两种方法，一是从注册表中删除你创建的ScanCode Map这个键，或者用”hex:00,00,00,00,00,00,00,00,01,00,00,00,00,00,00,00”覆盖掉原来的值就行了。</p>
+<p>当然，如果修改的键位比较多的话，通过查各个键位映射值，修改注册表写hex值，就麻烦很多了（很佩服曾经的自己硬是这样写了一些键位布局）。这时我们需要一个工具来管理，可以用第三方软件。但是既然原理我们已经知道了，也并不难远未达到工程级的量级，那完全可以自己实现这个管理工具。我们可以用Java，C++，Python等来写，这不重要，自己喜欢什么就用什么吧。下面是我用Python写的一个布局管理工具。</p>
+<p>自制管理工具</p>
+<p>这个工具名为layout_manage.py，功能是实现将我们要修改的键位关系转换为hex，并导出bat或reg文件（bat是Windows批处理文件，reg是Windows注册表脚本文件，在这里的功能是将hex值写入前面注册表中”ScanCode Map”这个键中）到layout_bat或layout_reg文件夹中。其本身不带有修改注册表功能（python自身的权限问题），只是生成的文件具有此功能。</p>
+<p>即我们想修改以下键位：将qwer和asdf调换位置，小键盘123和789调换位置，屏蔽右shift键。这时我们只需要新建一个文本文件（例如一个名为test.txt的文件），将以下内容写入：</p>
+<p>这个文件内容是按键值对组成的，”Q: A”的意思是将物理按键Q映射为A字符，即按Q键敲出A，更容易让人理解，冒号前为物理按键，冒号后为按键功能。说一下这个格式规则：</p>
+<p>忽略大小写<br>忽略换行符、冒号、分号前后的空白字符（位于两单词间的空格不忽略，如Left Ctrl中间只能有一个空格）<br>小键盘上的字符前需要加n，例如小键盘上的’0’和’.’应分别写为”n0”和’n.’<br>一些功能键需正确写入，如：Tab、Esc、CapsLock、Backspace、Delete、Enter、Left Ctrl、Left Windows等<br>然后我们将这个文件作为参数，传递给layout_manage.py并执行。有两种方法，第一种是直接拖动这个txt文件到layout_manage.py图标上，这样layout_manage.py也能顺利执行。第二种方法是在cmd或powershell中执行命令”python layout_manage.py test.txt”,注意路径问题。</p>
+<p>此外如果没有其他参数传递给该脚本文件时（即双击直接执行），将会生成一个recover文件，即还原初始键位的文件，也很方便。</p>
+<p>附上源码，注释应该很清楚了：</p>
+<p>#!&#x2F;usr&#x2F;bin&#x2F;env python3<br>#-<em>- coding:utf-8 -</em>-</p>
+<p>import sys<br>import os</p>
+<p>save_format &#x3D; “reg”    #这个值可以修改，有两个选项(bat和reg)，可选择生成bat批处理文件或者reg注册表脚本文件,功能一样</p>
+<p>class CountError(Exception):    #文本文件格式错误异常<br>    pass</p>
+<p>class FileFormatError(Exception):    #save_format值异常<br>    pass</p>
+<p>if save_format not in [“bat”,”reg”]:<br>    raise FileFormatError(“The variable ‘save_format’&#96;s value must be ‘bat’ or ‘reg’.”)</p>
+<p>if <strong>name</strong> &#x3D;&#x3D; “<strong>main</strong>“:</p>
+<pre><code>if not os.path.isdir(&quot;layout_&quot;+save_format):
+    os.mkdir(&quot;layout_&quot;+save_format)
+
+if len(sys.argv) == 1:
+    if save_format == &quot;bat&quot;:
+        with open(&quot;layout_bat/recover.bat&quot;,&#39;w&#39;, encoding=&quot;utf-8&quot;) as f:
+            f.write(&#39;@echo off\nreg delete &quot;hklm\\system\\currentcontrolset\\control\\keyboard layout&quot; /v &quot;ScanCode Map&quot; /f\necho &quot;键位已恢复，重启系统后生效&quot;\npause&#39;)
+        input(&quot;恢复文件recover.bat已生成至layout_bat文件夹下，以管理员身份右键执行该文件后重启系统生效。\n按回车键退出程序...&quot;)
+
+    else:
+        with open(&quot;layout_reg/recover.reg&quot;,&#39;w&#39;, encoding=&quot;utf-8&quot;) as f:
+            f.write(&#39;Windows Registry Editor Version 5.00\n[HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Keyboard Layout]\n&quot;ScanCode Map&quot;=hex:00,00,00,00,00,00,00,00,01,00,00,00,00,00,00,00&#39;)
+        input(&quot;恢复文件recover.reg已生成至layout_reg文件夹下，双击执行该文件后重启系统生效。\n按回车键退出程序...&quot;)
+
+elif len(sys.argv) == 2:
+    scan_code_dict = &#123;
+        &quot;00 00&quot;:&quot;None&quot;,
+        &quot;01 00&quot;:&quot;Esc&quot;,    #即Esc键的扫描码是&quot;0001&quot;
+        &quot;02 00&quot;:&quot;1&quot;,
+        &quot;03 00&quot;:&quot;2&quot;,
+        &quot;04 00&quot;:&quot;3&quot;,
+        &quot;05 00&quot;:&quot;4&quot;,
+        &quot;06 00&quot;:&quot;5&quot;,
+        &quot;07 00&quot;:&quot;6&quot;,
+        &quot;08 00&quot;:&quot;7&quot;,
+        &quot;09 00&quot;:&quot;8&quot;,
+        &quot;0a 00&quot;:&quot;9&quot;,
+        &quot;0b 00&quot;:&quot;0&quot;,
+        &quot;0c 00&quot;:&quot;-&quot;,
+        &quot;0d 00&quot;:&quot;=&quot;,
+        &quot;0e 00&quot;:&quot;Backspace&quot;,
+        &quot;0f 00&quot;:&quot;Tab&quot;,
+        &quot;10 00&quot;:&quot;Q&quot;,
+        &quot;11 00&quot;:&quot;W&quot;,
+        &quot;12 00&quot;:&quot;E&quot;,
+        &quot;13 00&quot;:&quot;R&quot;,
+        &quot;14 00&quot;:&quot;T&quot;,
+        &quot;15 00&quot;:&quot;Y&quot;,
+        &quot;16 00&quot;:&quot;U&quot;,
+        &quot;17 00&quot;:&quot;I&quot;,
+        &quot;18 00&quot;:&quot;O&quot;,
+        &quot;19 00&quot;:&quot;P&quot;,
+        &quot;1a 00&quot;:&quot;[&quot;,
+        &quot;1b 00&quot;:&quot;]&quot;,
+        &quot;1c 00&quot;:&quot;Enter&quot;,
+        &quot;1d 00&quot;:&quot;Left Ctrl&quot;,
+        &quot;1e 00&quot;:&quot;A&quot;,
+        &quot;1f 00&quot;:&quot;S&quot;,
+        &quot;20 00&quot;:&quot;D&quot;,
+        &quot;21 00&quot;:&quot;F&quot;,
+        &quot;22 00&quot;:&quot;G&quot;,
+        &quot;23 00&quot;:&quot;H&quot;,
+        &quot;24 00&quot;:&quot;J&quot;,
+        &quot;25 00&quot;:&quot;K&quot;,
+        &quot;26 00&quot;:&quot;L&quot;,
+        &quot;27 00&quot;:&quot;Semicolon&quot;,    #由评论区指出，键盘上的“;”应该用其他值代替，否则会与配置文本文件中的“;”混淆
+        &quot;28 00&quot;:&quot;&#39;&quot;,
+        &quot;29 00&quot;:&quot;`&quot;,
+        &quot;2a 00&quot;:&quot;Left Shift&quot;,
+        &quot;2b 00&quot;:&quot;\\&quot;,
+        &quot;2c 00&quot;:&quot;Z&quot;,
+        &quot;2d 00&quot;:&quot;X&quot;,
+        &quot;2e 00&quot;:&quot;C&quot;,
+        &quot;2f 00&quot;:&quot;V&quot;,
+        &quot;30 00&quot;:&quot;B&quot;,
+        &quot;31 00&quot;:&quot;N&quot;,
+        &quot;32 00&quot;:&quot;M&quot;,
+        &quot;33 00&quot;:&quot;,&quot;,
+        &quot;34 00&quot;:&quot;.&quot;,
+        &quot;35 00&quot;:&quot;/&quot;,
+        &quot;36 00&quot;:&quot;Right Shift&quot;,
+        &quot;37 00&quot;:&quot;n*&quot;,
+        &quot;38 00&quot;:&quot;Left Alt&quot;,
+        &quot;39 00&quot;:&quot;Space&quot;,
+        &quot;3a 00&quot;:&quot;Caps Lock&quot;,
+        &quot;3b 00&quot;:&quot;F1&quot;,
+        &quot;3c 00&quot;:&quot;F2&quot;,
+        &quot;3d 00&quot;:&quot;F3&quot;,
+        &quot;3e 00&quot;:&quot;F4&quot;,
+        &quot;3f 00&quot;:&quot;F5&quot;,
+        &quot;40 00&quot;:&quot;F6&quot;,
+        &quot;41 00&quot;:&quot;F7&quot;,
+        &quot;42 00&quot;:&quot;F8&quot;,
+        &quot;43 00&quot;:&quot;F9&quot;,
+        &quot;44 00&quot;:&quot;F10&quot;,
+        &quot;45 00&quot;:&quot;Num Lock&quot;,
+        &quot;46 00&quot;:&quot;Scroll Lock&quot;,
+        &quot;47 00&quot;:&quot;n7&quot;,
+        &quot;48 00&quot;:&quot;n8&quot;,
+        &quot;49 00&quot;:&quot;n9&quot;,
+        &quot;4a 00&quot;:&quot;n-&quot;,
+        &quot;4b 00&quot;:&quot;n4&quot;,
+        &quot;4c 00&quot;:&quot;n5&quot;,
+        &quot;4d 00&quot;:&quot;n6&quot;,
+        &quot;4e 00&quot;:&quot;n+&quot;,
+        &quot;4f 00&quot;:&quot;n1&quot;,
+        &quot;50 00&quot;:&quot;n2&quot;,
+        &quot;51 00&quot;:&quot;n3&quot;,
+        &quot;52 00&quot;:&quot;n0&quot;,
+        &quot;53 00&quot;:&quot;n.&quot;,
+        &quot;57 00&quot;:&quot;F11&quot;,
+        &quot;58 00&quot;:&quot;F12&quot;,
+
+        
+        &quot;1c e0&quot;:&quot;nEnter&quot;,
+        &quot;1d e0&quot;:&quot;Right Ctrl&quot;,
+        &quot;37 e0&quot;:&quot;PrtSc&quot;,
+        &quot;38 e0&quot;:&quot;Right Alt&quot;,
+        &quot;47 e0&quot;:&quot;Home&quot;,
+        &quot;48 e0&quot;:&quot;Up&quot;,
+        &quot;49 e0&quot;:&quot;Page Up&quot;,
+        &quot;4b e0&quot;:&quot;Left&quot;,
+        &quot;4d e0&quot;:&quot;Right&quot;,
+        &quot;4f e0&quot;:&quot;End&quot;,
+        &quot;50 e0&quot;:&quot;Down&quot;,
+        &quot;51 e0&quot;:&quot;Page Down&quot;,
+        &quot;52 e0&quot;:&quot;Insert&quot;,
+        &quot;53 e0&quot;:&quot;Delete&quot;,
+        &quot;5b e0&quot;:&quot;Left Windows&quot;,
+        &quot;5c e0&quot;:&quot;Right Windows&quot;,
+        &#125;
+
+    fun_key_dict = dict((m.upper(),n) for n,m in scan_code_dict.items())    #键值互换,键值全大写
+    content = &#39;00 00 00 00 00 00 00 00&#39;
+    
+    #用于暂时保存映射前后的键位，判断这次键位修改是否有风险
+    before_map_set = set()
+    after_map_set = set()
+
+    with open(sys.argv[1], encoding=&quot;utf-8&quot;) as f:
+        p = f.read().strip().split(&#39;;&#39;)
+        p.remove(&#39;&#39;)
+        content += &#39; &#123;:0&gt;2x&#125; 00 00 00&#39;.format(len(p)+1)
+        try:
+            for i in p:
+                if len(i.strip().split(&#39;:&#39;)) == 2:
+                    before_map_set.add(i.split(&#39;:&#39;)[0].strip().upper())
+                    after_map_set.add(i.split(&#39;:&#39;)[1].strip().upper())
+                    content += &#39; &#39;+fun_key_dict[i.split(&#39;:&#39;)[1].strip().upper()]+&#39; &#39;+fun_key_dict[i.split(&#39;:&#39;)[0].strip().upper()]
+                else:
+                    raise CountError
+            content += &#39; 00 00 00 00&#39;
+        except KeyError:
+            print(&quot;文件中键名称有误&quot;)
+            
+        except CountError:
+            print(&quot;文件中未按格式书写&quot;)
+        else:
+            if before_map_set != after_map_set:
+                run = input(&quot;此次键位替换存在风险，&#123;&#125;键功能将在键盘上无对应按键，是否继续？(输入y继续，否则退出程序)&quot;.format(str(before_map_set-after_map_set)[1:-1]))
+                if run != &#39;y&#39;:
+                    sys.exit()
+
+            if save_format == &quot;bat&quot;:
+                with open(&quot;layout_bat/&quot;+&#39;.&#39;.join(sys.argv[1].split(&#39;\\&#39;)[-1].split(&#39;.&#39;)[:-1])+&#39;.bat&#39;,&#39;w&#39;, encoding=&quot;utf-8&quot;) as g:
+                    g.write(&#39;@echo off\nreg add &quot;hklm\\system\\currentcontrolset\\control\\keyboard layout&quot; /v &quot;ScanCode Map&quot; /t REG_BINARY /d &quot;&#123;&#125;&quot; /f\necho &quot;键位已完成修改，重启系统后生效&quot;\npause&#39;.format(&#39;&#39;.join(content.split())))
+                input(&quot;...\n&#123;&#125;文件已生成至layout_bat目录下，右键以管理员身份执行该文件后重启系统生效。\n按回车键退出程序...&quot;.format(&#39;.&#39;.join(sys.argv[1].split(&#39;\\&#39;)[-1].split(&#39;.&#39;)[:-1])+&#39;.&#39;+save_format))
+
+            else:
+                with open(&quot;layout_reg/&quot;+&#39;.&#39;.join(sys.argv[1].split(&#39;\\&#39;)[-1].split(&#39;.&#39;)[:-1])+&#39;.reg&#39;,&#39;w&#39;, encoding=&quot;utf-8&quot;) as g:
+                    g.write(&#39;Windows Registry Editor Version 5.00\n[HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Keyboard Layout]\n&quot;ScanCode Map&quot;=hex:&#123;&#125;&#39;.format(&#39;,&#39;.join(content.split())))
+
+                input(&quot;...\n&#123;&#125;文件已生成至layout_reg目录下，双击执行该文件后重启系统生效。\n按回车键退出程序...&quot;.format(&#39;.&#39;.join(sys.argv[1].split(&#39;\\&#39;)[-1].split(&#39;.&#39;)[:-1])+&#39;.&#39;+save_format))
+else:
+    input(&quot;传入参数错误，按回车键退出程序...&quot;)
+</code></pre>
+<p>另外通过此脚本生成的bat或reg文件可以将其保存好，在其他Windows系统电脑上可以直接执行并修改为你想要的键位，这样可以一次生成，多处适用！切勿用来恶作剧哦。</p>
+<p>关于键位布局：我用了一个多月的Dvorak和两个多月的Norman，刚开始练习使用新键位的一周非常痛苦和新鲜，适应之后在英文文章输入的确要快点，但不是很明显。如果是敲code的话，就没什么可比性了。考虑到种种因素（尤其是在用其他人设备时），所以最后还是回归了QWERTY键位。</p>
+<p>编辑于 2020-11-13 16:14</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/29581818">https://zhuanlan.zhihu.com/p/29581818</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/06/windows-keyboard/" data-id="clkjdd1d9003x98aje27o58le" data-title="windows系统修改键位" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/windows/" rel="tag">windows</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/11/07/steam-lihui-1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          初识STEAM——第一次全体例会
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/11/01/steam-linhangbei-renchexietong/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">领航杯-人工智能竞技类（人车协同）竞赛规则解读</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Minecraft/">Minecraft</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E7%B1%BB/">分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E5%8F%91/">开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A4%BE%E5%9B%A2/">社团</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blander/" rel="tag">Blander</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CAD/" rel="tag">CAD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GUI/" rel="tag">GUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Novelai/" rel="tag">Novelai</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSD1309/" rel="tag">SSD1309</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STEAM/" rel="tag">STEAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STEAM%E7%A4%BE/" rel="tag">STEAM社</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VNC/" rel="tag">VNC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/" rel="tag">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arduino/" rel="tag">arduino</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/colour/" rel="tag">colour</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/learn/" rel="tag">learn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mc/" rel="tag">mc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/micro-bit/" rel="tag">micro:bit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nextcloud/" rel="tag">nextcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag">学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%87%E7%AD%BE/" rel="tag">标签</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" rel="tag">树莓派</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%86%E8%88%AA%E6%9D%AF/" rel="tag">领航杯</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Blander/" style="font-size: 10px;">Blander</a> <a href="/tags/CAD/" style="font-size: 12px;">CAD</a> <a href="/tags/GUI/" style="font-size: 10px;">GUI</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/Novelai/" style="font-size: 10px;">Novelai</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SSD1309/" style="font-size: 12px;">SSD1309</a> <a href="/tags/STEAM/" style="font-size: 10px;">STEAM</a> <a href="/tags/STEAM%E7%A4%BE/" style="font-size: 14px;">STEAM社</a> <a href="/tags/VNC/" style="font-size: 10px;">VNC</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/arduino/" style="font-size: 12px;">arduino</a> <a href="/tags/colour/" style="font-size: 10px;">colour</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/learn/" style="font-size: 10px;">learn</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mc/" style="font-size: 12px;">mc</a> <a href="/tags/micro-bit/" style="font-size: 16px;">micro:bit</a> <a href="/tags/nextcloud/" style="font-size: 10px;">nextcloud</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/python/" style="font-size: 18px;">python</a> <a href="/tags/windows/" style="font-size: 12px;">windows</a> <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 12px;">学习</a> <a href="/tags/%E6%A0%87%E7%AD%BE/" style="font-size: 12px;">标签</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" style="font-size: 12px;">树莓派</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">网络</a> <a href="/tags/%E9%A2%86%E8%88%AA%E6%9D%AF/" style="font-size: 10px;">领航杯</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">July 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">January 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">August 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/1000/12/">December 1000</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/07/26/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-HC-SR04/">linux-pi-HC-SR04</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-python-yolo5/">linux-python-yolo5</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-SSD1309/">linux-pi-SSD1309</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-MPU6050/">MPU6050-pi</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

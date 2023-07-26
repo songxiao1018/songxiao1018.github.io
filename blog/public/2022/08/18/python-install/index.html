@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>linux下载和安装python | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Debian系统 安装Python 本文参考自Python入门：在Debian系统安装Python 3  介绍 Python是一种面向对象的解释型计算机程序设计语言，由荷兰人Guido van Rossum于1989年发明，第一个公开发行版发行于1991年。 可用于许多不同的编程项目。这个名字的灵感源自英国喜剧组织Monty Python，开发团队希望让Python成为一种有趣的语言，并于1991">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux下载和安装python">
+<meta property="og:url" content="http://example.com/2022/08/18/python-install/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Debian系统 安装Python 本文参考自Python入门：在Debian系统安装Python 3  介绍 Python是一种面向对象的解释型计算机程序设计语言，由荷兰人Guido van Rossum于1989年发明，第一个公开发行版发行于1991年。 可用于许多不同的编程项目。这个名字的灵感源自英国喜剧组织Monty Python，开发团队希望让Python成为一种有趣的语言，并于1991">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-08-18T07:23:09.000Z">
+<meta property="article:modified_time" content="2023-07-23T14:19:11.823Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-python-install" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/08/18/python-install/" class="article-date">
+  <time class="dt-published" datetime="2022-08-18T07:23:09.000Z" itemprop="datePublished">2022-08-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      linux下载和安装python
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Debian系统-安装Python"><a href="#Debian系统-安装Python" class="headerlink" title="Debian系统 安装Python"></a>Debian系统 安装Python</h1><blockquote>
+<p>本文参考自<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1165255">Python入门：在Debian系统安装Python 3</a></p>
+</blockquote>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><blockquote>
+<p>Python是一种面向对象的解释型计算机程序设计语言，由荷兰人Guido van Rossum于1989年发明，第一个公开发行版发行于1991年。 可用于许多不同的编程项目。这个名字的灵感源自英国喜剧组织Monty Python，开发团队希望让Python成为一种有趣的语言，并于1991年首次发布。Python易于设置，编写方式相对简单，并及时反馈错误，是初学者和经验丰富的开发人员的绝佳选择。Python 3是该语言的最新版本。</p>
+</blockquote>
+<blockquote>
+<p>本教程将指导您在本地Linux机器上安装Python 3并通过命令行设置编程环境。本教程将介绍Debian 8的安装过程，原理适用于Debian Linux的任何其他发行版。</p>
+</blockquote>
+<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><blockquote>
+<ol>
+<li>Debian 8或其他版本的Debian Linux的计算机（服务器）</li>
+</ol>
+</blockquote>
+<h3 id="第一步-安装Python-3"><a href="#第一步-安装Python-3" class="headerlink" title="第一步 - 安装Python 3"></a>第一步 - 安装Python 3</h3><blockquote>
+<p>我们将在命令行上完成安装和设置，这是一种与计算机交互的非图形方式。也就是说，您不是点击按钮，而是输入文本并通过文本从计算机接收反馈。命令行（也称为shell）可以帮助您修改和自动化您每天在计算机上执行的许多任务，是软件开发人员必不可少的工具。您可以学习许多终端命令，可以让您做更强大的事情。</p>
+</blockquote>
+<blockquote>
+<p>Debian 8和其他版本的Debian Linux都预装了Python 3和Python 2。为了确保我们的版本是最新的，让我们用apt-get更新和升级系统：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get -y upgrade</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>-y将确认我们同意所有要安装的项目，但根据您的Linux版本不同，您可能需要确认其他提示作为系统更新和升级。</p>
+</blockquote>
+<blockquote>
+<p>完成该过程后，我们可以通过输入以下内容来检查系统中安装的Python 3的版本：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -V</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>您将在终端窗口中收到输出，告知您Python版本号。版本号可能会有所不同，像这样：<code>Python 3.9.0</code></p>
+</blockquote>
+<blockquote>
+<p>让我们安装pip管理Python的软件包：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install -y python3-pip</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>pip是一个与Python一起使用的工具，主要用于安装和管理我们可能想要在我们的开发项目中使用的编程包。您可以输入以下命令安装Python包：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install package_name</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>package_name可以指代任何Python包或库，例如用于Web开发的Django或用于科学计算的NumPy。因此，如果您想安装NumPy，可以使用pip3 install numpy命令执行此操作。</p>
+</blockquote>
+<blockquote>
+<p>还有一些软件包和开发工具可以安装，以确保我们为编程环境提供强大的设置，命令如下：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install build-essential libssl-dev libffi-dev python-dev</span><br></pre></td></tr></table></figure>
+
+<h3 id="第二步-设置虚拟环境"><a href="#第二步-设置虚拟环境" class="headerlink" title="第二步 - 设置虚拟环境"></a>第二步 - 设置虚拟环境</h3><blockquote>
+<p>设置了Python，并安装了pip和其他工具后，我们就可以为我们的开发项目设置一个虚拟环境。</p>
+</blockquote>
+<blockquote>
+<p>虚拟环境使您可以在计算机上为Python项目创建一个隔离空间，确保每个项目都有自己的一组依赖项，这些依赖项不会破坏任何其他项目。</p>
+</blockquote>
+<blockquote>
+<p>设置编程环境使我们能够更好地控制Python项目以及如何处理不同版本的包。在使用第三方软件包时，这一点尤为重要。</p>
+</blockquote>
+<blockquote>
+<p>您可以根据需要设置尽可能多的Python编程环境。每个环境基本上都是计算机中的一个目录或文件夹，其中包含一些脚本以环境运行。</p>
+</blockquote>
+<blockquote>
+<p>首先，我们需要安装venv模块，它是Python 3库的一部分，以便我们可以为我们创建虚拟环境。我们输入以下命令安装venv：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install -y python3-venv</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>安装完成后，我们就可以创建环境了。让我们选择我们想要放入Python编程环境的目录，或者我们可以用mkdir创建一个新目录，如：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir environments</span><br><span class="line">cd environments</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>进入您希望环境保存的目录后，可以通过运行以下命令来创建环境：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -m venv my_env</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这会设置一个新目录，其中包含一些我们可以用ls命令查看的项目：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls my_env</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>bin  include  lib  lib64  pyvenv.cfg</code>这些文件一起用于确保您的项目与本地计算机的隔离，以便系统文件和项目文件不会混合。这是版本控制的一个好例子，并确保您的每个项目都可以访问所需的特定软件包。Python Wheels是Python的内置包格式，可以通过减少编译所需的次数来加速软件生产。你会在每个lib目录中找到它。</p>
+</blockquote>
+<blockquote>
+<p>要使用此环境，您需要激活它，您可以通过输入以下调用activate脚本的命令来执行此操作：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source my_env/bin/activate</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>您的提示现在将以您的环境名称为前缀，在这里是my_env。根据您运行的Debian Linux的版本不同，您的前缀可能看起来有所不同，他们看起来应该是这样子的：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(my_env) sammy@sammy:~/environments$</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这个前缀让我们知道环境当前是my_env在运行的，这意味着当我们在这里创建程序时，它们将只使用这个特定环境的设置和包。</p>
+</blockquote>
+<blockquote>
+<p>注意：在虚拟环境中，您可以使用python代替python3，pip代替pip3。如果在环境之外使用Python 3，则需要专门使用python3和pip3。</p>
+</blockquote>
+<blockquote>
+<p>执行这些步骤后，您的虚拟环境即可使用。</p>
+</blockquote>
+<h3 id="第3步-离开虚拟环境"><a href="#第3步-离开虚拟环境" class="headerlink" title="第3步 - 离开虚拟环境"></a>第3步 - 离开虚拟环境</h3><blockquote>
+<p>要离开环境，只需输入命令<code>deactivate</code>，您将返回到原始目录。</p>
+</blockquote>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><blockquote>
+<p>恭喜！此时，您已经学会了如何设置了Python 3编程环境，可以开始编写项目啦！更多Python教程请关注腾讯云+社区。</p>
+</blockquote>
+<p>####参考文献：《How To Install Python 3 and Set Up a Local Programming Environment on Debian 8》</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/08/18/python-install/" data-id="clkjdd1cr003398aj6ps3f7el" data-title="linux下载和安装python" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/08/19/hexo-document/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          使用hexo搭建博客
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/07/30/python-draw-square/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">使用python打印数字矩阵python-draw-square</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Minecraft/">Minecraft</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E7%B1%BB/">分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E5%8F%91/">开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A4%BE%E5%9B%A2/">社团</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blander/" rel="tag">Blander</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CAD/" rel="tag">CAD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GUI/" rel="tag">GUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Novelai/" rel="tag">Novelai</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSD1309/" rel="tag">SSD1309</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STEAM/" rel="tag">STEAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STEAM%E7%A4%BE/" rel="tag">STEAM社</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VNC/" rel="tag">VNC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/" rel="tag">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arduino/" rel="tag">arduino</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/colour/" rel="tag">colour</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/learn/" rel="tag">learn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mc/" rel="tag">mc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/micro-bit/" rel="tag">micro:bit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nextcloud/" rel="tag">nextcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag">学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%87%E7%AD%BE/" rel="tag">标签</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" rel="tag">树莓派</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%86%E8%88%AA%E6%9D%AF/" rel="tag">领航杯</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Blander/" style="font-size: 10px;">Blander</a> <a href="/tags/CAD/" style="font-size: 12px;">CAD</a> <a href="/tags/GUI/" style="font-size: 10px;">GUI</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/Novelai/" style="font-size: 10px;">Novelai</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SSD1309/" style="font-size: 12px;">SSD1309</a> <a href="/tags/STEAM/" style="font-size: 10px;">STEAM</a> <a href="/tags/STEAM%E7%A4%BE/" style="font-size: 14px;">STEAM社</a> <a href="/tags/VNC/" style="font-size: 10px;">VNC</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/arduino/" style="font-size: 12px;">arduino</a> <a href="/tags/colour/" style="font-size: 10px;">colour</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/learn/" style="font-size: 10px;">learn</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mc/" style="font-size: 12px;">mc</a> <a href="/tags/micro-bit/" style="font-size: 16px;">micro:bit</a> <a href="/tags/nextcloud/" style="font-size: 10px;">nextcloud</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/python/" style="font-size: 18px;">python</a> <a href="/tags/windows/" style="font-size: 12px;">windows</a> <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 12px;">学习</a> <a href="/tags/%E6%A0%87%E7%AD%BE/" style="font-size: 12px;">标签</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" style="font-size: 12px;">树莓派</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">网络</a> <a href="/tags/%E9%A2%86%E8%88%AA%E6%9D%AF/" style="font-size: 10px;">领航杯</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">July 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">January 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">August 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/1000/12/">December 1000</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/07/26/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-HC-SR04/">linux-pi-HC-SR04</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-python-yolo5/">linux-python-yolo5</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-SSD1309/">linux-pi-SSD1309</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-MPU6050/">MPU6050-pi</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

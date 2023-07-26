@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>python发送邮件 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="123456789101112131415161718192021222324252627282930313233343536373839404142#!&#x2F;usr&#x2F;bin&#x2F;python3#-*- coding: utf-8 -*-            # 使其支持中文字符import smtplib                    # 调用模块from email.header impor">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python发送邮件">
+<meta property="og:url" content="http://example.com/2022/10/14/python-IMAP/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="123456789101112131415161718192021222324252627282930313233343536373839404142#!&#x2F;usr&#x2F;bin&#x2F;python3#-*- coding: utf-8 -*-            # 使其支持中文字符import smtplib                    # 调用模块from email.header impor">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-10-14T09:41:47.000Z">
+<meta property="article:modified_time" content="2023-07-23T14:19:14.086Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-python-IMAP" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/10/14/python-IMAP/" class="article-date">
+  <time class="dt-published" datetime="2022-10-14T09:41:47.000Z" itemprop="datePublished">2022-10-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      python发送邮件
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/python3</span><br><span class="line">#-*- coding: utf-8 -*-            # 使其支持中文字符</span><br><span class="line"></span><br><span class="line">import smtplib                    # 调用模块</span><br><span class="line">from email.header import Header</span><br><span class="line">from email.mime.text import MIMEText</span><br><span class="line"></span><br><span class="line">#第三方SMTP服务</span><br><span class="line">host = &quot;smtp.163.com&quot;          # 邮箱服务host = &quot;smtp.yeah.net&quot;</span><br><span class="line">port = 465                     # 端口号port = 465</span><br><span class="line">user = &quot;xxxxxxxx@163.com&quot;      # 用户名user = &quot;XXXXXXXXXX@yeah.net&quot;</span><br><span class="line">password = &quot;xxxxxxxxxxx&quot;       # 授权码</span><br><span class="line">sender = &quot;xxxxxxxxxxxx@163.com&quot;   # 发件人</span><br><span class="line">receivers = [&quot;xxxxxx@163.com&quot;,&#x27;xxxxxx@163.com&#x27;,&#x27;xxxxxx@163.com&#x27;,&quot;xxxxxx@163.com&quot;,&quot;xxxxxx@163.com&quot;,&quot;xxxxxx@163.com&quot;]  # 收件人，可以群发邮件，多个用户名就以列表形式展现                                                      </span><br><span class="line"></span><br><span class="line">content = &#x27;&#x27;&#x27;                    </span><br><span class="line">    这是一封测试邮件</span><br><span class="line">    内容随你喜欢</span><br><span class="line">    随便写</span><br><span class="line">&#x27;&#x27;&#x27;                         # 邮件内容</span><br><span class="line">subject = &#x27;测试邮件&#x27;         # 邮件主题</span><br><span class="line"></span><br><span class="line">#发送邮件</span><br><span class="line">def send_email():</span><br><span class="line">    msg = MIMEText(content+&#x27;\n send_email&#x27; ,&#x27;plain&#x27; ,&#x27;utf-8&#x27;)</span><br><span class="line">    msg[&#x27;From&#x27;] = user</span><br><span class="line">    msg[&#x27;To&#x27;] = &#x27;,&#x27;.join(receivers)        # 群发邮件形式，如果单独发送邮件直接调用receivers即可</span><br><span class="line">    msg[&#x27;Subject&#x27;] = subject+&#x27; send_email&#x27;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    try:</span><br><span class="line">        #验证</span><br><span class="line">        smtpObj = smtplib.SMTP_SSL(host,port)  # 启用SSL发短信</span><br><span class="line">        smtpObj.login(user,password)           # 用户名密码验证</span><br><span class="line">        smtpObj.sendmail(sender,receivers,msg.as_string())   # 发送</span><br><span class="line">        print(&quot;邮件发送成功&quot;)</span><br><span class="line">    except smtplib.SMTPException as e:</span><br><span class="line">        print(e)</span><br><span class="line"></span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">    send_email()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+<p>提前准备，需要设置邮箱服务器</p>
+<p>发送邮件代码块如下</p>
+<p>#coding:utf-8</p>
+<p>#发送邮件的<br>import smtplib<br>from email.mime.text import MIMEText<br>class SendEmail:<br>    global send_user<br>    global email_host<br>    global password<br>    email_host&#x3D;”smtp.qq.com”<br>    send_user&#x3D;”<a href="mailto:&#120;&#120;&#x78;&#64;&#113;&#113;&#46;&#x63;&#x6f;&#109;">&#120;&#120;&#x78;&#64;&#113;&#113;&#46;&#x63;&#x6f;&#109;</a>“<br>    password&#x3D;”xxx”<br>    #接受人，主题，内容<br>    def send_mail(self,user_list,sub,content):<br>        #发件者<br>        user&#x3D;”cherish”+”&lt;”+send_user+”&gt;”<br>        #内容、格式、编码<br>        message&#x3D;MIMEText(content,_subtype&#x3D;’plain’,_charset&#x3D;’utf-8’)<br>        #主题<br>        message[‘Subject’]&#x3D;sub<br>        #发送人<br>        message[‘From’]&#x3D;user<br>        #接受人<br>        message[‘To’]&#x3D;”;”.join(user_list)<br>        #服务连接<br>        server&#x3D;smtplib.SMTP()<br>        server.connect(email_host)<br>        #邮件登录<br>        server.login(send_user,password)<br>        #发送邮件内容<br>        server.sendmail(user,user_list,message.as_string())<br>        #关掉连接<br>        server.close()<br>    def send_main(self,pass_list,fail_list):<br>        pass_num&#x3D;float(len(pass_list))<br>        fail_num&#x3D;float(len(fail_list))<br>        count_num&#x3D;pass_num+fail_num<br>        #取小数后2位,通过率<br>        pass_result&#x3D;”%.2f%%”%(pass_num&#x2F;count_num*100)<br>        fail_result &#x3D; “%.2f%%”%(fail_num &#x2F; count_num * 100)<br>        user_list &#x3D; [‘<a href="mailto:&#x78;&#120;&#x40;&#x71;&#113;&#x2e;&#x63;&#111;&#109;">&#x78;&#120;&#x40;&#x71;&#113;&#x2e;&#x63;&#111;&#109;</a>‘,‘<a href="mailto:&#x78;&#x78;&#64;&#x71;&#113;&#x2e;&#99;&#x6f;&#x6d;">&#x78;&#x78;&#64;&#x71;&#113;&#x2e;&#99;&#x6f;&#x6d;</a>‘]<br>        sub &#x3D; “接口自动化测试报告”<br>        content&#x3D;”这次一共测试%s个接口,通过个数为%s,失败个数为%s,通过率为%s,失败率为%s”%(count_num,pass_num,fail_num,pass_result,fail_result)<br>        self.send_mail(user_list,sub,content)</p>
+<p>if <strong>name</strong> &#x3D;&#x3D; ‘<strong>main</strong>‘:<br>    sen&#x3D;SendEmail()<br>    sen.send_main([1,2,3,4],[5])</p>
+<p>测试结果：</p>
+<p>测试用例执行代码块</p>
+<p>#coding:utf-8<br>from base.runmethod import RunMethod<br>from data.get_data import GetData<br>from data.depend_data import DependData<br>from util.operation_json import OperationJson<br>from util.common_util import CommonUtil<br>import operator<br>import json<br>from logs.get_log import get_log<br>from util.send_email import SendEmail<br>import getcwd<br>class RunTest:<br>    def <strong>init</strong>(self):<br>        self.path &#x3D; getcwd.get_cwd()<br>        self.log_msg &#x3D; get_log(self.path + ‘&#x2F;data&#x2F;get_data.py’)<br>        self.run_method &#x3D; RunMethod()<br>        self.data &#x3D; GetData()<br>        self.com_util &#x3D; CommonUtil()<br>        self.op_json &#x3D; OperationJson(‘..&#x2F;dataconfig&#x2F;rigang_data&#x2F;header_value.json’)<br>        self.json_path&#x3D;’..&#x2F;dataconfig&#x2F;rigang_data&#x2F;expect_monitor_add.json’</p>
+<pre><code>#程序执行的
+def go_on_run(self):
+    res = None
+    pass_count = []
+    fail_count = []
+    #10  0,1,2,3
+    #用例行数
+    rows_count = self.data.get_case_lines()
+    #遍历所有用例进行测试
+    for i in range(1,rows_count):
+        is_run = self.data.get_is_run(i)
+        if is_run:
+            caseid=self.data.get_caseid(i)
+            url = self.data.get_request_url(i)
+            method = self.data.get_request_method(i)
+            request_data = json.dumps(self.data.get_data_for_json(i))
+            expect = self.data.get_expect_data_for_json(i,self.json_path)
+            header = self.data.is_header(i)
+            depend_case=self.data.is_depend(i)
+            #判断是否有数据依赖
+            if depend_case!=None:
+                self.depend_data = DependData(caseid)
+                #获取依赖的响应数据
+                depend_response_data=self.depend_data.get_data_for_key(i)
+                #获取依赖字段
+                depend_key=self.data.get_depend_field(i)
+                #请求数据的依赖字段重新赋值之前的依赖数据
+                request_data[depend_key]=depend_response_data
+            # res = self.run_method.run_main(method, url, request_data)
+
+            if header == &#39;5&#39;:
+                #根据关键字test获取header信息
+                header = self.op_json.get_data(&#39;monitor_add&#39;)
+                res = self.run_method.run_main(method,url,request_data,header)
+
+                self.log_msg.info(&#39;该条用例header内容是：%s&#39; % header)
+                #将返回结果写入json文件
+                response_dato_tojson=self.op_json.write_data(res,&#39;../dataconfig/rigang_data/actual_monitor_add.json&#39;)
+            else:
+                res = self.run_method.run_main(method,url,request_data)
+                response_dato_tojson=self.op_json.write_data(res, &#39;../dataconfig/rigang_data/actual_monitor_add.json&#39;)
+            read_json_data=self.op_json.read_data(&#39;../dataconfig/rigang_data/actual_monitor_add.json&#39;)
+            self.log_msg.info(&#39;写入json的返回结果是：%s&#39; % read_json_data)
+
+            if operator.eq(expect,res) == True:
+                self.data.write_result(i,&#39;pass&#39;)
+                #统计通过个数
+                pass_count.append(i)
+                self.log_msg.info(&#39;用例ID为%s-------------------测试通过\n&#39;%caseid )
+            else:
+                res = json.dumps(res)
+                self.data.write_result(i,res)
+                #统计失败个数
+                fail_count.append(i)
+                self.log_msg.info(&#39;用例ID为%s-------------------测试失败\n&#39; % caseid)
+
+    send_email=SendEmail()
+    send_email.send_main(pass_count,fail_count)
+</code></pre>
+<p>if <strong>name</strong> &#x3D;&#x3D; ‘<strong>main</strong>‘:<br>    run &#x3D; RunTest()<br>    run.go_on_run()</p>
+<p>测试结果</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/10/14/python-IMAP/" data-id="clkjdd1cp002x98aj0slf30kp" data-title="python发送邮件" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/10/18/vnc-peizhi/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          linux中配置vnc登录
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/10/14/python-str/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">python字符串处理</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Minecraft/">Minecraft</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E7%B1%BB/">分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E5%8F%91/">开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A4%BE%E5%9B%A2/">社团</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blander/" rel="tag">Blander</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CAD/" rel="tag">CAD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GUI/" rel="tag">GUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Novelai/" rel="tag">Novelai</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSD1309/" rel="tag">SSD1309</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STEAM/" rel="tag">STEAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STEAM%E7%A4%BE/" rel="tag">STEAM社</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VNC/" rel="tag">VNC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/" rel="tag">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arduino/" rel="tag">arduino</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/colour/" rel="tag">colour</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/learn/" rel="tag">learn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mc/" rel="tag">mc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/micro-bit/" rel="tag">micro:bit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nextcloud/" rel="tag">nextcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag">学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%87%E7%AD%BE/" rel="tag">标签</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" rel="tag">树莓派</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%86%E8%88%AA%E6%9D%AF/" rel="tag">领航杯</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Blander/" style="font-size: 10px;">Blander</a> <a href="/tags/CAD/" style="font-size: 12px;">CAD</a> <a href="/tags/GUI/" style="font-size: 10px;">GUI</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/Novelai/" style="font-size: 10px;">Novelai</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SSD1309/" style="font-size: 12px;">SSD1309</a> <a href="/tags/STEAM/" style="font-size: 10px;">STEAM</a> <a href="/tags/STEAM%E7%A4%BE/" style="font-size: 14px;">STEAM社</a> <a href="/tags/VNC/" style="font-size: 10px;">VNC</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/arduino/" style="font-size: 12px;">arduino</a> <a href="/tags/colour/" style="font-size: 10px;">colour</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/learn/" style="font-size: 10px;">learn</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mc/" style="font-size: 12px;">mc</a> <a href="/tags/micro-bit/" style="font-size: 16px;">micro:bit</a> <a href="/tags/nextcloud/" style="font-size: 10px;">nextcloud</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/python/" style="font-size: 18px;">python</a> <a href="/tags/windows/" style="font-size: 12px;">windows</a> <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 12px;">学习</a> <a href="/tags/%E6%A0%87%E7%AD%BE/" style="font-size: 12px;">标签</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" style="font-size: 12px;">树莓派</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">网络</a> <a href="/tags/%E9%A2%86%E8%88%AA%E6%9D%AF/" style="font-size: 10px;">领航杯</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">July 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">January 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">August 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/1000/12/">December 1000</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/07/26/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-HC-SR04/">linux-pi-HC-SR04</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-python-yolo5/">linux-python-yolo5</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-SSD1309/">linux-pi-SSD1309</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-MPU6050/">MPU6050-pi</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

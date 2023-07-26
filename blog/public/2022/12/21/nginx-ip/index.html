@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>nginx-ip | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;4e761ec96f67 Nginx 多个子域名映射到不同的端口或 ip MrTrickerIP属地: 福建0.2672019.07.17 15:42:10字数 1,163阅读 7,597场景介绍 在部署 DevOps 环境时，多个服务通过 Docker 部署到一个服务器上，映射到不同的端口。现在每次访问，都要带上端口号，既不美观，也很麻烦。 一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nginx-ip">
+<meta property="og:url" content="http://example.com/2022/12/21/nginx-ip/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;4e761ec96f67 Nginx 多个子域名映射到不同的端口或 ip MrTrickerIP属地: 福建0.2672019.07.17 15:42:10字数 1,163阅读 7,597场景介绍 在部署 DevOps 环境时，多个服务通过 Docker 部署到一个服务器上，映射到不同的端口。现在每次访问，都要带上端口号，既不美观，也很麻烦。 一">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-12-21T03:25:35.000Z">
+<meta property="article:modified_time" content="2023-07-23T14:19:13.130Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-nginx-ip" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/12/21/nginx-ip/" class="article-date">
+  <time class="dt-published" datetime="2022-12-21T03:25:35.000Z" itemprop="datePublished">2022-12-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      nginx-ip
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/4e761ec96f67">https://www.jianshu.com/p/4e761ec96f67</a></p>
+<p>Nginx 多个子域名映射到不同的端口或 ip</p>
+<p>MrTricker<br>IP属地: 福建<br>0.267<br>2019.07.17 15:42:10<br>字数 1,163<br>阅读 7,597<br>场景介绍</p>
+<p>在部署 DevOps 环境时，多个服务通过 Docker 部署到一个服务器上，映射到不同的端口。<br>现在每次访问，都要带上端口号，既不美观，也很麻烦。</p>
+<p>一、思考过程<br>如果不想带上端口号，就只能访问 80 或 443 端口。<br>可以用过二级目录区分服务，通过反向代理转发到不同的 Server。<br>可以用过子域名区分服务，通过反向代理转发到不同的 Server。<br>二、方案评估<br>对于不带端口号访问，以我目前的经验来看，找不到其它更好的方法，只能使用 80 或 443 端口。<br>使用二级目录区分服务，可行性很大。<br>能通过二级目录名，明确区分服务。<br>可是和直接使用端口号差别不大，只是把辨别服务的方法，从端口号变成了二级目录名。<br>可能导致 url 过长。<br>还是没有什么美观性。<br>使用子域名区分服务，可行性与二级目录相差无几。<br>能通过子域名，明确区分服务。<br>具有一定的美观性。<br>三、方案确定 和 方案设计<br>我决定采用采用 子域名区分服务 的方式，然后使用 nginx 做反向代理，分发到不同的端口。</p>
+<ol>
+<li>本地测试<br>注意</li>
+</ol>
+<p>我使用的环境是 Ubuntu Desktop 桌面操作系统。</p>
+<p>首先安装 nginx</p>
+<h1 id="使用-Ubuntu-包管理器中的-nginx-即可。"><a href="#使用-Ubuntu-包管理器中的-nginx-即可。" class="headerlink" title="使用 Ubuntu 包管理器中的 nginx 即可。"></a>使用 Ubuntu 包管理器中的 nginx 即可。</h1><p>$ sudo apt update<br>$ sudo apt install nginx<br>安装 Docker 和 Docker Composer</p>
+<p>参考官方文档 Get Docker CE for Ubuntu 和 Install Docker Compose。</p>
+<p>创建目录结构</p>
+<h1 id="我使用的是-Jetbrains-全家桶；"><a href="#我使用的是-Jetbrains-全家桶；" class="headerlink" title="我使用的是 Jetbrains 全家桶；"></a>我使用的是 Jetbrains 全家桶；</h1><h1 id="这里比较麻烦。"><a href="#这里比较麻烦。" class="headerlink" title="这里比较麻烦。"></a>这里比较麻烦。</h1><p>$ mkdir -p DevOps<br>$ cd mkdir<br>$ mkdir -p gitlab registry teamcity mysql<br>$ mkdir -p -m 750 hub&#x2F;backups hub&#x2F;conf hub&#x2F;data hub&#x2F;logs youtrack&#x2F;backups youtrack&#x2F;conf youtrack&#x2F;data youtrack&#x2F;logs upsource&#x2F;backups upsource&#x2F;conf upsource&#x2F;data upsource&#x2F;logs<br>$ sudo chmod -R 13001:13001 hub youtrack upsource<br>$ touch docker-compose.yml<br>编写 docker-compose.yml 配置文件</p>
+<p>version: ‘3’</p>
+<p>services:</p>
+<p>  gitlab:<br>    image: gitlab&#x2F;gitlab-ce:latest<br>    restart: always<br>    hostname: ‘gitlab.tricker.org’<br>    prots:<br>      - 8888:80<br>      - 2222:22<br>    volumes:<br>      - ‘.&#x2F;gitlab&#x2F;config:&#x2F;etc&#x2F;gitlab’<br>      - ‘.&#x2F;gitlab&#x2F;data:&#x2F;var&#x2F;opt&#x2F;gitlab’<br>      - ‘.&#x2F;gitlab&#x2F;logs:&#x2F;var&#x2F;log&#x2F;gitlab’<br>    environment:<br>      GITLAB_OMNIBUS_CONFIG: |<br>        external_url “<a target="_blank" rel="noopener" href="http://gitlab.tricker.org/">http://gitlab.tricker.org</a>“<br>        gitlab_rails[“gitlab_shell_ssh_port”] &#x3D; 2222<br>    networks:<br>      devops:<br>        aliases:<br>          - ‘gitlab.tricker.org’</p>
+<p>  registry:<br>    image: registry:latest<br>    hostname: ‘registry.tricker.org’<br>    ports:<br>      - 5555:5000<br>    volumes:<br>      - ‘.&#x2F;registry&#x2F;data:&#x2F;var&#x2F;lib&#x2F;registry’<br>    networks:<br>      devops:<br>        aliases:<br>          - ‘registry.tricker.org’</p>
+<p>  hub:<br>    image: jetbrains&#x2F;hub:2019.1.11584<br>    hostname: ‘hub.tricker.org’<br>    ports:<br>      - 18080:8080<br>    volumes:<br>      - ‘.&#x2F;hub&#x2F;data:&#x2F;opt&#x2F;hub&#x2F;data’<br>      - ‘.&#x2F;hub&#x2F;conf:&#x2F;opt&#x2F;hub&#x2F;conf’<br>      - ‘.&#x2F;hub&#x2F;logs:&#x2F;opt&#x2F;hub&#x2F;logs’<br>      - ‘.&#x2F;hub&#x2F;backups:&#x2F;opt&#x2F;hub&#x2F;backups’<br>    networks:<br>      devops:<br>        aliases:<br>          - ‘hub.tricker.org’</p>
+<p>  youtrack:<br>    image: jetbrains&#x2F;youtrack:2019.2.54193<br>    hostname: ‘youtrack.tricker.org’<br>    ports:<br>      - 18081:8080<br>    volumes:<br>      - ‘.&#x2F;youtrack&#x2F;data:&#x2F;opt&#x2F;youtrack&#x2F;data’<br>      - ‘.&#x2F;youtrack&#x2F;conf:&#x2F;opt&#x2F;youtrack&#x2F;conf’<br>      - ‘.&#x2F;youtrack&#x2F;logs:&#x2F;opt&#x2F;youtrack&#x2F;logs’<br>      - ‘.&#x2F;youtrack&#x2F;backups:&#x2F;opt&#x2F;youtrack&#x2F;backups’<br>    networks:<br>      devops:<br>        aliases:<br>          - ‘youtrack.tricker.org’<br>    depends_on:<br>      - hub</p>
+<p>  upsource:<br>    image: jetbrains&#x2F;upsource:2019.1.1432<br>    hostname: ‘upsource.tricker.org’<br>    ports:<br>      - 18082:8080<br>    volumes:<br>      - ‘.&#x2F;upsource&#x2F;data:&#x2F;opt&#x2F;upsource&#x2F;data’<br>      - ‘.&#x2F;upsource&#x2F;conf:&#x2F;opt&#x2F;upsource&#x2F;conf’<br>      - ‘.&#x2F;upsource&#x2F;logs:&#x2F;opt&#x2F;upsource&#x2F;logs’<br>      - ‘.&#x2F;upsource&#x2F;backups:&#x2F;opt&#x2F;upsource&#x2F;backups’<br>    networks:<br>      devops:<br>        aliases:<br>          - ‘upsource.tricker.org’<br>    depends_on:<br>      - hub<br>      - gitlab</p>
+<p>  teamcity:<br>    image: jetbrains&#x2F;teamcity-server<br>    hostname: ‘teamcity.tricker.org’<br>    ports:<br>      - 18111:8111<br>    volumes:<br>      - ‘.&#x2F;teamcity&#x2F;data:&#x2F;data&#x2F;teamcity_server&#x2F;datadir’<br>      - ‘.&#x2F;teamcity&#x2F;logs:&#x2F;opt&#x2F;teamcity&#x2F;logs’<br>    networks:<br>      devops:<br>        aliases:<br>          - ‘teamcity.tricker.org’<br>    depends_on:<br>      - mysql<br>      - gitlab</p>
+<p>networks:<br>  devops:<br>修改 hosts 文件</p>
+<h1 id="注意-这里一定要使用-root-权限。"><a href="#注意-这里一定要使用-root-权限。" class="headerlink" title="注意: 这里一定要使用 root 权限。"></a>注意: 这里一定要使用 root 权限。</h1><p>$ sudo vim &#x2F;etc&#x2F;hosts</p>
+<h1 id="关于-vim-的使用，此处不再复述，有问题找百度。"><a href="#关于-vim-的使用，此处不再复述，有问题找百度。" class="headerlink" title="关于 vim 的使用，此处不再复述，有问题找百度。"></a>关于 vim 的使用，此处不再复述，有问题找百度。</h1><p>127.0.0.1       gitlab.tricker.org<br>127.0.0.1       registry.tricker.org<br>127.0.0.1       hub.tricker.org<br>127.0.0.1       youtrack.tricker.org<br>127.0.0.1       upsource.tricker.org<br>127.0.0.1       teamcity.tricker.org<br>修改 nginx 配置</p>
+<h1 id="进入-nginx-文件夹，这个文件夹内的操作，几乎都需要-root-权限。"><a href="#进入-nginx-文件夹，这个文件夹内的操作，几乎都需要-root-权限。" class="headerlink" title="进入 nginx 文件夹，这个文件夹内的操作，几乎都需要 root 权限。"></a>进入 nginx 文件夹，这个文件夹内的操作，几乎都需要 root 权限。</h1><p>$ cd &#x2F;etc&#x2F;nginx<br>$ cd sites-available&#x2F;<br>$ sudo mv default default.backup<br>$ sudo vim devops<br>server {<br>    listen 80;</p>
+<pre><code>server_name gitlab.tricker.org;
+
+location / &#123;
+    proxy_pass       http://127.0.0.1:8888;
+    proxy_set_header Host      $host;
+    proxy_set_header X-Real-IP $remote_addr;
+&#125;
+</code></pre>
+<p>}</p>
+<p>server {<br>    listen 80;</p>
+<pre><code>server_name registry.tricker.org;
+
+location / &#123;
+    proxy_pass       http://127.0.0.1:5555;
+    proxy_set_header Host      $host;
+    proxy_set_header X-Real-IP $remote_addr;
+&#125;
+</code></pre>
+<p>}</p>
+<p>server {<br>    listen 80;</p>
+<pre><code>server_name hub.tricker.org;
+
+location / &#123;
+    proxy_pass       http://127.0.0.1:18080;
+    proxy_set_header Host      $host;
+    proxy_set_header X-Real-IP $remote_addr;
+&#125;
+</code></pre>
+<p>}</p>
+<p>server {<br>    listen 80;</p>
+<pre><code>server_name youtrack.tricker.org;
+
+location / &#123;
+    proxy_pass       http://127.0.0.1:18081;
+    proxy_set_header Host      $host;
+    proxy_set_header X-Real-IP $remote_addr;
+&#125;
+</code></pre>
+<p>}</p>
+<p>server {<br>    listen 80;</p>
+<pre><code>server_name upsource.tricker.org;
+
+location / &#123;
+    proxy_pass       http://127.0.0.1:18082;
+    proxy_set_header Host      $host;
+    proxy_set_header X-Real-IP $remote_addr;
+&#125;
+</code></pre>
+<p>}</p>
+<p>server {<br>    listen 80;</p>
+<pre><code>server_name teamcity.tricker.org;
+
+location / &#123;
+    proxy_pass       http://127.0.0.1:18111;
+    proxy_set_header Host      $host;
+    proxy_set_header X-Real-IP $remote_addr;
+&#125;
+</code></pre>
+<p>}</p>
+<h1 id="重启-nginx-打开浏览器访问相应的子域名，就可以转到相应的服务了。"><a href="#重启-nginx-打开浏览器访问相应的子域名，就可以转到相应的服务了。" class="headerlink" title="重启 nginx 打开浏览器访问相应的子域名，就可以转到相应的服务了。"></a>重启 nginx 打开浏览器访问相应的子域名，就可以转到相应的服务了。</h1><p>$ sudo systemct restart nginx</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/12/21/nginx-ip/" data-id="clkjdd1ce002f98ajgay19508" data-title="nginx-ip" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/12/31/linux-zip-tar/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          linux-zip-tar
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/11/26/pi-bluetooth/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">pi-bluetooth</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Minecraft/">Minecraft</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E7%B1%BB/">分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E5%8F%91/">开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A4%BE%E5%9B%A2/">社团</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blander/" rel="tag">Blander</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CAD/" rel="tag">CAD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GUI/" rel="tag">GUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Novelai/" rel="tag">Novelai</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSD1309/" rel="tag">SSD1309</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STEAM/" rel="tag">STEAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STEAM%E7%A4%BE/" rel="tag">STEAM社</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VNC/" rel="tag">VNC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/" rel="tag">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arduino/" rel="tag">arduino</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/colour/" rel="tag">colour</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/learn/" rel="tag">learn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mc/" rel="tag">mc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/micro-bit/" rel="tag">micro:bit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nextcloud/" rel="tag">nextcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag">学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%87%E7%AD%BE/" rel="tag">标签</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" rel="tag">树莓派</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%86%E8%88%AA%E6%9D%AF/" rel="tag">领航杯</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Blander/" style="font-size: 10px;">Blander</a> <a href="/tags/CAD/" style="font-size: 12px;">CAD</a> <a href="/tags/GUI/" style="font-size: 10px;">GUI</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/Novelai/" style="font-size: 10px;">Novelai</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SSD1309/" style="font-size: 12px;">SSD1309</a> <a href="/tags/STEAM/" style="font-size: 10px;">STEAM</a> <a href="/tags/STEAM%E7%A4%BE/" style="font-size: 14px;">STEAM社</a> <a href="/tags/VNC/" style="font-size: 10px;">VNC</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/arduino/" style="font-size: 12px;">arduino</a> <a href="/tags/colour/" style="font-size: 10px;">colour</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/learn/" style="font-size: 10px;">learn</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mc/" style="font-size: 12px;">mc</a> <a href="/tags/micro-bit/" style="font-size: 16px;">micro:bit</a> <a href="/tags/nextcloud/" style="font-size: 10px;">nextcloud</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/python/" style="font-size: 18px;">python</a> <a href="/tags/windows/" style="font-size: 12px;">windows</a> <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 12px;">学习</a> <a href="/tags/%E6%A0%87%E7%AD%BE/" style="font-size: 12px;">标签</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" style="font-size: 12px;">树莓派</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">网络</a> <a href="/tags/%E9%A2%86%E8%88%AA%E6%9D%AF/" style="font-size: 10px;">领航杯</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">July 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">January 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">August 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/1000/12/">December 1000</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/07/26/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-HC-SR04/">linux-pi-HC-SR04</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-python-yolo5/">linux-python-yolo5</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-SSD1309/">linux-pi-SSD1309</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-MPU6050/">MPU6050-pi</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

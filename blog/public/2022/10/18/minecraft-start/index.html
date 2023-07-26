@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>我的世界linux和windows启动脚本 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="MC服务器启动脚本写法 Linux系统的.sh启动脚本   Linux单次启动Linux循环十次启动Linux无限循环启动   Windows系统的.bat启动脚本   Windows单次启动Windows循环十次启动Windows无限循环启动  Minecraft服务器的启动脚本写法记录首先，每个服务端都会有一个用于启动服务器的jar文件，这个根据具体情况具体修改，此处以forge直接启动服务器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="我的世界linux和windows启动脚本">
+<meta property="og:url" content="http://example.com/2022/10/18/minecraft-start/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="MC服务器启动脚本写法 Linux系统的.sh启动脚本   Linux单次启动Linux循环十次启动Linux无限循环启动   Windows系统的.bat启动脚本   Windows单次启动Windows循环十次启动Windows无限循环启动  Minecraft服务器的启动脚本写法记录首先，每个服务端都会有一个用于启动服务器的jar文件，这个根据具体情况具体修改，此处以forge直接启动服务器">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-10-18T11:30:30.000Z">
+<meta property="article:modified_time" content="2023-07-23T14:19:12.090Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="mc">
+<meta property="article:tag" content="windows">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-minecraft-start" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/10/18/minecraft-start/" class="article-date">
+  <time class="dt-published" datetime="2022-10-18T11:30:30.000Z" itemprop="datePublished">2022-10-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Minecraft/">Minecraft</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      我的世界linux和windows启动脚本
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="MC服务器启动脚本写法"><a href="#MC服务器启动脚本写法" class="headerlink" title="MC服务器启动脚本写法"></a>MC服务器启动脚本写法</h1><ol>
+<li>Linux系统的.sh启动脚本</li>
+</ol>
+<blockquote>
+<p>Linux单次启动<br>Linux循环十次启动<br>Linux无限循环启动</p>
+</blockquote>
+<ol>
+<li>Windows系统的.bat启动脚本</li>
+</ol>
+<blockquote>
+<p>Windows单次启动<br>Windows循环十次启动<br>Windows无限循环启动</p>
+</blockquote>
+<h2 id="Minecraft服务器的启动脚本写法记录"><a href="#Minecraft服务器的启动脚本写法记录" class="headerlink" title="Minecraft服务器的启动脚本写法记录"></a>Minecraft服务器的启动脚本写法记录</h2><p>首先，每个服务端都会有一个用于启动服务器的<code>jar</code>文件，这个根据具体情况具体修改，此处以<code>forge</code>直接启动服务器为例，使用文件<code>forge-1.12.2-14.23.5.2854.jar</code>启动服务器。</p>
+<p>将服务端最低内存设置为1024M，最大内存设置为4096M，同时不需要图形界面，配置参数nogui。<br>核心的启动命令即为：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -server -XX:+UseG1GC  -Xmx4096M -Xms1024M -jar forge-<span class="number">1.12</span><span class="number">.2</span>-<span class="number">14.23</span><span class="number">.5</span><span class="number">.2854</span>.jar nogui</span><br></pre></td></tr></table></figure>
+
+<p>再随便瞎加一些优化参数（不一定是正优化，根据具体情况调整）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -server -XX:+UseG1GC  -Xms1024M -Xmx4096M -jar forge-<span class="number">1.12</span><span class="number">.2</span>-<span class="number">14.23</span><span class="number">.5</span><span class="number">.2854</span>.jar nogui -noverify -XX:+AggressiveOpts -XX:+UseCompressedOops</span><br></pre></td></tr></table></figure>
+
+<p>在完成了核心启动语句后，就要根据具体操作系统编写启动脚本了。</p>
+<ol>
+<li>Linux系统的<code>.sh</code>启动脚本</li>
+</ol>
+<p>新建任何一个后缀名为<code>.sh</code>的文件，使用<code>chmod +x</code>添加运行权限。</p>
+<p>运行时使用<code>./文件名.sh</code>来运行文件。</p>
+<p>1.1 Linux单次启动</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line">java -server -XX:+UseG1GC  -Xms1024M -Xmx4096M -jar forge-1.12.2-14.23.5.2854.jar nogui -noverify -XX:+AggressiveOpts -XX:+UseCompressedOops</span><br></pre></td></tr></table></figure>
+
+<p>1.2 Linux循环十次启动</p>
+<p>服务器崩溃后会自动重新启动，一共启动十次，用于应对那些不是启动秒崩无限循环的小崩溃bug。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ((i=<span class="number">0</span>; i&lt;<span class="number">10</span>; i ++))</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    java -server -XX:+UseG1GC  -Xms1024M -Xmx4096M -jar forge-1.12.2-14.23.5.2854.jar nogui -noverify -XX:+AggressiveOpts -XX:+UseCompressedOops</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<p>1.3 Linux无限循环启动</p>
+<p>崩溃后无限循环启动，只能通过强制终止<code>screen</code>或重启计算机停止。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> ((<span class="number">1</span>))</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    java -server -XX:+UseG1GC  -Xms1024M -Xmx4096M -jar forge-1.12.2-14.23.5.2854.jar nogui -noverify -XX:+AggressiveOpts -XX:+UseCompressedOops</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><code>Windows</code>系统的<code>.bat</code>启动脚本</li>
+</ol>
+<p>新建任何一个后缀名为<code>.bat</code>的文件，运行时直接双击来运行文件。</p>
+<blockquote>
+<p>注：<code>windows</code>系统的<code>cmd</code>如果要使用中文，需要用<code>GB2312</code>编码来编写<code>.bat</code>文件，否则中文会出现乱码问题。</p>
+</blockquote>
+<p>2.1 <code>Windows</code>单次启动</p>
+<p>单次启动的<code>.bat</code>脚本写法：</p>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">ECHO</span> OFF</span><br><span class="line"><span class="built_in">title</span> Minecraft Server</span><br><span class="line">java -server -XX:+UseG1GC  -Xms1024M -Xmx4096M -jar forge-<span class="number">1</span>.<span class="number">12</span>.<span class="number">2</span>-<span class="number">14</span>.<span class="number">23</span>.<span class="number">5</span>.<span class="number">2854</span>.jar nogui -noverify -XX:+AggressiveOpts -XX:+UseCompressedOops</span><br><span class="line"><span class="built_in">pause</span></span><br><span class="line"><span class="keyword">EXIT</span></span><br></pre></td></tr></table></figure>
+
+<p>2.2 <code>Windows</code>循环十次启动</p>
+<p>服务器崩溃后会自动重新启动，一共启动十次，用于应对那些不是启动秒崩无限循环的小崩溃bug。</p>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">ECHO</span> OFF</span><br><span class="line"><span class="built_in">title</span> Minecraft Server</span><br><span class="line"><span class="built_in">set</span> n=<span class="number">0</span></span><br><span class="line">:start_server</span><br><span class="line">java -server -XX:+UseG1GC  -Xms1024M -Xmx4096M -jar forge-<span class="number">1</span>.<span class="number">12</span>.<span class="number">2</span>-<span class="number">14</span>.<span class="number">23</span>.<span class="number">5</span>.<span class="number">2854</span>.jar nogui -noverify -XX:+AggressiveOpts -XX:+UseCompressedOops</span><br><span class="line"><span class="built_in">set</span> /a n+=<span class="number">1</span></span><br><span class="line"><span class="keyword">if</span> <span class="variable">%n%</span>==<span class="number">10</span> <span class="keyword">exit</span></span><br><span class="line"><span class="keyword">goto</span> start_server</span><br></pre></td></tr></table></figure>
+
+<p>2.3 <code>Windows</code>无限循环启动<br>崩溃后无限循环启动，可以通过关闭cmd窗口停止。</p>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">ECHO</span> OFF</span><br><span class="line"><span class="built_in">title</span> Minecraft Server</span><br><span class="line">:start_server</span><br><span class="line">java -server -XX:+UseG1GC  -Xms1024M -Xmx4096M -jar forge-<span class="number">1</span>.<span class="number">12</span>.<span class="number">2</span>-<span class="number">14</span>.<span class="number">23</span>.<span class="number">5</span>.<span class="number">2854</span>.jar nogui -noverify -XX:+AggressiveOpts -XX:+UseCompressedOops</span><br><span class="line"><span class="keyword">goto</span> start_server</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/starvapour/article/details/113415562"></a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/anliven/articles/6847762.html"></a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/10/18/minecraft-start/" data-id="clkjdd1ca002a98aj0rhvffij" data-title="我的世界linux和windows启动脚本" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mc/" rel="tag">mc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/windows/" rel="tag">windows</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/10/19/linux-kaijiqidong/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          linux设置开机启动（待完善）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/10/18/vnc-peizhi/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">linux中配置vnc登录</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Minecraft/">Minecraft</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E7%B1%BB/">分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E5%8F%91/">开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A4%BE%E5%9B%A2/">社团</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blander/" rel="tag">Blander</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CAD/" rel="tag">CAD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GUI/" rel="tag">GUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Novelai/" rel="tag">Novelai</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSD1309/" rel="tag">SSD1309</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STEAM/" rel="tag">STEAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STEAM%E7%A4%BE/" rel="tag">STEAM社</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VNC/" rel="tag">VNC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/" rel="tag">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arduino/" rel="tag">arduino</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/colour/" rel="tag">colour</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/learn/" rel="tag">learn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mc/" rel="tag">mc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/micro-bit/" rel="tag">micro:bit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nextcloud/" rel="tag">nextcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag">学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%87%E7%AD%BE/" rel="tag">标签</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" rel="tag">树莓派</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%86%E8%88%AA%E6%9D%AF/" rel="tag">领航杯</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Blander/" style="font-size: 10px;">Blander</a> <a href="/tags/CAD/" style="font-size: 12px;">CAD</a> <a href="/tags/GUI/" style="font-size: 10px;">GUI</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/Novelai/" style="font-size: 10px;">Novelai</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SSD1309/" style="font-size: 12px;">SSD1309</a> <a href="/tags/STEAM/" style="font-size: 10px;">STEAM</a> <a href="/tags/STEAM%E7%A4%BE/" style="font-size: 14px;">STEAM社</a> <a href="/tags/VNC/" style="font-size: 10px;">VNC</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/arduino/" style="font-size: 12px;">arduino</a> <a href="/tags/colour/" style="font-size: 10px;">colour</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/learn/" style="font-size: 10px;">learn</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mc/" style="font-size: 12px;">mc</a> <a href="/tags/micro-bit/" style="font-size: 16px;">micro:bit</a> <a href="/tags/nextcloud/" style="font-size: 10px;">nextcloud</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/python/" style="font-size: 18px;">python</a> <a href="/tags/windows/" style="font-size: 12px;">windows</a> <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 12px;">学习</a> <a href="/tags/%E6%A0%87%E7%AD%BE/" style="font-size: 12px;">标签</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" style="font-size: 12px;">树莓派</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">网络</a> <a href="/tags/%E9%A2%86%E8%88%AA%E6%9D%AF/" style="font-size: 10px;">领航杯</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">July 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">January 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">August 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/1000/12/">December 1000</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/07/26/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-HC-SR04/">linux-pi-HC-SR04</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-python-yolo5/">linux-python-yolo5</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-SSD1309/">linux-pi-SSD1309</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-MPU6050/">MPU6050-pi</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

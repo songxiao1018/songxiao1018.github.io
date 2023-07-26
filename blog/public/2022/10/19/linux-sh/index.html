@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>linux中sh文件使用方法 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="linux sh命令简述  可能需要的执行方式linux下执行.sh文件的方法  开头：#!&#x2F;bin&#x2F;sh  变量  Shell命令和流程控制Unix命令概念：管道，重定向和backtick（反斜线）流程控制  可能需要的执行方式linux下执行.sh文件的方法.sh文件就是文本文件，如果要执行，需要使用chmod a+x xxx.sh来给可执行权限。  开头：#!&#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux中sh文件使用方法">
+<meta property="og:url" content="http://example.com/2022/10/19/linux-sh/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="linux sh命令简述  可能需要的执行方式linux下执行.sh文件的方法  开头：#!&#x2F;bin&#x2F;sh  变量  Shell命令和流程控制Unix命令概念：管道，重定向和backtick（反斜线）流程控制  可能需要的执行方式linux下执行.sh文件的方法.sh文件就是文本文件，如果要执行，需要使用chmod a+x xxx.sh来给可执行权限。  开头：#!&#x2F;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-10-19T11:32:29.000Z">
+<meta property="article:modified_time" content="2023-07-23T14:19:12.170Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-linux-sh" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/10/19/linux-sh/" class="article-date">
+  <time class="dt-published" datetime="2022-10-19T11:32:29.000Z" itemprop="datePublished">2022-10-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      linux中sh文件使用方法
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>linux sh命令简述</p>
+<ol>
+<li><p>可能需要的执行方式<br>linux下执行.sh文件的方法</p>
+</li>
+<li><p>开头：#!&#x2F;bin&#x2F;sh</p>
+</li>
+<li><p>变量</p>
+</li>
+<li><p>Shell命令和流程控制<br>Unix命令<br>概念：管道，重定向和backtick（反斜线）<br>流程控制</p>
+</li>
+<li><p>可能需要的执行方式<br>linux下执行.sh文件的方法<br>.sh文件就是文本文件，如果要执行，需要使用chmod a+x xxx.sh来给可执行权限。</p>
+</li>
+<li><p>开头：#!&#x2F;bin&#x2F;sh<br>shell程序必须以“#!&#x2F;bin&#x2F;sh”开始。shell中#一般表示注释的意思，所以很多时候认为”#!”也是注释，但实际上并不是。</p>
+</li>
+</ol>
+<p>“#!&#x2F;bin&#x2F;sh”是对shell的声明，说明你所用的是哪种类型的shell及其路径所在。</p>
+<p>#!&#x2F;bin&#x2F;是指此脚本使用.bin&#x2F;sh来执行。</p>
+<p>#!是特殊的表示符，其后面跟的是解释此脚本的shell的路径，如果没有声明，则脚本将在默认的shell中执行，默认shell是由用户所在的系统定义为执行shell脚本，如果脚本被编写为在Kornshell ksh中运行，而默认运行shell脚本的为C shell csh,则脚本在执行过程中很可能失败。所以建议大家就把”#!&#x2F;bin&#x2F;sh”当成C 语言的main函数一样，写shell必须有，以使shell程序更严密。</p>
+<ol start="3">
+<li>变量<br>在其他编程语言中必须使用变量。在shell编程中，所有变量都由字符串组成，并且不需要对变量进行声明。要赋值给一个变量，可以这样写：</li>
+</ol>
+<p>#!&#x2F;bin&#x2F;sh<br> #对变量赋值：<br> a&#x3D;”hello world”</p>
+<h1 id="现在打印变量a的内容："><a href="#现在打印变量a的内容：" class="headerlink" title="现在打印变量a的内容："></a>现在打印变量a的内容：</h1><p> echo “A is:”<br> echo $a<br>1<br>2<br>3<br>4<br>5<br>6<br>有时候变量名很容易与其他文字混淆，比如：</p>
+<p> num&#x3D;2<br> echo “this is the $numnd”<br>1<br>2<br>这并不会打印出”this is the 2nd”，而仅仅打印”this is the “，因为shell会去搜索变量numnd的值，但是这个变量是没有值的。因此，可以使用花括号来告诉shell我们要打印的是num变量：</p>
+<p> num&#x3D;2<br> echo “this is the ${num}nd”<br>1<br>2<br>这样才会打印”this is the 2nd”</p>
+<ol start="4">
+<li>Shell命令和流程控制<br>在shell脚本中可以使用以下命令：</li>
+</ol>
+<p>Unix命令<br>虽然在shell脚本中可以使用任意的unix命令，但还是有一些相对更常用的命令。这些命令通常是用来进行文件和文字操作的。<br>如：</p>
+<p> echo “some text” #将文字内容打印在屏幕上<br> ls #文件列表<br> cp sourcefile destfile #文件拷贝<br> mv oldname newname #重命名文件或移动文件<br> rm file #删除文件<br> grep ‘pattern’ file #在文件内搜索字符串，如：grep ‘searchstring’ file.txt<br> cat file.txt #输出文件内容到标准输出设备（屏幕）上<br> read var #显示用户输入，并将输入赋值给变量<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>概念：管道，重定向和backtick（反斜线）<br>管道 | 将一个命令的输出作为另外一个命令的输入。<br>grep “hello” file.txt | wc -l<br>1<br>上述代码表示为：在 file.txt 中搜索包含有 “hello” 的行并计算其行数。在这里grep命令的输出作为wc命令的输入。</p>
+<p>需要注意的是，管道后的命令是子命令，并不会出现在接下来的命令中（有点像C++在{}内和{}外赋值的区别），如以下命令：</p>
+<p>#!&#x2F;bin&#x2F;sh<br>echo 1 2 3 | { read a b c ; echo $a $b $c ; } # 打印结果为： 1 2 3<br>echo $a $b $c # 打印结果为空<br>1<br>2<br>3<br>重定向：将命令的结果输出到文件，而不是标准输出（屏幕）。</p>
+<blockquote>
+<p>写入文件并覆盖旧文件</p>
+<blockquote>
+<p>追加到文件的尾部，保留旧文件内容。</p>
+</blockquote>
+</blockquote>
+<p>反短横线 “&#96;”：使用反短横线可以将一个命令的输出作为另一个命令的一个命令行参数。</p>
+<p> find . -mtime  -1  -type  f  -print<br>1<br>上述语句用来查找过去24小时（-mtime -2则表示过去48小时）内修改过的文件。如果想将所有查找到的文件打一个包，则可以使用一下linux脚本：</p>
+<p> #!&#x2F;bin&#x2F;sh</p>
+<h1 id="The-ticks-are-backticks-not-normal-quotes-‘"><a href="#The-ticks-are-backticks-not-normal-quotes-‘" class="headerlink" title="The ticks are backticks (&#96;) not normal quotes (‘):"></a>The ticks are backticks (&#96;) not normal quotes (‘):</h1><p> tar -zcvf  lastmod.tar.gz <code>find . -mtime -1 -type f -print</code><br>1<br>2<br>3<br>流程控制<br>if<br>if 表达式，如果条件为真则执行 then 后面的部分：</p>
+<p> if ….; then<br> ….<br> elif ….; then<br> ….<br> else<br> ….<br> fi #注意是以fi结尾<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>大多数情况下，可以使用测试命令来对条件进行测试。比如可以比较字符串、判断文件时都存在以及是否可读等等…</p>
+<p>while<br>while 循环的语法结构为：</p>
+<h1 id="expression-1"><a href="#expression-1" class="headerlink" title="expression 1"></a>expression 1</h1><h1 id="while循环：当expresssion成立的时候，执行cmd"><a href="#while循环：当expresssion成立的时候，执行cmd" class="headerlink" title="while循环：当expresssion成立的时候，执行cmd"></a>while循环：当expresssion成立的时候，执行cmd</h1><p>while (expresssion)<br>do<br>  cmd<br>done</p>
+<h1 id="expression-2，可以直接使用true"><a href="#expression-2，可以直接使用true" class="headerlink" title="expression 2，可以直接使用true"></a>expression 2，可以直接使用true</h1><p>while true（或 ：）<br>do<br>    cmd<br>done<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>该命令配合可以配合管道使用，如：</p>
+<h1 id="寻找-path-路径下唯一首字母为‘E’的子目录，并-cd-到该目录"><a href="#寻找-path-路径下唯一首字母为‘E’的子目录，并-cd-到该目录" class="headerlink" title="寻找 ${path} 路径下唯一首字母为‘E’的子目录，并 cd 到该目录"></a>寻找 ${path} 路径下唯一首字母为‘E’的子目录，并 cd 到该目录</h1><p>find ${path}&#x2F;E* -type d | while read corresp_path<br>do<br>    cd ${corresp_path}<br>done<br>1<br>2<br>3<br>4<br>5<br>测试条件<br>通常使用“[ ]”来表示测试条件。注意这里的空格很重要，要确保方括号里的空格。</p>
+<p> [ -f “somefile” ] #判断文件是否存在<br> [ -d “testResults&#x2F;“ ] #判断目录testResults&#x2F;是否存在<br> [ -x “&#x2F;bin&#x2F;ls” ] #判断&#x2F;bin&#x2F;ls文件是否存在并有可执行权限<br> [ -n “$var” ] #判断$var变量是否有值<br> [ “$a” &#x3D; “$b” ] #判断$a和$b是否相等<br>1<br>2<br>3<br>4<br>5<br>快捷操作符<br>熟悉C语言可能会喜欢一下表达式：</p>
+<p>  [ -f “&#x2F;etc&#x2F;shadow” ] &amp;&amp; echo “This computer uses shadow passwors”<br>1<br>这里“&amp;&amp;”就是一个快捷操作符，如果左边的表达式为真则执行右边的语句。当然也可以将上述表达式认为是逻辑运算中的与操作。</p>
+<p>同样或操作“||”在shell编程中也是可用的：</p>
+<p> #!&#x2F;bin&#x2F;sh<br> mailfolder&#x3D;&#x2F;var&#x2F;spool&#x2F;mail&#x2F;james<br> [ -r “$mailfolder” ]‘ ‘{ echo “Can not read $mailfolder” ; exit 1; } #感觉这里的‘’应该是||<br> echo “$mailfolder has mail from:”<br> grep “^From ” $mailfolder<br>1<br>2<br>3<br>4<br>5<br>该脚本首先判断mailfolder是否可读。如果可读则打印该文件中的”From” 一行。如果不可读则或操作生效，打印错误信息后脚本退出。这里有个问题，那就是我们必须有两个命令：<br>◆打印错误信息<br>◆退出程序<br>我们使用花括号以匿名函数的形式将两个命令放到一起作为一个命令使用。一般函数将在下文提及。<br>不用‘与’和‘或’操作符，我们也可以用if表达式作任何事情，但是使用与或操作符会更便利很多。<br>————————————————<br>版权声明：本文为CSDN博主「泠山」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_28087491/article/details/107107342">https://blog.csdn.net/qq_28087491/article/details/107107342</a></p>
+<hr>
+<p><a target="_blank" rel="noopener" href="https://www.php.cn/linux-421139.html">https://www.php.cn/linux-421139.html</a></p>
+<p>linux怎么执行sh文件<br>原创2019-05-29 16:56:5640961</p>
+<p>本文介绍Linux下面用命令怎么执行.sh文件的方法，有两种方法：</p>
+<p>一、直接.&#x2F;加上文件名.sh，如运行hello.sh为.&#x2F;hello.sh【hello.sh必须有x权限】</p>
+<p>二、直接sh 加上文件名.sh，如运行hello.sh为sh hello.sh【hello.sh可以没有x权限】</p>
+<p>方法一：当前目录执行.sh文件</p>
+<p>【步骤一】cd到.sh文件所在目录</p>
+<p>比如以hello.sh文件为例，如下图</p>
+<p>b025c277daad47225f2a582b20c475c.png</p>
+<p>【步骤二】给.sh文件添加x执行权限</p>
+<p>比如以hello.sh文件为例，chmod u+x hello.sh，如下图</p>
+<p>f871b7b1652765e6991f3d7fc4e8e92.png</p>
+<p>【步骤三】.&#x2F;执行.sh文件</p>
+<p>比如以hello.sh文件为例，.&#x2F;hello.sh 即可执行hello.sh文件，如下图</p>
+<p>dab3467991cdb86c70255f48c1ca03c.png</p>
+<p>【步骤四】sh 执行.sh文件</p>
+<p>以hello.sh文件为例，sh hello.sh即可执行hello.sh文件，如下图</p>
+<p>2ec0b33ee81cc50a16f47be2ae400c3.png</p>
+<p>方法二：绝对路径执行.sh文件</p>
+<p>下面三种方法都可以，如下图</p>
+<p>.&#x2F;home&#x2F;test&#x2F;shell&#x2F;hello.sh</p>
+<p>&#x2F;home&#x2F;test&#x2F;shell&#x2F;hello.sh</p>
+<p>sh &#x2F;home&#x2F;test&#x2F;shell&#x2F;hello.sh</p>
+<p>60c14a51c0b1d39dfbfa312bdf8e9ab.png</p>
+<p>注意事项：用“.&#x2F;”加文件名.sh执行时，必须给.sh文件加x执行权限。</p>
+<p>以上就是linux怎么执行sh文件的详细内容，更多请关注php中文网其它相关文章！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/10/19/linux-sh/" data-id="clkjdd1bt001l98aje67edn7v" data-title="linux中sh文件使用方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/10/24/0-hi/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          你好！
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/10/19/linux-git/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">在linux环境中安装git环境</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Minecraft/">Minecraft</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E7%B1%BB/">分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E5%8F%91/">开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A4%BE%E5%9B%A2/">社团</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blander/" rel="tag">Blander</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CAD/" rel="tag">CAD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GUI/" rel="tag">GUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Novelai/" rel="tag">Novelai</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSD1309/" rel="tag">SSD1309</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STEAM/" rel="tag">STEAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STEAM%E7%A4%BE/" rel="tag">STEAM社</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VNC/" rel="tag">VNC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/" rel="tag">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arduino/" rel="tag">arduino</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/colour/" rel="tag">colour</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/learn/" rel="tag">learn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mc/" rel="tag">mc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/micro-bit/" rel="tag">micro:bit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nextcloud/" rel="tag">nextcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag">学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%87%E7%AD%BE/" rel="tag">标签</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" rel="tag">树莓派</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%86%E8%88%AA%E6%9D%AF/" rel="tag">领航杯</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Blander/" style="font-size: 10px;">Blander</a> <a href="/tags/CAD/" style="font-size: 12px;">CAD</a> <a href="/tags/GUI/" style="font-size: 10px;">GUI</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/Novelai/" style="font-size: 10px;">Novelai</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SSD1309/" style="font-size: 12px;">SSD1309</a> <a href="/tags/STEAM/" style="font-size: 10px;">STEAM</a> <a href="/tags/STEAM%E7%A4%BE/" style="font-size: 14px;">STEAM社</a> <a href="/tags/VNC/" style="font-size: 10px;">VNC</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/arduino/" style="font-size: 12px;">arduino</a> <a href="/tags/colour/" style="font-size: 10px;">colour</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/learn/" style="font-size: 10px;">learn</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mc/" style="font-size: 12px;">mc</a> <a href="/tags/micro-bit/" style="font-size: 16px;">micro:bit</a> <a href="/tags/nextcloud/" style="font-size: 10px;">nextcloud</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/python/" style="font-size: 18px;">python</a> <a href="/tags/windows/" style="font-size: 12px;">windows</a> <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 12px;">学习</a> <a href="/tags/%E6%A0%87%E7%AD%BE/" style="font-size: 12px;">标签</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" style="font-size: 12px;">树莓派</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">网络</a> <a href="/tags/%E9%A2%86%E8%88%AA%E6%9D%AF/" style="font-size: 10px;">领航杯</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">July 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">January 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">August 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/1000/12/">December 1000</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/07/26/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-HC-SR04/">linux-pi-HC-SR04</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-python-yolo5/">linux-python-yolo5</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-SSD1309/">linux-pi-SSD1309</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-MPU6050/">MPU6050-pi</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

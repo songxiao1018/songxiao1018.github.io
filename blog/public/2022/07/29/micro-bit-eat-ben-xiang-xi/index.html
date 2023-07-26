@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>micor：bit制作吃豆子小游戏-详解 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="代码逻辑代码构成 游戏初始化  游戏主循环  游戏后台   代码详解一、游戏初始化  在游戏开始时，播放初始化音乐，检测“A”键是否按下，如果按下，则开始游戏。  二、游戏后台  循环播放背景音乐  三、游戏主循环  每次开始游戏，都需要初始化游戏，包括人物的位置、豆子的位置、得分等。  其中，每次游戏开局人物位置固定，豆子的位置是随机的。   代码下面有一段是为了防止生成的随机豆子与人物重合而设">
+<meta property="og:type" content="article">
+<meta property="og:title" content="micor：bit制作吃豆子小游戏-详解">
+<meta property="og:url" content="http://example.com/2022/07/29/micro-bit-eat-ben-xiang-xi/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="代码逻辑代码构成 游戏初始化  游戏主循环  游戏后台   代码详解一、游戏初始化  在游戏开始时，播放初始化音乐，检测“A”键是否按下，如果按下，则开始游戏。  二、游戏后台  循环播放背景音乐  三、游戏主循环  每次开始游戏，都需要初始化游戏，包括人物的位置、豆子的位置、得分等。  其中，每次游戏开局人物位置固定，豆子的位置是随机的。   代码下面有一段是为了防止生成的随机豆子与人物重合而设">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://foruda.gitee.com/images/1667287166408016185/30e59892_10348382.png">
+<meta property="og:image" content="https://foruda.gitee.com/images/1667287177736048596/79ff73f6_10348382.png">
+<meta property="og:image" content="https://foruda.gitee.com/images/1667287205320935095/2b5faa31_10348382.png">
+<meta property="og:image" content="https://foruda.gitee.com/images/1667287214987395721/c5eba0f4_10348382.png">
+<meta property="og:image" content="https://foruda.gitee.com/images/1667287231827351204/a6e6eb82_10348382.png">
+<meta property="og:image" content="https://foruda.gitee.com/images/1667287244534390310/654b39f4_10348382.png">
+<meta property="og:image" content="https://foruda.gitee.com/images/1667287260759214030/c94af515_10348382.png">
+<meta property="og:image" content="https://foruda.gitee.com/images/1667287270228842567/4b443155_10348382.png">
+<meta property="og:image" content="https://foruda.gitee.com/images/1667287278931176864/acc83f26_10348382.png">
+<meta property="og:image" content="https://foruda.gitee.com/images/1667287288800769765/a3875cce_10348382.png">
+<meta property="og:image" content="https://foruda.gitee.com/images/1667287297464890887/1347af93_10348382.png">
+<meta property="article:published_time" content="2022-07-29T07:23:20.000Z">
+<meta property="article:modified_time" content="2023-07-23T14:19:11.275Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="micro:bit">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://foruda.gitee.com/images/1667287166408016185/30e59892_10348382.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="posts-micro-bit-eat-ben-xiang-xi" class="h-entry article article-type-posts" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/07/29/micro-bit-eat-ben-xiang-xi/" class="article-date">
+  <time class="dt-published" datetime="2022-07-29T07:23:20.000Z" itemprop="datePublished">2022-07-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      micor：bit制作吃豆子小游戏-详解
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="代码逻辑"><a href="#代码逻辑" class="headerlink" title="代码逻辑"></a>代码逻辑</h1><h2 id="代码构成"><a href="#代码构成" class="headerlink" title="代码构成"></a>代码构成</h2><ul>
+<li><p>游戏初始化</p>
+</li>
+<li><p>游戏主循环</p>
+</li>
+<li><p>游戏后台</p>
+</li>
+</ul>
+<h2 id="代码详解"><a href="#代码详解" class="headerlink" title="代码详解"></a>代码详解</h2><h3 id="一、游戏初始化"><a href="#一、游戏初始化" class="headerlink" title="一、游戏初始化"></a>一、游戏初始化</h3><p><img src="https://foruda.gitee.com/images/1667287166408016185/30e59892_10348382.png" alt="初始化代码" title="1.png"></p>
+<blockquote>
+<p>在游戏开始时，播放初始化音乐，检测“A”键是否按下，如果按下，则开始游戏。</p>
+</blockquote>
+<h3 id="二、游戏后台"><a href="#二、游戏后台" class="headerlink" title="二、游戏后台"></a>二、游戏后台</h3><p><img src="https://foruda.gitee.com/images/1667287177736048596/79ff73f6_10348382.png" alt="后台代码" title="2.png"></p>
+<blockquote>
+<p>循环播放背景音乐</p>
+</blockquote>
+<h3 id="三、游戏主循环"><a href="#三、游戏主循环" class="headerlink" title="三、游戏主循环"></a>三、游戏主循环</h3><p><img src="https://foruda.gitee.com/images/1667287205320935095/2b5faa31_10348382.png" alt="每局游戏初始化" title="3.png"></p>
+<blockquote>
+<p>每次开始游戏，都需要初始化游戏，包括人物的位置、豆子的位置、得分等。</p>
+<blockquote>
+<p>其中，每次游戏开局人物位置固定，豆子的位置是随机的。</p>
+</blockquote>
+</blockquote>
+<p>代码下面有一段是为了防止生成的随机豆子与人物重合而设置的。</p>
+<p><img src="https://foruda.gitee.com/images/1667287214987395721/c5eba0f4_10348382.png" alt="判断是否需要暂停" title="4.png"></p>
+<blockquote>
+<p>下面的代码是判断是否需要暂停游戏。具体的逻辑是：</p>
+<blockquote>
+<p>如果按下“A”和“B”键，则暂停游戏；在按AB间的时候会有k值得变化，当确定需要暂停后，我们需要注意将k值设置为0，这样就可以再次判断是否继续游戏。</p>
+</blockquote>
+</blockquote>
+<p><img src="https://foruda.gitee.com/images/1667287231827351204/a6e6eb82_10348382.png" alt="绘制人物和豆子" title="5.png"></p>
+<blockquote>
+<p>这里采用了修改点阵屏亮度的方式提高人物与豆子的辨识度。</p>
+</blockquote>
+<p><img src="https://foruda.gitee.com/images/1667287244534390310/654b39f4_10348382.png" alt="是否吃到豆子" title="6.png"></p>
+<blockquote>
+<p>当吃到豆子的时候，即为豆子和人的xy值相同，这时计算得分，并且重新生成豆子。</p>
+</blockquote>
+<p><img src="https://foruda.gitee.com/images/1667287260759214030/c94af515_10348382.png" alt="判断出界" title="7.png"></p>
+<blockquote>
+<p>当人物走出屏幕的时候，则判断为游戏结束。</p>
+</blockquote>
+<p><img src="https://foruda.gitee.com/images/1667287270228842567/4b443155_10348382.png" alt="游戏结束" title="8.png"></p>
+<blockquote>
+<p>当游戏结束后，显示最终的得分，并且进入是否需要重新开始的判断。</p>
+</blockquote>
+<h3 id="四、游戏操作"><a href="#四、游戏操作" class="headerlink" title="四、游戏操作"></a>四、游戏操作</h3><p><img src="https://foruda.gitee.com/images/1667287278931176864/acc83f26_10348382.png" alt="游戏操作" title="9.png"></p>
+<blockquote>
+<p>我们分别采用转动板子来实现人物的移动，需要注意人物上下移动时的逻辑，徽标朝上，实际指的是我们向下反转板子及人物下移；徽标朝下，实际指的是我们向上反转板子及人物上移。</p>
+</blockquote>
+<p><img src="https://foruda.gitee.com/images/1667287288800769765/a3875cce_10348382.png" alt="k值" title="10.png"></p>
+<blockquote>
+<p>最后一块就是k值修改的部分。</p>
+</blockquote>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><img src="https://foruda.gitee.com/images/1667287297464890887/1347af93_10348382.png" alt="补充说明" title="11.png"></p>
+<blockquote>
+<p>我们规定左上角为(0,0)，右下角为(4，4)，这样方便我们计算人物的位置。向下移动时，人物的y值加1，向上移动时，人物的y值减1。同理，向左移动时，人物的x值减1，向右移动时，人物的x值加1。</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/07/29/micro-bit-eat-ben-xiang-xi/" data-id="clkjdd1c4001x98aj7w16blgx" data-title="micor：bit制作吃豆子小游戏-详解" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/micro-bit/" rel="tag">micro:bit</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/07/30/python-draw-square/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          使用python打印数字矩阵python-draw-square
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/07/29/micro-bit-eat-ben/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">micor：bit制作吃豆子小游戏</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Minecraft/">Minecraft</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E7%B1%BB/">分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E5%8F%91/">开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A4%BE%E5%9B%A2/">社团</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blander/" rel="tag">Blander</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CAD/" rel="tag">CAD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GUI/" rel="tag">GUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Novelai/" rel="tag">Novelai</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSD1309/" rel="tag">SSD1309</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STEAM/" rel="tag">STEAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STEAM%E7%A4%BE/" rel="tag">STEAM社</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VNC/" rel="tag">VNC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/" rel="tag">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arduino/" rel="tag">arduino</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/colour/" rel="tag">colour</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/learn/" rel="tag">learn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mc/" rel="tag">mc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/micro-bit/" rel="tag">micro:bit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nextcloud/" rel="tag">nextcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag">学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%87%E7%AD%BE/" rel="tag">标签</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" rel="tag">树莓派</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%86%E8%88%AA%E6%9D%AF/" rel="tag">领航杯</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Blander/" style="font-size: 10px;">Blander</a> <a href="/tags/CAD/" style="font-size: 12px;">CAD</a> <a href="/tags/GUI/" style="font-size: 10px;">GUI</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/Novelai/" style="font-size: 10px;">Novelai</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SSD1309/" style="font-size: 12px;">SSD1309</a> <a href="/tags/STEAM/" style="font-size: 10px;">STEAM</a> <a href="/tags/STEAM%E7%A4%BE/" style="font-size: 14px;">STEAM社</a> <a href="/tags/VNC/" style="font-size: 10px;">VNC</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/arduino/" style="font-size: 12px;">arduino</a> <a href="/tags/colour/" style="font-size: 10px;">colour</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/learn/" style="font-size: 10px;">learn</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mc/" style="font-size: 12px;">mc</a> <a href="/tags/micro-bit/" style="font-size: 16px;">micro:bit</a> <a href="/tags/nextcloud/" style="font-size: 10px;">nextcloud</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/python/" style="font-size: 18px;">python</a> <a href="/tags/windows/" style="font-size: 12px;">windows</a> <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 12px;">学习</a> <a href="/tags/%E6%A0%87%E7%AD%BE/" style="font-size: 12px;">标签</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" style="font-size: 12px;">树莓派</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">网络</a> <a href="/tags/%E9%A2%86%E8%88%AA%E6%9D%AF/" style="font-size: 10px;">领航杯</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">July 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">January 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">August 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/1000/12/">December 1000</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/07/26/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-HC-SR04/">linux-pi-HC-SR04</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-python-yolo5/">linux-python-yolo5</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-SSD1309/">linux-pi-SSD1309</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-MPU6050/">MPU6050-pi</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

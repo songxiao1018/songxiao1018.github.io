@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>python字符串处理 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="str&#x3D;’python String function’ 生成字符串变量str&#x3D;’python String function’ 字符串长度获取：len(str)例：print ‘%s length&#x3D;%d’ % (str,len(str)) 一、字母处理全部大写：str.upper()全部小写：str.lower()大小写互换：str.swapcase()首字母大写，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python字符串处理">
+<meta property="og:url" content="http://example.com/2022/10/14/python-str/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="str&#x3D;’python String function’ 生成字符串变量str&#x3D;’python String function’ 字符串长度获取：len(str)例：print ‘%s length&#x3D;%d’ % (str,len(str)) 一、字母处理全部大写：str.upper()全部小写：str.lower()大小写互换：str.swapcase()首字母大写，">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-10-14T09:27:24.000Z">
+<meta property="article:modified_time" content="2023-07-23T14:19:12.345Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-python-str" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/10/14/python-str/" class="article-date">
+  <time class="dt-published" datetime="2022-10-14T09:27:24.000Z" itemprop="datePublished">2022-10-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      python字符串处理
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>str&#x3D;’python String function’</p>
+<p>生成字符串变量str&#x3D;’python String function’</p>
+<p>字符串长度获取：len(str)<br>例：print ‘%s length&#x3D;%d’ % (str,len(str))</p>
+<p>一、字母处理<br>全部大写：str.upper()<br>全部小写：str.lower()<br>大小写互换：str.swapcase()<br>首字母大写，其余小写：str.capitalize()<br>首字母大写：str.title()<br>print ‘%s lower&#x3D;%s’ % (str,str.lower())<br>print ‘%s upper&#x3D;%s’ % (str,str.upper())<br>print ‘%s swapcase&#x3D;%s’ % (str,str.swapcase())<br>print ‘%s capitalize&#x3D;%s’ % (str,str.capitalize())<br>print ‘%s title&#x3D;%s’ % (str,str.title())<br>二、格式化相关<br>获取固定长度，右对齐，左边不够用空格补齐：str.ljust(width)<br>获取固定长度，左对齐，右边不够用空格补齐：str.ljust(width)<br>获取固定长度，中间对齐，两边不够用空格补齐：str.ljust(width)<br>获取固定长度，右对齐，左边不足用0补齐<br>print ‘%s ljust&#x3D;%s’ % (str,str.ljust(20))<br>print ‘%s rjust&#x3D;%s’ % (str,str.rjust(20))<br>print ‘%s center&#x3D;%s’ % (str,str.center(20))<br>print ‘%s zfill&#x3D;%s’ % (str,str.zfill(20))</p>
+<p>三、字符串搜索相关<br>搜索指定字符串，没有返回-1：str.find(‘t’)<br>指定起始位置搜索：str.find(‘t’,start)<br>指定起始及结束位置搜索：str.find(‘t’,start,end)<br>从右边开始查找：str.rfind(‘t’)<br>搜索到多少个指定字符串：str.count(‘t’)<br>上面所有方法都可用index代替，不同的是使用index查找不到会抛异常，而find返回-1<br>print ‘%s find nono&#x3D;%d’ % (str,str.find(‘nono’))<br>print ‘%s find t&#x3D;%d’ % (str,str.find(‘t’))<br>print ‘%s find t from %d&#x3D;%d’ % (str,1,str.find(‘t’,1))<br>print ‘%s find t from %d to %d&#x3D;%d’ % (str,1,2,str.find(‘t’,1,2))<br>#print ‘%s index nono ‘ % (str,str.index(‘nono’,1,2))<br>print ‘%s rfind t&#x3D;%d’ % (str,str.rfind(‘t’))<br>print ‘%s count t&#x3D;%d’ % (str,str.count(‘t’))</p>
+<p>三、字符串替换相关<br>替换old为new：str.replace(‘old’,’new’)<br>替换指定次数的old为new：str.replace(‘old’,’new’,maxReplaceTimes)<br>print ‘%s replace t to <em>&#x3D;%s’ % (str,str.replace(‘t’, ‘</em>‘))<br>print ‘%s replace t to <em>&#x3D;%s’ % (str,str.replace(‘t’, ‘</em>‘,1))</p>
+<p>四、字符串去空格及去指定字符<br>去两边空格：str.strip()<br>去左空格：str.lstrip()<br>去右空格：str.rstrip()<br>去两边字符串：str.strip(‘d’)，相应的也有lstrip，rstrip<br>str&#x3D;’ python String function ‘<br>print ‘%s strip&#x3D;%s’ % (str,str.strip())<br>str&#x3D;’python String function’<br>print ‘%s strip&#x3D;%s’ % (str,str.strip(‘d’))</p>
+<p>按指定字符分割字符串为数组：str.split(‘ ‘)</p>
+<p>五、默认按空格分隔<br>str&#x3D;’a b c de’<br>print ‘%s strip&#x3D;%s’ % (str,str.split())<br>str&#x3D;’a-b-c-de’<br>print ‘%s strip&#x3D;%s’ % (str,str.split(‘-‘))</p>
+<p>六、字符串判断相关<br>是否以start开头：str.startswith(‘start’)<br>是否以end结尾：str.endswith(‘end’)<br>是否全为字母或数字：str.isalnum()<br>是否全字母：str.isalpha()<br>是否全数字：str.isdigit()<br>是否全小写：str.islower()<br>是否全大写：str.isupper()<br>str&#x3D;’python String function’<br>print ‘%s startwith t&#x3D;%s’ % (str,str.startswith(‘t’))<br>print ‘%s endwith d&#x3D;%s’ % (str,str.endswith(‘d’))<br>print ‘%s isalnum&#x3D;%s’ % (str,str.isalnum())<br>str&#x3D;’pythonStringfunction’<br>print ‘%s isalnum&#x3D;%s’ % (str,str.isalnum())<br>print ‘%s isalpha&#x3D;%s’ % (str,str.isalpha())<br>print ‘%s isupper&#x3D;%s’ % (str,str.isupper())<br>print ‘%s islower&#x3D;%s’ % (str,str.islower())<br>print ‘%s isdigit&#x3D;%s’ % (str,str.isdigit())<br>str&#x3D;’3423’<br>print ‘%s isdigit&#x3D;%s’ % (str,str.isdigit())</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/10/14/python-str/" data-id="clkjdd1cx003c98aj0vfidp7p" data-title="python字符串处理" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/10/14/python-IMAP/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          python发送邮件
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/10/14/python-read/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">python读取文件内容的三种方法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Minecraft/">Minecraft</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E7%B1%BB/">分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E5%8F%91/">开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A4%BE%E5%9B%A2/">社团</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blander/" rel="tag">Blander</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CAD/" rel="tag">CAD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GUI/" rel="tag">GUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Novelai/" rel="tag">Novelai</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSD1309/" rel="tag">SSD1309</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STEAM/" rel="tag">STEAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STEAM%E7%A4%BE/" rel="tag">STEAM社</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VNC/" rel="tag">VNC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/" rel="tag">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arduino/" rel="tag">arduino</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/colour/" rel="tag">colour</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/learn/" rel="tag">learn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mc/" rel="tag">mc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/micro-bit/" rel="tag">micro:bit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nextcloud/" rel="tag">nextcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag">学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%87%E7%AD%BE/" rel="tag">标签</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" rel="tag">树莓派</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%86%E8%88%AA%E6%9D%AF/" rel="tag">领航杯</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Blander/" style="font-size: 10px;">Blander</a> <a href="/tags/CAD/" style="font-size: 12px;">CAD</a> <a href="/tags/GUI/" style="font-size: 10px;">GUI</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/Novelai/" style="font-size: 10px;">Novelai</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SSD1309/" style="font-size: 12px;">SSD1309</a> <a href="/tags/STEAM/" style="font-size: 10px;">STEAM</a> <a href="/tags/STEAM%E7%A4%BE/" style="font-size: 14px;">STEAM社</a> <a href="/tags/VNC/" style="font-size: 10px;">VNC</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/arduino/" style="font-size: 12px;">arduino</a> <a href="/tags/colour/" style="font-size: 10px;">colour</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/learn/" style="font-size: 10px;">learn</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mc/" style="font-size: 12px;">mc</a> <a href="/tags/micro-bit/" style="font-size: 16px;">micro:bit</a> <a href="/tags/nextcloud/" style="font-size: 10px;">nextcloud</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/python/" style="font-size: 18px;">python</a> <a href="/tags/windows/" style="font-size: 12px;">windows</a> <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 12px;">学习</a> <a href="/tags/%E6%A0%87%E7%AD%BE/" style="font-size: 12px;">标签</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" style="font-size: 12px;">树莓派</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">网络</a> <a href="/tags/%E9%A2%86%E8%88%AA%E6%9D%AF/" style="font-size: 10px;">领航杯</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">July 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">January 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">August 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/1000/12/">December 1000</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/07/26/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-HC-SR04/">linux-pi-HC-SR04</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-python-yolo5/">linux-python-yolo5</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-SSD1309/">linux-pi-SSD1309</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-MPU6050/">MPU6050-pi</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

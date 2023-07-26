@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/page/5/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-vnc-peizhi" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/10/18/vnc-peizhi/" class="article-date">
+  <time class="dt-published" datetime="2022-10-18T11:12:12.000Z" itemprop="datePublished">2022-10-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/10/18/vnc-peizhi/">linux中配置vnc登录</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>debian vnc 配置</p>
+<p>介绍 (Introduction)<br>Virtual Network Computing, or VNC, is a connection system that allows you to use your keyboard and mouse to interact with a graphical desktop environment on a remote server. It makes managing files, software, and settings on a remote server easier for users who are not yet comfortable with the command line.</p>
+<p>虚拟网络计算 (VNC)是一种连接系统，使您可以使用键盘和鼠标与远程服务器上的图形桌面环境进行交互。 对于尚不熟悉命令行的用户，它使在远程服务器上管理文件，软件和设置更加容易。</p>
+<p>In this guide, you’ll set up a VNC server on a Debian 10 server and connect to it securely through an SSH tunnel. You’ll use TightVNC, a fast and lightweight remote control package. This choice will ensure that our VNC connection will be smooth and stable even on slower internet connections.</p>
+<p>在本指南中，您将在Debian 10服务器上设置VNC服务器，并通过SSH隧道安全地连接到该服务器。 您将使用TightVNC ，这是一种快速，轻便的远程控制程序包。 此选择将确保即使在较慢的Internet连接上，我们的VNC连接也将保持平稳。</p>
+<p>先决条件 (Prerequisites)<br>To complete this tutorial, you’ll need:</p>
+<p>要完成本教程，您需要：</p>
+<p>One Debian 10 server set up by following the Debian 10 initial server setup guide, including a non-root user with sudo access and a firewall.</p>
+<p>按照Debian 10初始服务器设置指南设置一台Debian 10服务器，包括具有sudo访问权限和防火墙的非root用户。</p>
+<p>On Windows, you can use TightVNC, RealVNC, or UltraVNC.</p>
+<p>在Windows上，可以使用TightVNC ， RealVNC或UltraVNC 。</p>
+<p>On macOS, you can use the built-in Screen Sharing program, or can use a cross-platform app like RealVNC.</p>
+<p>在macOS上，您可以使用内置的屏幕共享程序，也可以使用RealVNC之类的跨平台应用程序。</p>
+<p>On Linux, you can choose from many options, including vinagre, krdc, RealVNC, or TightVNC.</p>
+<p>在Linux上，可以从许多选项中进行选择，包括vinagre ， krdc ， RealVNC或TightVNC 。</p>
+<p>步骤1 —安装桌面环境和VNC服务器 (Step 1 — Installing the Desktop Environment and VNC Server)<br>By default, a Debian 10 server does not come with a graphical desktop environment or a VNC server installed, so we’ll begin by installing those. Specifically, we will install packages for the latest Xfce desktop environment and the TightVNC package available in the official Debian repository.</p>
+<p>默认情况下，Debian 10服务器未安装图形桌面环境或VNC服务器，因此我们将从安装它们开始。 具体来说，我们将为最新的Xfce桌面环境安装软件包，并在Debian官方存储库中提供TightVNC软件包。</p>
+<p>On your server, update your list of packages:</p>
+<p>在您的服务器上，更新软件包列表：</p>
+<p>sudo apt update<br>sudo apt更新<br>Now install the Xfce desktop environment on your server:</p>
+<p>现在，在您的服务器上安装Xfce桌面环境：</p>
+<p>sudo apt install xfce4 xfce4-goodies<br>sudo apt安装xfce4 xfce4-goodies<br>During the installation, you’ll be prompted to select your keyboard layout from a list of possible options. Choose the one that’s appropriate for your language and press Enter. The installation will continue.</p>
+<p>在安装过程中，系统会提示您从可能的选项列表中选择键盘布局。 选择适合您的语言的一种，然后按Enter 。 安装将继续。</p>
+<p>Once the installation completes, install the TightVNC server:</p>
+<p>安装完成后，安装TightVNC服务器：</p>
+<p>sudo apt install tightvncserver<br>sudo apt安装tightvncserver<br>To complete the VNC server’s initial configuration after installation, use the vncserver command to set up a secure password and create the initial configuration files:</p>
+<p>要在安装后完成VNC服务器的初始配置，请使用vncserver命令设置安全密码并创建初始配置文件：</p>
+<p>vncserver<br>vncserver<br>You’ll be prompted to enter and verify a password to access your machine remotely:</p>
+<p>系统将提示您输入并验证密码以远程访问您的计算机：</p>
+<pre><code>Output
+</code></pre>
+<p>   You will require a password to access your desktops.</p>
+<p>Password:<br>Verify:<br>The password must be between six and eight characters long. Passwords more than 8 characters will be truncated automatically.</p>
+<p>密码长度必须介于六到八个字符之间。 超过8个字符的密码将被自动截断。</p>
+<p>Once you verify the password, you’ll have the option to create a a view-only password. Users who log in with the view-only password will not be able to control the VNC instance with their mouse or keyboard. This is a helpful option if you want to demonstrate something to other people using your VNC server, but this isn’t required.</p>
+<p>验证密码后，您可以选择创建仅查看密码。 使用仅查看密码登录的用户将无法使用其鼠标或键盘来控制VNC实例。 如果您想向使用VNC服务器的其他人演示某些内容，这是一个有用的选项，但这不是必需的。</p>
+<p>The process then creates the necessary default configuration files and connection information for the server:</p>
+<p>然后，该过程为服务器创建必要的默认配置文件和连接信息：</p>
+<pre><code>Output
+</code></pre>
+<p>   Would you like to enter a view-only password (y&#x2F;n)? n<br>xauth:  file &#x2F;home&#x2F;sammy&#x2F;.Xauthority does not exist</p>
+<p>New ‘X’ desktop is your_hostname:1</p>
+<p>Creating default startup script &#x2F;home&#x2F;sammy&#x2F;.vnc&#x2F;xstartup<br>Starting applications specified in &#x2F;home&#x2F;sammy&#x2F;.vnc&#x2F;xstartup<br>Log file is &#x2F;home&#x2F;sammy&#x2F;.vnc&#x2F;your_hostname:1.log<br>Now let’s configure the VNC server.</p>
+<p>现在，让我们配置VNC服务器。</p>
+<p>步骤2 —配置VNC服务器 (Step 2 — Configuring the VNC Server)<br>The VNC server needs to know which commands to execute when it starts up. Specifically, VNC needs to know which graphical desktop it should connect to.</p>
+<p>VNC服务器启动时需要知道要执行哪些命令。 具体来说，VNC需要知道它应该连接到哪个图形桌面。</p>
+<p>These commands are located in a configuration file called xstartup in the .vnc folder under your home directory. The startup script was created when you ran the vncserver command in the previous step, but we’ll create our own to launch the Xfce desktop.</p>
+<p>这些命令位于主目录下.vnc文件夹中名为xstartup的配置文件中。 在上一步中运行vncserver命令时创建了启动脚本，但是我们将创建自己的脚本来启动Xfce桌面。</p>
+<p>When VNC is first set up, it launches a default server instance on port 5901. This port is called a display port, and is referred to by VNC as :1. VNC can launch multiple instances on other display ports, like :2, :3, and so on.</p>
+<p>首次设置VNC时，它将在端口5901上启动默认服务器实例。 此端口称为显示端口 ，VNC将该端口称为:1 。 VNC可以在其他显示端口上启动多个实例，例如:2 ， :3等。</p>
+<p>Because we are going to be changing how the VNC server is configured, first stop the VNC server instance that is running on port 5901 with the following command:</p>
+<p>因为我们将要更改VNC服务器的配置方式，所以首先使用以下命令停止在端口5901上运行的VNC服务器实例：</p>
+<p>vncserver -kill :1<br>vncserver -kill：1<br>The output should look like this, although you’ll see a different PID:</p>
+<p>输出将看起来像这样，尽管您将看到一个不同的PID：</p>
+<pre><code>Output
+</code></pre>
+<p>   Killing Xtightvnc process ID 17648<br>Before you modify the xstartup file, back up the original:</p>
+<p>在修改xstartup文件之前，请备份原始文件：</p>
+<p>mv ~&#x2F;.vnc&#x2F;xstartup ~&#x2F;.vnc&#x2F;xstartup.bak<br>mv〜&#x2F; .vnc &#x2F; xstartup〜&#x2F; .vnc &#x2F; xstartup.bak<br>Now create a new xstartup file and open it in your text editor:</p>
+<p>现在创建一个新的xstartup文件，并在文本编辑器中将其打开：</p>
+<p>nano ~&#x2F;.vnc&#x2F;xstartup<br>纳米〜&#x2F; .vnc &#x2F; xstartup<br>Commands in this file are executed automatically whenever you start or restart the VNC server. We need VNC to start our desktop environment if it’s not already started. Add these commands to the file:</p>
+<p>每当启动或重新启动VNC服务器时，该文件中的命令就会自动执行。 如果尚未启动桌面环境，我们需要VNC来启动它。 将以下命令添加到文件中：</p>
+<p>~&#x2F;.vnc&#x2F;xstartup<br>〜&#x2F; .vnc &#x2F; xstartup<br>#!&#x2F;bin&#x2F;bash<br>xrdb $HOME&#x2F;.Xresources<br>startxfce4 &amp;<br>The first command in the file, xrdb $HOME&#x2F;.Xresources, tells VNC’s GUI framework to read the user’s .Xresources file. .Xresources is where a user can make changes to certain settings for the graphical desktop, like terminal colors, cursor themes, and font rendering. The second command tells the server to launch Xfce, which is where you will find all of the graphical software that you need to comfortably manage your server.</p>
+<p>文件中的第一个命令xrdb $HOME&#x2F;.Xresources告诉VNC的GUI框架读取用户的.Xresources文件。 用户可以在.Xresources中更改图形桌面的某些设置，例如终端颜色，光标主题和字体渲染。 第二个命令告诉服务器启动Xfce，在这里您将找到轻松管理服务器所需的所有图形软件。</p>
+<p>To ensure that the VNC server will be able to use this new startup file properly, we’ll need to make it executable.</p>
+<p>为了确保VNC服务器能够正确使用此新启动文件，我们需要使其成为可执行文件。</p>
+<p>sudo chmod +x ~&#x2F;.vnc&#x2F;xstartup<br>须藤chmod + x〜&#x2F; .vnc &#x2F; xstartup<br>Now, restart the VNC server.</p>
+<p>现在，重新启动VNC服务器。</p>
+<p>vncserver<br>vncserver<br>You’ll see output similar to this:</p>
+<p>您将看到类似于以下的输出：</p>
+<pre><code>Output
+</code></pre>
+<p>   New ‘X’ desktop is your_hostname:1</p>
+<p>Starting applications specified in &#x2F;home&#x2F;sammy&#x2F;.vnc&#x2F;xstartup<br>Log file is &#x2F;home&#x2F;sammy&#x2F;.vnc&#x2F;your_hostname:1.log<br>With the configuration in place, let’s connect to the server from our local machine.</p>
+<p>完成配置后，让我们从本地计算机连接到服务器。</p>
+<p>步骤3 —安全地连接VNC桌面 (Step 3 — Connecting the VNC Desktop Securely)<br>VNC itself doesn’t use secure protocols when connecting. We’ll use an SSH tunnel to connect securely to our server, and then tell our VNC client to use that tunnel rather than making a direct connection.</p>
+<p>连接时，VNC本身不使用安全协议。 我们将使用SSH隧道安全地连接到我们的服务器，然后告诉我们的VNC客户端使用该隧道，而不是直接建立连接。</p>
+<p>Create an SSH connection on your local computer that securely forwards to the localhost connection for VNC. You can do this via the terminal on Linux or macOS with the following command:</p>
+<p>在本地计算机上创建一个SSH连接，该连接安全地转发到VNC的localhost连接。 您可以使用以下命令通过Linux或macOS上的终端执行此操作：</p>
+<p>ssh -L 5901:127.0.0.1:5901 -C -N -l sammy your_server_ip</p>
+<p>ssh -L 5901 ：127.0.0.1： 5901 -C -N -l sammy your_server_ip</p>
+<p>The -L switch specifies the port bindings. In this case we’re binding port 5901 of the remote connection to port 5901 on your local machine. The -C switch enables compression, while the -N switch tells ssh that we don’t want to execute a remote command. The -l switch specifies the remote login name.</p>
+<p>-L开关指定端口绑定。 在这种情况下，我们绑定端口5901的远程连接端口5901在本地机器上。 -C开关启用压缩，而-N开关告诉ssh我们不想执行远程命令。 -l开关指定远程登录名。</p>
+<p>Remember to replace sammy and your_server_ip with your non-root username and the IP address of your server.</p>
+<p>请记住用非root用户名和服务器的IP地址替换sammy和your_server_ip 。</p>
+<p>If you are using a graphical SSH client, like PuTTY, use your_server_ip as the connection IP, and set localhost:5901 as a new forwarded port in the program’s SSH tunnel settings.</p>
+<p>如果使用的是图形SSH客户端(如PuTTY)，请使用your_server_ip作为连接IP，并在程序的SSH隧道设置中将localhost:5901设置为新的转发端口。</p>
+<p>Once the tunnel is running, use a VNC client to connect to localhost:5901. You’ll be prompted to authenticate using the password you set in Step 1.</p>
+<p>隧道运行后，使用VNC客户端连接到localhost:5901 。 系统将提示您使用在步骤1中设置的密码进行身份验证。</p>
+<p>Once you are connected, you’ll see the default Xfce desktop.</p>
+<p>建立连接后，您将看到默认的Xfce桌面。</p>
+<p>Select Use default config to configure your desktop quickly.</p>
+<p>选择“ 使用默认配置”以快速配置您的桌面。</p>
+<p>You can access files in your home directory with the file manager or from the command line, as seen here:</p>
+<p>您可以使用文件管理器或从命令行访问主目录中的文件，如下所示：</p>
+<p>On your local machine, press CTRL+C in your terminal to stop the SSH tunnel and return to your prompt. This will disconnect your VNC session as well.</p>
+<p>在本地计算机上，在终端中按CTRL+C停止SSH隧道并返回到提示符。 这也将断开您的VNC会话。</p>
+<p>Next let’s set up the VNC server as a service.</p>
+<p>接下来，我们将VNC服务器设置为服务。</p>
+<p>步骤4 —将VNC作为系统服务运行 (Step 4 — Running VNC as a System Service)<br>Next, we’ll set up the VNC server as a systemd service so we can start, stop, and restart it as needed, like any other service. This will also ensure that VNC starts up when your server reboots.</p>
+<p>接下来，我们将VNC服务器设置为系统服务，以便可以像其他任何服务一样根据需要启动，停止和重新启动它。 这还将确保在服务器重新引导时VNC启动。</p>
+<p>First, create a new unit file called &#x2F;etc&#x2F;systemd&#x2F;system&#x2F;vncserver@.service using your favorite text editor:</p>
+<p>首先，使用您喜欢的文本编辑器创建一个名为&#x2F;etc&#x2F;systemd&#x2F;system&#x2F;vncserver@.service的新单元文件：</p>
+<p>sudo nano &#x2F;etc&#x2F;systemd&#x2F;system&#x2F;vncserver@.service<br>须藤纳米&#x2F;etc&#x2F;systemd&#x2F;system&#x2F;vncserver@.service<br>The @ symbol at the end of the name will let us pass in an argument we can use in the service configuration. We’ll use this to specify the VNC display port we want to use when we manage the service.</p>
+<p>名称末尾的@符号将使我们传递可在服务配置中使用的参数。 我们将使用它来指定我们在管理服务时要使用的VNC显示端口。</p>
+<p>Add the following lines to the file. Be sure to change the value of User, Group, WorkingDirectory, and the username in the value of PIDFILE to match your username:</p>
+<p>将以下行添加到文件中。 确保在PIDFILE的值中更改User ， Group ， WorkingDirectory和用户名的值以匹配您的用户名：</p>
+<p>&#x2F;etc&#x2F;systemd&#x2F;system&#x2F;vncserver@.service<br>&#x2F;etc&#x2F;systemd&#x2F;system&#x2F;vncserver@.service<br>[Unit]<br>Description&#x3D;Start TightVNC server at startup<br>After&#x3D;syslog.target network.target</p>
+<p>[Service]<br>Type&#x3D;forking<br>User&#x3D;sammy<br>Group&#x3D;sammy<br>WorkingDirectory&#x3D;&#x2F;home&#x2F;sammy</p>
+<p>PIDFile&#x3D;&#x2F;home&#x2F;sammy&#x2F;.vnc&#x2F;%H:%i.pid<br>ExecStartPre&#x3D;-&#x2F;usr&#x2F;bin&#x2F;vncserver -kill :%i &gt; &#x2F;dev&#x2F;null 2&gt;&amp;1<br>ExecStart&#x3D;&#x2F;usr&#x2F;bin&#x2F;vncserver -depth 24 -geometry 1280x800 :%i<br>ExecStop&#x3D;&#x2F;usr&#x2F;bin&#x2F;vncserver -kill :%i</p>
+<p>[Install]<br>WantedBy&#x3D;multi-user.target</p>
+<p>The ExecStartPre command stops VNC if it’s already running. The ExecStart command starts VNC and sets the color depth to 24-bit color with a resolution of 1280x800. You can modify these startup options as well to meet your needs.</p>
+<p>如果ExecStartPre命令已经在运行，它将停止它。 ExecStart命令启动VNC并将颜色深度设置为24位颜色，分辨率为1280x800。 您也可以修改这些启动选项，以满足您的需求。</p>
+<p>Save and close the file.</p>
+<p>保存并关闭文件。</p>
+<p>Next, make the system aware of the new unit file.</p>
+<p>接下来，使系统知道新的单位文件。</p>
+<p>sudo systemctl daemon-reload<br>sudo systemctl守护进程重新加载<br>Enable the unit file.</p>
+<p>启用单位文件。</p>
+<p>sudo systemctl enable <a href="mailto:&#118;&#110;&#x63;&#x73;&#x65;&#x72;&#x76;&#x65;&#114;&#x40;&#x31;&#x2e;&#x73;&#x65;&#114;&#118;&#105;&#99;&#101;">&#118;&#110;&#x63;&#x73;&#x65;&#x72;&#x76;&#x65;&#114;&#x40;&#x31;&#x2e;&#x73;&#x65;&#114;&#118;&#105;&#99;&#101;</a><br>sudo systemctl启用<a href="mailto:&#x76;&#110;&#99;&#115;&#x65;&#114;&#x76;&#101;&#x72;&#64;&#x31;&#x2e;&#x73;&#x65;&#114;&#118;&#105;&#x63;&#x65;">&#x76;&#110;&#99;&#115;&#x65;&#114;&#x76;&#101;&#x72;&#64;&#x31;&#x2e;&#x73;&#x65;&#114;&#118;&#105;&#x63;&#x65;</a><br>The 1 following the @ sign signifies which display number the service should appear over, in this case the default :1 as was discussed in Step 2..</p>
+<p>@符号后的1表示服务应显示在哪个显示号上，在这种情况下，默认值:1如步骤2所述。</p>
+<p>Stop the current instance of the VNC server if it’s still running.</p>
+<p>如果VNC服务器的当前实例仍在运行，请停止它。</p>
+<p>vncserver -kill :1<br>vncserver -kill：1<br>Then start it as you would start any other systemd service.</p>
+<p>然后像启动其他任何systemd服务一样启动它。</p>
+<p>sudo systemctl start vncserver@1<br>sudo systemctl启动vncserver @ 1<br>You can verify that it started with this command:</p>
+<p>您可以验证它是否使用以下命令启动：</p>
+<p>sudo systemctl status vncserver@1<br>sudo systemctl状态vncserver @ 1<br>If it started correctly, the output should look like this:</p>
+<p>如果正确启动，则输出应如下所示：</p>
+<pre><code>Output
+</code></pre>
+<p>   ● <a href="mailto:&#x76;&#110;&#x63;&#x73;&#x65;&#114;&#118;&#101;&#114;&#64;&#x31;&#x2e;&#115;&#101;&#x72;&#118;&#105;&#99;&#x65;">&#x76;&#110;&#x63;&#x73;&#x65;&#114;&#118;&#101;&#114;&#64;&#x31;&#x2e;&#115;&#101;&#x72;&#118;&#105;&#99;&#x65;</a> - Start TightVNC server at startup<br>   Loaded: loaded (&#x2F;etc&#x2F;systemd&#x2F;system&#x2F;vncserver@.service; enabled; vendor preset: enabled)<br>   Active: active (running) since Thu 2019-10-10 17:56:17 UTC; 5s ago<br>  Process: 935 ExecStartPre&#x3D;&#x2F;usr&#x2F;bin&#x2F;vncserver -kill :1 &gt; &#x2F;dev&#x2F;null 2&gt;&amp;1 (code&#x3D;exited, status&#x3D;2)<br>  Process: 940 ExecStart&#x3D;&#x2F;usr&#x2F;bin&#x2F;vncserver -depth 24 -geometry 1280x800 :1 (code&#x3D;exited, status&#x3D;0&#x2F;SUCCESS)<br> Main PID: 948 (Xtightvnc)<br>. . .<br>Your VNC server will now be available when you reboot the machine.</p>
+<p>重新启动计算机后，您的VNC服务器现在将可用。</p>
+<p>Start your SSH tunnel again:</p>
+<p>再次启动SSH隧道：</p>
+<p>ssh -L 5901:127.0.0.1:5901 -C -N -l sammy your_server_ip</p>
+<p>ssh -L 5901 ：127.0.0.1： 5901 -C -N -l sammy your_server_ip</p>
+<p>Then make a new connection using your VNC client software to localhost:5901 to connect to your machine.</p>
+<p>然后使用您的VNC客户端软件与localhost:5901建立新连接，以连接到您的计算机。</p>
+<p>结论 (Conclusion)<br>You now have a secured VNC server up and running on your Debian 10 server. Now you’ll be able to manage your files, software, and settings with an easy-to-use and familiar graphical interface, and you’ll be able to run graphical software like web browsers remotely.</p>
+<p>现在，您已在Debian 10服务器上启动并运行了安全的VNC服务器。 现在，您将可以使用易于使用且熟悉的图形界面来管理文件，软件和设置，并且可以远程运行Web浏览器等图形软件。</p>
+<p>翻译自: <a target="_blank" rel="noopener" href="https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-vnc-on-debian-10">https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-vnc-on-debian-10</a></p>
+<p>debian vnc 配置</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/10/18/vnc-peizhi/" data-id="clkjdd1d6003u98aj2qy4273t" data-title="linux中配置vnc登录" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GUI/" rel="tag">GUI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VNC/" rel="tag">VNC</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-python-IMAP" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/10/14/python-IMAP/" class="article-date">
+  <time class="dt-published" datetime="2022-10-14T09:41:47.000Z" itemprop="datePublished">2022-10-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/10/14/python-IMAP/">python发送邮件</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/python3</span><br><span class="line">#-*- coding: utf-8 -*-            # 使其支持中文字符</span><br><span class="line"></span><br><span class="line">import smtplib                    # 调用模块</span><br><span class="line">from email.header import Header</span><br><span class="line">from email.mime.text import MIMEText</span><br><span class="line"></span><br><span class="line">#第三方SMTP服务</span><br><span class="line">host = &quot;smtp.163.com&quot;          # 邮箱服务host = &quot;smtp.yeah.net&quot;</span><br><span class="line">port = 465                     # 端口号port = 465</span><br><span class="line">user = &quot;xxxxxxxx@163.com&quot;      # 用户名user = &quot;XXXXXXXXXX@yeah.net&quot;</span><br><span class="line">password = &quot;xxxxxxxxxxx&quot;       # 授权码</span><br><span class="line">sender = &quot;xxxxxxxxxxxx@163.com&quot;   # 发件人</span><br><span class="line">receivers = [&quot;xxxxxx@163.com&quot;,&#x27;xxxxxx@163.com&#x27;,&#x27;xxxxxx@163.com&#x27;,&quot;xxxxxx@163.com&quot;,&quot;xxxxxx@163.com&quot;,&quot;xxxxxx@163.com&quot;]  # 收件人，可以群发邮件，多个用户名就以列表形式展现                                                      </span><br><span class="line"></span><br><span class="line">content = &#x27;&#x27;&#x27;                    </span><br><span class="line">    这是一封测试邮件</span><br><span class="line">    内容随你喜欢</span><br><span class="line">    随便写</span><br><span class="line">&#x27;&#x27;&#x27;                         # 邮件内容</span><br><span class="line">subject = &#x27;测试邮件&#x27;         # 邮件主题</span><br><span class="line"></span><br><span class="line">#发送邮件</span><br><span class="line">def send_email():</span><br><span class="line">    msg = MIMEText(content+&#x27;\n send_email&#x27; ,&#x27;plain&#x27; ,&#x27;utf-8&#x27;)</span><br><span class="line">    msg[&#x27;From&#x27;] = user</span><br><span class="line">    msg[&#x27;To&#x27;] = &#x27;,&#x27;.join(receivers)        # 群发邮件形式，如果单独发送邮件直接调用receivers即可</span><br><span class="line">    msg[&#x27;Subject&#x27;] = subject+&#x27; send_email&#x27;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    try:</span><br><span class="line">        #验证</span><br><span class="line">        smtpObj = smtplib.SMTP_SSL(host,port)  # 启用SSL发短信</span><br><span class="line">        smtpObj.login(user,password)           # 用户名密码验证</span><br><span class="line">        smtpObj.sendmail(sender,receivers,msg.as_string())   # 发送</span><br><span class="line">        print(&quot;邮件发送成功&quot;)</span><br><span class="line">    except smtplib.SMTPException as e:</span><br><span class="line">        print(e)</span><br><span class="line"></span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">    send_email()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+<p>提前准备，需要设置邮箱服务器</p>
+<p>发送邮件代码块如下</p>
+<p>#coding:utf-8</p>
+<p>#发送邮件的<br>import smtplib<br>from email.mime.text import MIMEText<br>class SendEmail:<br>    global send_user<br>    global email_host<br>    global password<br>    email_host&#x3D;”smtp.qq.com”<br>    send_user&#x3D;”<a href="mailto:&#120;&#120;&#x78;&#64;&#113;&#113;&#46;&#x63;&#x6f;&#109;">&#120;&#120;&#x78;&#64;&#113;&#113;&#46;&#x63;&#x6f;&#109;</a>“<br>    password&#x3D;”xxx”<br>    #接受人，主题，内容<br>    def send_mail(self,user_list,sub,content):<br>        #发件者<br>        user&#x3D;”cherish”+”&lt;”+send_user+”&gt;”<br>        #内容、格式、编码<br>        message&#x3D;MIMEText(content,_subtype&#x3D;’plain’,_charset&#x3D;’utf-8’)<br>        #主题<br>        message[‘Subject’]&#x3D;sub<br>        #发送人<br>        message[‘From’]&#x3D;user<br>        #接受人<br>        message[‘To’]&#x3D;”;”.join(user_list)<br>        #服务连接<br>        server&#x3D;smtplib.SMTP()<br>        server.connect(email_host)<br>        #邮件登录<br>        server.login(send_user,password)<br>        #发送邮件内容<br>        server.sendmail(user,user_list,message.as_string())<br>        #关掉连接<br>        server.close()<br>    def send_main(self,pass_list,fail_list):<br>        pass_num&#x3D;float(len(pass_list))<br>        fail_num&#x3D;float(len(fail_list))<br>        count_num&#x3D;pass_num+fail_num<br>        #取小数后2位,通过率<br>        pass_result&#x3D;”%.2f%%”%(pass_num&#x2F;count_num*100)<br>        fail_result &#x3D; “%.2f%%”%(fail_num &#x2F; count_num * 100)<br>        user_list &#x3D; [‘<a href="mailto:&#x78;&#120;&#x40;&#x71;&#113;&#x2e;&#x63;&#111;&#109;">&#x78;&#120;&#x40;&#x71;&#113;&#x2e;&#x63;&#111;&#109;</a>‘,‘<a href="mailto:&#x78;&#x78;&#64;&#x71;&#113;&#x2e;&#99;&#x6f;&#x6d;">&#x78;&#x78;&#64;&#x71;&#113;&#x2e;&#99;&#x6f;&#x6d;</a>‘]<br>        sub &#x3D; “接口自动化测试报告”<br>        content&#x3D;”这次一共测试%s个接口,通过个数为%s,失败个数为%s,通过率为%s,失败率为%s”%(count_num,pass_num,fail_num,pass_result,fail_result)<br>        self.send_mail(user_list,sub,content)</p>
+<p>if <strong>name</strong> &#x3D;&#x3D; ‘<strong>main</strong>‘:<br>    sen&#x3D;SendEmail()<br>    sen.send_main([1,2,3,4],[5])</p>
+<p>测试结果：</p>
+<p>测试用例执行代码块</p>
+<p>#coding:utf-8<br>from base.runmethod import RunMethod<br>from data.get_data import GetData<br>from data.depend_data import DependData<br>from util.operation_json import OperationJson<br>from util.common_util import CommonUtil<br>import operator<br>import json<br>from logs.get_log import get_log<br>from util.send_email import SendEmail<br>import getcwd<br>class RunTest:<br>    def <strong>init</strong>(self):<br>        self.path &#x3D; getcwd.get_cwd()<br>        self.log_msg &#x3D; get_log(self.path + ‘&#x2F;data&#x2F;get_data.py’)<br>        self.run_method &#x3D; RunMethod()<br>        self.data &#x3D; GetData()<br>        self.com_util &#x3D; CommonUtil()<br>        self.op_json &#x3D; OperationJson(‘..&#x2F;dataconfig&#x2F;rigang_data&#x2F;header_value.json’)<br>        self.json_path&#x3D;’..&#x2F;dataconfig&#x2F;rigang_data&#x2F;expect_monitor_add.json’</p>
+<pre><code>#程序执行的
+def go_on_run(self):
+    res = None
+    pass_count = []
+    fail_count = []
+    #10  0,1,2,3
+    #用例行数
+    rows_count = self.data.get_case_lines()
+    #遍历所有用例进行测试
+    for i in range(1,rows_count):
+        is_run = self.data.get_is_run(i)
+        if is_run:
+            caseid=self.data.get_caseid(i)
+            url = self.data.get_request_url(i)
+            method = self.data.get_request_method(i)
+            request_data = json.dumps(self.data.get_data_for_json(i))
+            expect = self.data.get_expect_data_for_json(i,self.json_path)
+            header = self.data.is_header(i)
+            depend_case=self.data.is_depend(i)
+            #判断是否有数据依赖
+            if depend_case!=None:
+                self.depend_data = DependData(caseid)
+                #获取依赖的响应数据
+                depend_response_data=self.depend_data.get_data_for_key(i)
+                #获取依赖字段
+                depend_key=self.data.get_depend_field(i)
+                #请求数据的依赖字段重新赋值之前的依赖数据
+                request_data[depend_key]=depend_response_data
+            # res = self.run_method.run_main(method, url, request_data)
+
+            if header == &#39;5&#39;:
+                #根据关键字test获取header信息
+                header = self.op_json.get_data(&#39;monitor_add&#39;)
+                res = self.run_method.run_main(method,url,request_data,header)
+
+                self.log_msg.info(&#39;该条用例header内容是：%s&#39; % header)
+                #将返回结果写入json文件
+                response_dato_tojson=self.op_json.write_data(res,&#39;../dataconfig/rigang_data/actual_monitor_add.json&#39;)
+            else:
+                res = self.run_method.run_main(method,url,request_data)
+                response_dato_tojson=self.op_json.write_data(res, &#39;../dataconfig/rigang_data/actual_monitor_add.json&#39;)
+            read_json_data=self.op_json.read_data(&#39;../dataconfig/rigang_data/actual_monitor_add.json&#39;)
+            self.log_msg.info(&#39;写入json的返回结果是：%s&#39; % read_json_data)
+
+            if operator.eq(expect,res) == True:
+                self.data.write_result(i,&#39;pass&#39;)
+                #统计通过个数
+                pass_count.append(i)
+                self.log_msg.info(&#39;用例ID为%s-------------------测试通过\n&#39;%caseid )
+            else:
+                res = json.dumps(res)
+                self.data.write_result(i,res)
+                #统计失败个数
+                fail_count.append(i)
+                self.log_msg.info(&#39;用例ID为%s-------------------测试失败\n&#39; % caseid)
+
+    send_email=SendEmail()
+    send_email.send_main(pass_count,fail_count)
+</code></pre>
+<p>if <strong>name</strong> &#x3D;&#x3D; ‘<strong>main</strong>‘:<br>    run &#x3D; RunTest()<br>    run.go_on_run()</p>
+<p>测试结果</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/10/14/python-IMAP/" data-id="clkjdd1cp002x98aj0slf30kp" data-title="python发送邮件" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-python-str" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/10/14/python-str/" class="article-date">
+  <time class="dt-published" datetime="2022-10-14T09:27:24.000Z" itemprop="datePublished">2022-10-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/10/14/python-str/">python字符串处理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>str&#x3D;’python String function’</p>
+<p>生成字符串变量str&#x3D;’python String function’</p>
+<p>字符串长度获取：len(str)<br>例：print ‘%s length&#x3D;%d’ % (str,len(str))</p>
+<p>一、字母处理<br>全部大写：str.upper()<br>全部小写：str.lower()<br>大小写互换：str.swapcase()<br>首字母大写，其余小写：str.capitalize()<br>首字母大写：str.title()<br>print ‘%s lower&#x3D;%s’ % (str,str.lower())<br>print ‘%s upper&#x3D;%s’ % (str,str.upper())<br>print ‘%s swapcase&#x3D;%s’ % (str,str.swapcase())<br>print ‘%s capitalize&#x3D;%s’ % (str,str.capitalize())<br>print ‘%s title&#x3D;%s’ % (str,str.title())<br>二、格式化相关<br>获取固定长度，右对齐，左边不够用空格补齐：str.ljust(width)<br>获取固定长度，左对齐，右边不够用空格补齐：str.ljust(width)<br>获取固定长度，中间对齐，两边不够用空格补齐：str.ljust(width)<br>获取固定长度，右对齐，左边不足用0补齐<br>print ‘%s ljust&#x3D;%s’ % (str,str.ljust(20))<br>print ‘%s rjust&#x3D;%s’ % (str,str.rjust(20))<br>print ‘%s center&#x3D;%s’ % (str,str.center(20))<br>print ‘%s zfill&#x3D;%s’ % (str,str.zfill(20))</p>
+<p>三、字符串搜索相关<br>搜索指定字符串，没有返回-1：str.find(‘t’)<br>指定起始位置搜索：str.find(‘t’,start)<br>指定起始及结束位置搜索：str.find(‘t’,start,end)<br>从右边开始查找：str.rfind(‘t’)<br>搜索到多少个指定字符串：str.count(‘t’)<br>上面所有方法都可用index代替，不同的是使用index查找不到会抛异常，而find返回-1<br>print ‘%s find nono&#x3D;%d’ % (str,str.find(‘nono’))<br>print ‘%s find t&#x3D;%d’ % (str,str.find(‘t’))<br>print ‘%s find t from %d&#x3D;%d’ % (str,1,str.find(‘t’,1))<br>print ‘%s find t from %d to %d&#x3D;%d’ % (str,1,2,str.find(‘t’,1,2))<br>#print ‘%s index nono ‘ % (str,str.index(‘nono’,1,2))<br>print ‘%s rfind t&#x3D;%d’ % (str,str.rfind(‘t’))<br>print ‘%s count t&#x3D;%d’ % (str,str.count(‘t’))</p>
+<p>三、字符串替换相关<br>替换old为new：str.replace(‘old’,’new’)<br>替换指定次数的old为new：str.replace(‘old’,’new’,maxReplaceTimes)<br>print ‘%s replace t to <em>&#x3D;%s’ % (str,str.replace(‘t’, ‘</em>‘))<br>print ‘%s replace t to <em>&#x3D;%s’ % (str,str.replace(‘t’, ‘</em>‘,1))</p>
+<p>四、字符串去空格及去指定字符<br>去两边空格：str.strip()<br>去左空格：str.lstrip()<br>去右空格：str.rstrip()<br>去两边字符串：str.strip(‘d’)，相应的也有lstrip，rstrip<br>str&#x3D;’ python String function ‘<br>print ‘%s strip&#x3D;%s’ % (str,str.strip())<br>str&#x3D;’python String function’<br>print ‘%s strip&#x3D;%s’ % (str,str.strip(‘d’))</p>
+<p>按指定字符分割字符串为数组：str.split(‘ ‘)</p>
+<p>五、默认按空格分隔<br>str&#x3D;’a b c de’<br>print ‘%s strip&#x3D;%s’ % (str,str.split())<br>str&#x3D;’a-b-c-de’<br>print ‘%s strip&#x3D;%s’ % (str,str.split(‘-‘))</p>
+<p>六、字符串判断相关<br>是否以start开头：str.startswith(‘start’)<br>是否以end结尾：str.endswith(‘end’)<br>是否全为字母或数字：str.isalnum()<br>是否全字母：str.isalpha()<br>是否全数字：str.isdigit()<br>是否全小写：str.islower()<br>是否全大写：str.isupper()<br>str&#x3D;’python String function’<br>print ‘%s startwith t&#x3D;%s’ % (str,str.startswith(‘t’))<br>print ‘%s endwith d&#x3D;%s’ % (str,str.endswith(‘d’))<br>print ‘%s isalnum&#x3D;%s’ % (str,str.isalnum())<br>str&#x3D;’pythonStringfunction’<br>print ‘%s isalnum&#x3D;%s’ % (str,str.isalnum())<br>print ‘%s isalpha&#x3D;%s’ % (str,str.isalpha())<br>print ‘%s isupper&#x3D;%s’ % (str,str.isupper())<br>print ‘%s islower&#x3D;%s’ % (str,str.islower())<br>print ‘%s isdigit&#x3D;%s’ % (str,str.isdigit())<br>str&#x3D;’3423’<br>print ‘%s isdigit&#x3D;%s’ % (str,str.isdigit())</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/10/14/python-str/" data-id="clkjdd1cx003c98aj0vfidp7p" data-title="python字符串处理" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-python-read" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/10/14/python-read/" class="article-date">
+  <time class="dt-published" datetime="2022-10-14T09:23:59.000Z" itemprop="datePublished">2022-10-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/10/14/python-read/">python读取文件内容的三种方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>#这里介绍利用Python读取文本文件内容的三种方法：<code>read()</code>、<code>readline()</code>和<code>readlines()</code>。</p>
+<p>假设<code>sxl.txt</code>文件内容如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">i like the movie</span><br><span class="line">i ate an egg</span><br><span class="line">read()方法</span><br></pre></td></tr></table></figure>
+
+<h2 id="read（）方法表示一次读取文件全部内容，该方法返回字符串。"><a href="#read（）方法表示一次读取文件全部内容，该方法返回字符串。" class="headerlink" title="read（）方法表示一次读取文件全部内容，该方法返回字符串。"></a><code>read（）</code>方法表示一次读取文件全部内容，该方法返回字符串。</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">f = <span class="built_in">open</span>(<span class="string">&quot;sxl.txt&quot;</span>)</span><br><span class="line">lines = f.read()</span><br><span class="line"><span class="built_in">print</span> lines</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(lines))</span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">i like the movie</span><br><span class="line">i ate an egg</span><br><span class="line">&lt;class &#x27;str&#x27;&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="readline（）方法"><a href="#readline（）方法" class="headerlink" title="readline（）方法"></a><code>readline（）</code>方法</h2><p>该方法每次读出一行内容，所以，读取时占用内存小，比较适合大文件，该方法返回一个字符串对象。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">f = <span class="built_in">open</span>(<span class="string">&quot;sxl.txt&quot;</span>)</span><br><span class="line">line = f.readline()</span><br><span class="line"><span class="keyword">while</span> line:</span><br><span class="line">    <span class="built_in">print</span> (line)</span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">type</span>(line))</span><br><span class="line">    line = f.readline()</span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">i like the movie</span><br><span class="line">&lt;class &#x27;str&#x27;&gt;</span><br><span class="line">i ate an egg</span><br><span class="line">&lt;class &#x27;str&#x27;&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="readlines（）方法"><a href="#readlines（）方法" class="headerlink" title="readlines（）方法"></a>readlines（）方法</h2><p>readlines()方法读取整个文件所有行，保存在一个列表(list)变量中，每次读取一行，但读取大文件会比较占内存。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">f = <span class="built_in">open</span>(<span class="string">&quot;sxl.txt&quot;</span>)</span><br><span class="line">lines = f.readlines()</span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> lines:</span><br><span class="line">    <span class="built_in">print</span> (line)</span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">type</span>(line))</span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">i like the movie</span><br><span class="line">&lt;class &#x27;str&#x27;&gt;</span><br><span class="line">i ate an egg</span><br><span class="line">&lt;class &#x27;str&#x27;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>最后还有一种方式，与第三种方法类似。</p>
+<p>f &#x3D; open(“sxl.txt”)<br>print (type(f))<br>for line in f:<br>    print (line)<br>    print(type(line))<br>f.close()<br>输出结果：</p>
+<p>&lt;class ‘_io.TextIOWrapper’&gt;<br>i like the movie<br>&lt;class ‘str’&gt;<br>i ate an egg<br>&lt;class ‘str’&gt;</p>
+<h1 id="OR"><a href="#OR" class="headerlink" title="OR"></a>OR</h1><p>0.准备<br>假设a.txt的内容如下所示：</p>
+<p>Hello<br>Welcome<br>What is the fuck…</p>
+<ol>
+<li>read([size])方法<br>read([size])方法从文件当前位置起读取size个字节，若无参数size，则表示读取至文件结束为止，它范围为字符串对象</li>
+</ol>
+<p>f &#x3D; open(“a.txt”)<br>lines &#x3D; f.read()<br>print lines<br>print(type(lines))<br>f.close()<br>输出结果：</p>
+<p>Hello<br>Welcome<br>What is the fuck…<br>&lt;type ‘str’&gt; #字符串类型<br>2.readline()方法<br>从字面意思可以看出，该方法每次读出一行内容，所以，读取时占用内存小，比较适合大文件，该方法返回一个字符串对象。</p>
+<p>f &#x3D; open(“a.txt”)<br>line &#x3D; f.readline()<br>print(type(line))<br>while line:<br>    print line,<br>    line &#x3D; f.readline()<br>f.close()<br>输出结果：</p>
+<p>&lt;type ‘str’&gt;<br>Hello<br>Welcome<br>What is the fuck…<br>3.readlines()方法读取整个文件所有行，保存在一个列表(list)变量中，每行作为一个元素，但读取大文件会比较占内存。<br>f &#x3D; open(“a.txt”)<br>lines &#x3D; f.readlines()<br>print(type(lines))<br>for line in lines:<br>    print line，<br>f.close()<br>输出结果：<br>&lt;type ‘list’&gt;<br>Hello<br>Welcome<br>What is the fuck…</p>
+<p>4.linecache模块<br>当然，有特殊需求还可以用linecache模块，比如你要输出某个文件的第n行：</p>
+<h1 id="输出第2行"><a href="#输出第2行" class="headerlink" title="输出第2行"></a>输出第2行</h1><p>text &#x3D; linecache.getline(‘a.txt’,2)<br>print text,<br>对于大文件效率还可以。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/10/14/python-read/" data-id="clkjdd1cv003998aje33v59yi" data-title="python读取文件内容的三种方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-nginx-new-ssl" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/10/14/nginx-new-ssl/" class="article-date">
+  <time class="dt-published" datetime="2022-10-14T03:23:04.000Z" itemprop="datePublished">2022-10-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/10/14/nginx-new-ssl/">nginx创建HTTPS连接new_ssl</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>创建存放SSL证书文件的文件夹：<br>$ sudo mkdir -p &#x2F;etc&#x2F;nginx&#x2F;ssl</p>
+<p>我这里是把这两个文件放在 &#x2F;etc&#x2F;nginx&#x2F;ssl目录下，这里需要记住上传SSL证书文件的路径。<br>接着，我们需要给nginx的配置文件加上添加证书的路径以及开启安全证书，进入默认的配置文件：</p>
+<p>$ vim &#x2F;etc&#x2F;nginx&#x2F;sites-available&#x2F;default</p>
+<p>添加的内容如下：</p>
+<p>点击 i ，进行修改内容，把以下内容复制&#x2F;输入进去，当然别忘了把ssl_certificate和ssl_certificate_key后面路径的<strong><strong>换成是你的文件名字哦：<br>        listen 443 ssl;<br>        ssl_certificate    &#x2F;etc&#x2F;nginx&#x2F;ssl&#x2F;</strong></strong>.pem;<br>        ssl_certificate_key &#x2F;etc&#x2F;nginx&#x2F;ssl&#x2F;****.key;<br>        ssl_session_timeout 5m;<br>        ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;<br>        ssl_protocols TLSv1 TLSv1.1 TLSv1.2;<br>        ssl_prefer_server_ciphers on;</p>
+<p>最后按esc退出，然后输入**:wq** 保存并退出。</p>
+<p>然后检查一下我们修改内容有没有出错，输入：</p>
+<p>$ nginx -t</p>
+<p>提示successful</p>
+<p>最后的最后，还需要重启一下nginx，不然的话是不会生效的。<br>输入：</p>
+<p>$ sudo service nginx restart</p>
+<p>最后，在浏览器访问我的域名，可以看到提示连接是安全的</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/10/14/nginx-new-ssl/" data-id="clkjdd1cg002i98ajcx8j1o5l" data-title="nginx创建HTTPS连接new_ssl" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-novelai" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/10/09/novelai/" class="article-date">
+  <time class="dt-published" datetime="2022-10-09T04:16:14.000Z" itemprop="datePublished">2022-10-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/10/09/novelai/">AI智能绘图novelai</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>因为前两天看到<code>loc</code>上有人提问这个软件，就去搜索了解。<br>意外发现该软件竟然被强制开源了。原因是有人认为制作团队盗用画师免费提供的图用于训练模型算法数据库，却反过来收费提供服务的行为极其不道德，所以，被看不惯的大神们点艹了。<br>恭喜这位<code>MJJ</code>成功省下了一大笔开销<code>@yushui</code></p>
+<p>首先放链接，据悉其中包括应用程序和成品模型数据库。<br><code>magnet:?xt=urn:btih:5bde442da86265b670a3e5ea3163afad2c6f8ecc</code><br>复制代码<br>百度云、迅雷网盘和夸克网盘目前已可离线</p>
+<p>因为<code>NovelAI</code>是基于开源软件<code>Stable Diffusion</code>制作而来，所以想复制一个“世界一流绘图AI”，理论上只需按照<code>Stable Diffusion</code>的搭建教程走，最后导入<code>NAI</code>的数据库即可。</p>
+<p><code>Stable Diffusion</code>部署教程网上很多，这里放几个简单示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">https://bbs.saraba1st.com/2b/thread-2098295-1-1.html</span><br><span class="line">https://zhuanlan.zhihu.com/p/561546984</span><br><span class="line">https://www.bilibili.com/read/cv18292916</span><br><span class="line">https://boards.4channel.org/g/thread/89011971</span><br></pre></td></tr></table></figure>
+
+<p>如遇问题请善用<code>谷歌</code>、<code>必应</code>、<code>百度</code>、<code>Yandex</code>等搜索引擎，或是加入相应社区进行讨论。</p>
+<p>欢迎感兴趣的<code>MJJ</code>们来搞，众人拾柴火焰高。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">另外国外某论坛也有人指出：“因代码来源尚不明朗，故存在安全风险，在确认文件安全之前，最好不要在生产环境或主要使用的计算机上调用模型”。</span><br></pre></td></tr></table></figure>
+
+<p>注：因为AI、大数据、知识图谱等项目无一例外都对GPU的要求极其苛刻，请参考官方文档及其他网友反馈，自行斟酌自己的运行环境是否达标。</p>
+<p>更新网盘分流，感谢上传的热心群众<br>GD by 炼铜术士 ↓<br><code>https://drive.google.com/drive/folders/1y3MALY5qZ8ksGuXbS0jr5cvyTEyaUbXO</code></p>
+<p>GD by Jonathan ↓<br><code>https://drive.google.com/drive/folders/1OWwzaL2RTrORQ87UOEGLeDopRHQkNNT_</code></p>
+<p>OD by Jonathan ↓<br><code>https://dannylivestanford-my.sharepoint.com/:f:/g/personal/shea_chloe_alumni_stanford_edu/EpsNYAx1aDxMv07BduEPAHQBkcVZZ6jGzOOsJwlUy4ssdw?e=G9VPG2</code></p>
+<p>阿里云盘 by Ecisrt ↓<br><code>https://www.aliyundrive.com/s/4xATgZRwnzZ</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/10/09/novelai/" data-id="clkjdd1ck002q98aj16pgge9w" data-title="AI智能绘图novelai" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Novelai/" rel="tag">Novelai</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-JAVA-HelloWorld" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/09/10/JAVA-HelloWorld/" class="article-date">
+  <time class="dt-published" datetime="2022-09-10T02:56:11.000Z" itemprop="datePublished">2022-09-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/09/10/JAVA-HelloWorld/">JAVA学习笔记-初识程序“HelloWorld”</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="JAVA-HelloWorld"><a href="#JAVA-HelloWorld" class="headerlink" title="JAVA-HelloWorld"></a>JAVA-HelloWorld</h1><h2 id="Show-main-code"><a href="#Show-main-code" class="headerlink" title="Show main code"></a>Show main code</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HelloWorld</span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span> <span class="params">(String[] args)</span>&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;Hello&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="line-by-line-explan"><a href="#line-by-line-explan" class="headerlink" title="line by line explan"></a>line by line explan</h2><ul>
+<li>set <code>class</code> <code>HelloWorld</code></li>
+<li>set <code>main</code> way</li>
+</ul>
+<h2 id="start-the-projiec"><a href="#start-the-projiec" class="headerlink" title="start the projiec"></a>start the projiec</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd ./HelloWorld.java</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">javac HelloWorld.java</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">java HelloWorld</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/09/10/JAVA-HelloWorld/" data-id="clkjdd1at000998aj0dv1412d" data-title="JAVA学习笔记-初识程序“HelloWorld”" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-hexo-document" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/08/19/hexo-document/" class="article-date">
+  <time class="dt-published" datetime="2022-08-19T07:23:09.000Z" itemprop="datePublished">2022-08-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/08/19/hexo-document/">使用hexo搭建博客</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Hexo-使用方法"><a href="#Hexo-使用方法" class="headerlink" title="Hexo 使用方法"></a>Hexo 使用方法</h1><h2 id="学习目标"><a href="#学习目标" class="headerlink" title="学习目标"></a>学习目标</h2><h3 id="知识目标："><a href="#知识目标：" class="headerlink" title="知识目标："></a>知识目标：</h3><ol>
+<li>通过学习，了解博客搭建常用的几种方式以及之间的区别 <blockquote>
+<ol>
+<li>第三方平台搭建 </li>
+<li>静态网站生成页面，搭配<code>Github</code>展示 </li>
+<li>管理系统<code>CMS</code>搭建 </li>
+<li>手写前后端代码</li>
+</ol>
+</blockquote>
+</li>
+<li>熟悉静态页面的生成技术 </li>
+<li>学会最基本的<code>git</code>操作</li>
+</ol>
+<h3 id="能力目标："><a href="#能力目标：" class="headerlink" title="能力目标："></a>能力目标：</h3><ol>
+<li>实现个人博客的搭建 </li>
+<li>能熟练在<code>Github/Gitee</code>上部署页面</li>
+</ol>
+<hr>
+<h2 id="学习流程"><a href="#学习流程" class="headerlink" title="学习流程"></a>学习流程</h2><hr>
+<h3 id="1-工具基本介绍"><a href="#1-工具基本介绍" class="headerlink" title="1. 工具基本介绍"></a>1. 工具基本介绍</h3><h4 id="1-Hexo-介绍"><a href="#1-Hexo-介绍" class="headerlink" title="1. Hexo 介绍"></a>1. Hexo 介绍</h4><p><code>Hexo</code>是一个快速、简单且功能强大的博客框架。你用<code>Markdown</code>（或其他标记语言）写帖子，<code>Hexo</code> 会在几秒钟内生成带有漂亮主题的静态文件。 </p>
+<h4 id="2-Gitee-介绍"><a href="#2-Gitee-介绍" class="headerlink" title="2. Gitee 介绍"></a>2. Gitee 介绍</h4><p>码云<code>Gitee</code>是开源中国社区在 2013 年推出的基于<code>Git</code>的代码托管服务，专为开发者提供稳定、高效、安全的云端软件开发协作平台，无论是个人、团队、或是企业，都能够用<code>Gitee</code>实现代码托管、项目管理、协作开发，更有代码质量分析、项目演示等丰富功能。 </p>
+<p><code>Gitee</code>目前已经成为国内最大的代码托管平台，致力于为国内开发者提供优质稳定的托管服务，与 <code>GitHub</code>类似区别在于码云国内，<code>GitHub</code>国外。 </p>
+<h4 id="3-Git-介绍"><a href="#3-Git-介绍" class="headerlink" title="3. Git 介绍"></a>3. Git 介绍</h4><p><code>Git</code>是目前世界上最先进的分布式版本控制系统，可以有效、高速的处理从很小到非常大的项目版本管理。也就是用来管理你的<code>hexo</code>博客文章，上传到<code>GitHub</code>的工具。<code>Git </code>非常强大，我觉得建议每个人都去了解一下。 </p>
+<h4 id="4-Node-js-介绍"><a href="#4-Node-js-介绍" class="headerlink" title="4. Node.js 介绍"></a>4. Node.js 介绍</h4><p><code>Node.js </code>是一个能够在服务区端运行<code>JavaScript</code>的开放源代码、跨平台<code>JavaScript </code>运行环<br>境。 </p>
+<p><code>Hexo </code>是基于<code>node.js</code>编写的，所以需要安装一下<code>nodeJs</code>和里面的<code>npm</code>工具。 </p>
+<hr>
+<h3 id="2-整体搭建流程"><a href="#2-整体搭建流程" class="headerlink" title="2. 整体搭建流程"></a>2. 整体搭建流程</h3><hr>
+<h3 id="开始搭建"><a href="#开始搭建" class="headerlink" title="开始搭建"></a>开始搭建</h3><ol>
+<li>基础准备 <blockquote>
+<ol>
+<li>Gitee 的注册</li>
+</ol>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<ol start="2">
+<li>Git、Node.js 安装</li>
+</ol>
+</blockquote>
+<p>安装<code>Hexo</code>相当简单，只需要先安装下列应用程序即可：</p>
+<blockquote>
+<p>Node.js (Node.js 版本需不低于 10.13，建议使用 Node.js 12.0 及以上版本) </p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Node.js 为大多数平台提供了官方的 安装程序。对于中国大陆地区用户，可以前往 淘宝 Node.js 镜像 下载。 </span><br><span class="line"></span><br><span class="line">其它的安装方法： </span><br><span class="line">1. Windows：通过 nvs（推荐）或者 nvm 安装。 </span><br><span class="line">2. Mac：使用 Homebrew 或 MacPorts 安装。 </span><br><span class="line">3. Linux（DEB/RPM-based）：从 NodeSource 安装。 </span><br><span class="line">4. 其它：使用相应的软件包管理器进行安装，可以参考由 Node.js 提供的 指导。 </span><br><span class="line"></span><br><span class="line">对于 Mac 和 Linux 同样建议使用 nvs 或者 nvm，以避免可能会出现的权限问题。 </span><br><span class="line"></span><br><span class="line">Windows 用户使用 Node.js 官方安装程序时，请确保勾选 Add to PATH 选项（默认已勾选） </span><br><span class="line">For Mac / Linux 用户如果在尝试安装 Hexo 的过程中出现 EACCES 权限错误，请遵循 由 npmjs 发布的指导 修复该问题。强烈建议 不要 使用 root、 sudo 等方法覆盖权限 </span><br><span class="line">Linux 如果您使用 Snap 来安装 Node.js，在 初始化 博客时您可能需要手动在目标文件夹中执行 。 npm install </span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Git </p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">1. Windows：下载并安装 git. </span><br><span class="line">2. Mac：使用 Homebrew, MacPorts 或者下载 安装程序。 </span><br><span class="line">3. Linux (Ubuntu, Debian)： </span><br><span class="line">sudo apt-get install git-core </span><br><span class="line">Linux (Fedora, Red Hat, CentOS)： </span><br><span class="line">sudo yum install git-core </span><br><span class="line"></span><br><span class="line">Mac 用户如果在编译时可能会遇到问题，请先到 App Store 安装 Xcode，Xcode 完成后，启动并进入 Preferences -&gt; Download -&gt; Command Line Tools -&gt; Install 安装命令行工具。</span><br><span class="line"></span><br><span class="line">Windows 用户对于中国大陆地区用户，可以前往淘宝 Git for Windows 镜像 下载 git 安装包。 查看下 Git、Node.js 版本，确保安装无误 git --version node -v和npm -v</span><br><span class="line"></span><br><span class="line"> 顺便说一下，windows 在 git 安装完后，就可以直接使用 git bash 来敲命令行了，不用自带的 cmd，cmd 有点难用。 </span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>安装 Hexo </p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">进入 Hexo 的官网：Hexo就可以看到对于 Hexo 的详细介绍，直接下滑，然后点击 Get Started，即可进入 Hexo 使用介绍文档，也可以直接访问：https://hexo.io/docs/ 进入。 </span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="正式开始搭建"><a href="#正式开始搭建" class="headerlink" title="正式开始搭建"></a>正式开始搭建</h3><hr>
+<p>所有必备的应用程序安装完成后，即可使用<code>npm</code>安装<code> Hexo</code>。 </p>
+<ul>
+<li>首先我们需要新建一个项目目录，以我为例：我会在桌面的<code>Project</code>目录下新建一个<code>HexoBlog</code>文件夹用于存放改项目相关文件。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd Desktop/Project/ </span><br><span class="line">mkdir HexoBlog&amp;&amp;cd HexoBlog npm install -g hexo-cli </span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>这个时候如果直接运行下面语句安装 Hexo，你可能会遇到<code>rollbackFailedOptional</code>。 </p>
+<blockquote>
+<p>这是因为网络问题（npm 的服务器位于国外下载慢），可以使用 cnpm（淘宝团队做的国内镜像）的获取镜像或者直接修改 npm的资源获取地址为国内的。 </p>
+</blockquote>
+<h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><ul>
+<li>安装 cnmp</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g cnpm --registry=https://registry.npm.taobao.org </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>直接修改 npm 资源获取地址（推荐）</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config set registry http://registry.npm.taobao.org </span><br></pre></td></tr></table></figure>
+
+<p>可能出现的问题：<a target="_blank" rel="noopener" href="http://www.kuazhi.com/post/305594.html">npm WARN config global <code>--global</code>, <code>--local</code> are deprecated. Use <code>--location=global</code> instead </a></p>
+<ul>
+<li>初始化一个 Hexo Blog <blockquote>
+<p>前面已经准备好了所有相关环境，接下来我们就正式来初始化一个<code>Hexo</code>博客吧～初始化的命令格式为<code> hexo init &lt;项目名称&gt;</code>，这里我们暂且叫做<code> blog</code>。</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init blog </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>新建完成后，指定文件夹目录下有：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">:node_modules: 依赖包 </span><br><span class="line">:public：存放生成的页面 </span><br><span class="line">:scaffolds：生成文章的一些模板 </span><br><span class="line">:source：用来存放你的文章 </span><br><span class="line">:themes：主题 </span><br><span class="line">:_config.yml: 博客的配置文件</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>初始化项目后，我们只需在本地执行下面命令即可在本地进行预览</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd blog </span><br><span class="line">hexo s </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>首先我们需要进入到新建的项目目录下，然后执行 hexo s 即可启动项目，然后我们访问<a href="127.0.0.1:4000">127.0.0.1:4000</a>或者<a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000/</a>即可查看网站啦～</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/08/19/hexo-document/" data-id="clkjdd1bd000s98aj9iiwhmc2" data-title="使用hexo搭建博客" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-python-install" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/08/18/python-install/" class="article-date">
+  <time class="dt-published" datetime="2022-08-18T07:23:09.000Z" itemprop="datePublished">2022-08-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/08/18/python-install/">linux下载和安装python</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Debian系统-安装Python"><a href="#Debian系统-安装Python" class="headerlink" title="Debian系统 安装Python"></a>Debian系统 安装Python</h1><blockquote>
+<p>本文参考自<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1165255">Python入门：在Debian系统安装Python 3</a></p>
+</blockquote>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><blockquote>
+<p>Python是一种面向对象的解释型计算机程序设计语言，由荷兰人Guido van Rossum于1989年发明，第一个公开发行版发行于1991年。 可用于许多不同的编程项目。这个名字的灵感源自英国喜剧组织Monty Python，开发团队希望让Python成为一种有趣的语言，并于1991年首次发布。Python易于设置，编写方式相对简单，并及时反馈错误，是初学者和经验丰富的开发人员的绝佳选择。Python 3是该语言的最新版本。</p>
+</blockquote>
+<blockquote>
+<p>本教程将指导您在本地Linux机器上安装Python 3并通过命令行设置编程环境。本教程将介绍Debian 8的安装过程，原理适用于Debian Linux的任何其他发行版。</p>
+</blockquote>
+<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><blockquote>
+<ol>
+<li>Debian 8或其他版本的Debian Linux的计算机（服务器）</li>
+</ol>
+</blockquote>
+<h3 id="第一步-安装Python-3"><a href="#第一步-安装Python-3" class="headerlink" title="第一步 - 安装Python 3"></a>第一步 - 安装Python 3</h3><blockquote>
+<p>我们将在命令行上完成安装和设置，这是一种与计算机交互的非图形方式。也就是说，您不是点击按钮，而是输入文本并通过文本从计算机接收反馈。命令行（也称为shell）可以帮助您修改和自动化您每天在计算机上执行的许多任务，是软件开发人员必不可少的工具。您可以学习许多终端命令，可以让您做更强大的事情。</p>
+</blockquote>
+<blockquote>
+<p>Debian 8和其他版本的Debian Linux都预装了Python 3和Python 2。为了确保我们的版本是最新的，让我们用apt-get更新和升级系统：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get -y upgrade</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>-y将确认我们同意所有要安装的项目，但根据您的Linux版本不同，您可能需要确认其他提示作为系统更新和升级。</p>
+</blockquote>
+<blockquote>
+<p>完成该过程后，我们可以通过输入以下内容来检查系统中安装的Python 3的版本：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -V</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>您将在终端窗口中收到输出，告知您Python版本号。版本号可能会有所不同，像这样：<code>Python 3.9.0</code></p>
+</blockquote>
+<blockquote>
+<p>让我们安装pip管理Python的软件包：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install -y python3-pip</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>pip是一个与Python一起使用的工具，主要用于安装和管理我们可能想要在我们的开发项目中使用的编程包。您可以输入以下命令安装Python包：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install package_name</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>package_name可以指代任何Python包或库，例如用于Web开发的Django或用于科学计算的NumPy。因此，如果您想安装NumPy，可以使用pip3 install numpy命令执行此操作。</p>
+</blockquote>
+<blockquote>
+<p>还有一些软件包和开发工具可以安装，以确保我们为编程环境提供强大的设置，命令如下：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install build-essential libssl-dev libffi-dev python-dev</span><br></pre></td></tr></table></figure>
+
+<h3 id="第二步-设置虚拟环境"><a href="#第二步-设置虚拟环境" class="headerlink" title="第二步 - 设置虚拟环境"></a>第二步 - 设置虚拟环境</h3><blockquote>
+<p>设置了Python，并安装了pip和其他工具后，我们就可以为我们的开发项目设置一个虚拟环境。</p>
+</blockquote>
+<blockquote>
+<p>虚拟环境使您可以在计算机上为Python项目创建一个隔离空间，确保每个项目都有自己的一组依赖项，这些依赖项不会破坏任何其他项目。</p>
+</blockquote>
+<blockquote>
+<p>设置编程环境使我们能够更好地控制Python项目以及如何处理不同版本的包。在使用第三方软件包时，这一点尤为重要。</p>
+</blockquote>
+<blockquote>
+<p>您可以根据需要设置尽可能多的Python编程环境。每个环境基本上都是计算机中的一个目录或文件夹，其中包含一些脚本以环境运行。</p>
+</blockquote>
+<blockquote>
+<p>首先，我们需要安装venv模块，它是Python 3库的一部分，以便我们可以为我们创建虚拟环境。我们输入以下命令安装venv：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install -y python3-venv</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>安装完成后，我们就可以创建环境了。让我们选择我们想要放入Python编程环境的目录，或者我们可以用mkdir创建一个新目录，如：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir environments</span><br><span class="line">cd environments</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>进入您希望环境保存的目录后，可以通过运行以下命令来创建环境：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -m venv my_env</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这会设置一个新目录，其中包含一些我们可以用ls命令查看的项目：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls my_env</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>bin  include  lib  lib64  pyvenv.cfg</code>这些文件一起用于确保您的项目与本地计算机的隔离，以便系统文件和项目文件不会混合。这是版本控制的一个好例子，并确保您的每个项目都可以访问所需的特定软件包。Python Wheels是Python的内置包格式，可以通过减少编译所需的次数来加速软件生产。你会在每个lib目录中找到它。</p>
+</blockquote>
+<blockquote>
+<p>要使用此环境，您需要激活它，您可以通过输入以下调用activate脚本的命令来执行此操作：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source my_env/bin/activate</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>您的提示现在将以您的环境名称为前缀，在这里是my_env。根据您运行的Debian Linux的版本不同，您的前缀可能看起来有所不同，他们看起来应该是这样子的：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(my_env) sammy@sammy:~/environments$</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这个前缀让我们知道环境当前是my_env在运行的，这意味着当我们在这里创建程序时，它们将只使用这个特定环境的设置和包。</p>
+</blockquote>
+<blockquote>
+<p>注意：在虚拟环境中，您可以使用python代替python3，pip代替pip3。如果在环境之外使用Python 3，则需要专门使用python3和pip3。</p>
+</blockquote>
+<blockquote>
+<p>执行这些步骤后，您的虚拟环境即可使用。</p>
+</blockquote>
+<h3 id="第3步-离开虚拟环境"><a href="#第3步-离开虚拟环境" class="headerlink" title="第3步 - 离开虚拟环境"></a>第3步 - 离开虚拟环境</h3><blockquote>
+<p>要离开环境，只需输入命令<code>deactivate</code>，您将返回到原始目录。</p>
+</blockquote>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><blockquote>
+<p>恭喜！此时，您已经学会了如何设置了Python 3编程环境，可以开始编写项目啦！更多Python教程请关注腾讯云+社区。</p>
+</blockquote>
+<p>####参考文献：《How To Install Python 3 and Set Up a Local Programming Environment on Debian 8》</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/08/18/python-install/" data-id="clkjdd1cr003398aj6ps3f7el" data-title="linux下载和安装python" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-python-draw-square" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/07/30/python-draw-square/" class="article-date">
+  <time class="dt-published" datetime="2022-07-30T07:23:09.000Z" itemprop="datePublished">2022-07-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/07/30/python-draw-square/">使用python打印数字矩阵python-draw-square</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="打印对应的图案"><a href="#打印对应的图案" class="headerlink" title="打印对应的图案"></a>打印对应的图案</h1><h2 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h2><p>本问题有多种表述形式，但基本上都离不开：</p>
+<ul>
+<li>给一组样例或输入的数字</li>
+<li>更据数字寻找绘图规律</li>
+<li>编辑程序打印图形</li>
+</ul>
+<h3 id="例题一"><a href="#例题一" class="headerlink" title="例题一"></a>例题一</h3><h4 id="样例输入：-无"><a href="#样例输入：-无" class="headerlink" title="样例输入： 无"></a>样例输入： 无</h4><h4 id="样例输出："><a href="#样例输出：" class="headerlink" title="样例输出："></a>样例输出：</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">00</span> 01 02 03 04 05 06 07 08 09</span><br><span class="line"></span><br><span class="line"><span class="number">10</span> <span class="number">11</span> <span class="number">12</span> <span class="number">13</span> <span class="number">14</span> <span class="number">15</span> <span class="number">16</span> <span class="number">17</span> <span class="number">18</span> <span class="number">19</span></span><br><span class="line"></span><br><span class="line"><span class="number">20</span> <span class="number">21</span> <span class="number">22</span> <span class="number">23</span> <span class="number">24</span> <span class="number">25</span> <span class="number">26</span> <span class="number">27</span> <span class="number">28</span> <span class="number">29</span></span><br><span class="line"></span><br><span class="line"><span class="number">30</span> <span class="number">31</span> <span class="number">32</span> <span class="number">33</span> <span class="number">34</span> <span class="number">35</span> <span class="number">36</span> <span class="number">37</span> <span class="number">38</span> <span class="number">39</span></span><br><span class="line"></span><br><span class="line"><span class="number">40</span> <span class="number">41</span> <span class="number">42</span> <span class="number">43</span> <span class="number">44</span> <span class="number">45</span> <span class="number">46</span> <span class="number">47</span> <span class="number">48</span> <span class="number">49</span></span><br><span class="line"></span><br><span class="line"><span class="number">50</span> <span class="number">51</span> <span class="number">52</span> <span class="number">53</span> <span class="number">54</span> <span class="number">55</span> <span class="number">56</span> <span class="number">57</span> <span class="number">58</span> <span class="number">59</span></span><br><span class="line"></span><br><span class="line"><span class="number">60</span> <span class="number">61</span> <span class="number">62</span> <span class="number">63</span> <span class="number">64</span> <span class="number">65</span> <span class="number">66</span> <span class="number">67</span> <span class="number">68</span> <span class="number">69</span></span><br><span class="line"></span><br><span class="line"><span class="number">70</span> <span class="number">71</span> <span class="number">72</span> <span class="number">73</span> <span class="number">74</span> <span class="number">75</span> <span class="number">76</span> <span class="number">77</span> <span class="number">78</span> <span class="number">79</span></span><br><span class="line"></span><br><span class="line"><span class="number">80</span> <span class="number">81</span> <span class="number">82</span> <span class="number">83</span> <span class="number">84</span> <span class="number">85</span> <span class="number">86</span> <span class="number">87</span> <span class="number">88</span> <span class="number">89</span></span><br><span class="line"></span><br><span class="line"><span class="number">90</span> <span class="number">91</span> <span class="number">92</span> <span class="number">93</span> <span class="number">94</span> <span class="number">95</span> <span class="number">96</span> <span class="number">97</span> <span class="number">98</span> <span class="number">99</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="题目讲解："><a href="#题目讲解：" class="headerlink" title="题目讲解："></a>题目讲解：</h4><blockquote>
+<p>首先我们观察需要打印图形的图案，要求我们打印一个正方形的图案</p>
+</blockquote>
+<blockquote>
+<p>图案是由0-99所构成的</p>
+</blockquote>
+<blockquote>
+<p>再注意一个细节，小数字前位数不够需要补0</p>
+</blockquote>
+<h4 id="样例代码："><a href="#样例代码：" class="headerlink" title="样例代码："></a>样例代码：</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置变量</span></span><br><span class="line">a = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置两层循环</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>) :</span><br><span class="line">    <span class="keyword">for</span> y <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>) :</span><br><span class="line">        <span class="built_in">print</span> (<span class="string">f&#x27;<span class="subst">&#123;a:<span class="number">0</span>&gt;2d&#125;</span> &#x27;</span> ,end =<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">        a += <span class="number">1</span></span><br><span class="line">    <span class="built_in">print</span> (<span class="string">&#x27;\n&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="语法讲解："><a href="#语法讲解：" class="headerlink" title="语法讲解："></a>语法讲解：</h4><ol>
+<li>设置变量 <code>变量名</code>+<code>=</code>+<code>值</code></li>
+<li>for循环 <code>for</code>+<code>变量</code>+<code>in</code>+<code>范围</code></li>
+</ol>
+<h4 id="代码逻辑："><a href="#代码逻辑：" class="headerlink" title="代码逻辑："></a>代码逻辑：</h4><ul>
+<li>先创建一个变量，用来存储需要打印的数字</li>
+<li>再建立一个嵌套循环</li>
+<li>每经历一次循环就将变量加一</li>
+<li>每经历十次循环就换下一行</li>
+<li>直到循环结束</li>
+</ul>
+<h4 id="代码知识点："><a href="#代码知识点：" class="headerlink" title="代码知识点："></a>代码知识点：</h4><p>控制打印的数字位数：</p>
+<table>
+<thead>
+<tr>
+<th>变量值</th>
+<th>占位符</th>
+<th>格式化结果</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>3.1415926</code></td>
+<td><code>&#123;:.2f&#125;</code></td>
+<td><code>&#39;3.14&#39;</code></td>
+<td>保留小数点后两位</td>
+</tr>
+<tr>
+<td><code>3.1415926</code></td>
+<td><code>&#123;:+.2f&#125;</code></td>
+<td><code>&#39;+3.14&#39;</code></td>
+<td>带符号保留小数点后两位</td>
+</tr>
+<tr>
+<td><code>-1</code></td>
+<td><code>&#123;:+.2f&#125;</code></td>
+<td><code>&#39;-1.00&#39;</code></td>
+<td>带符号保留小数点后两位</td>
+</tr>
+<tr>
+<td><code>3.1415926</code></td>
+<td><code>&#123;:.0f&#125;</code></td>
+<td><code>&#39;3&#39;</code></td>
+<td>不带小数</td>
+</tr>
+<tr>
+<td><code>123</code></td>
+<td><code>&#123;:0&gt;10d&#125;</code></td>
+<td><code>&#39;0000000123&#39;</code></td>
+<td>左边补<code>0</code>，补够10位</td>
+</tr>
+<tr>
+<td><code>123</code></td>
+<td><code>&#123;:x&lt;10d&#125;</code></td>
+<td><code>&#39;123xxxxxxx&#39;</code></td>
+<td>右边补<code>x</code> ，补够10位</td>
+</tr>
+<tr>
+<td><code>123</code></td>
+<td><code>&#123;:&gt;10d&#125;</code></td>
+<td><code>&#39;       123&#39;</code></td>
+<td>左边补空格，补够10位</td>
+</tr>
+<tr>
+<td><code>123</code></td>
+<td><code>&#123;:&lt;10d&#125;</code></td>
+<td><code>&#39;123       &#39;</code></td>
+<td>右边补空格，补够10位</td>
+</tr>
+<tr>
+<td><code>123456789</code></td>
+<td><code>&#123;:,&#125;</code></td>
+<td><code>&#39;123,456,789&#39;</code></td>
+<td>逗号分隔格式</td>
+</tr>
+<tr>
+<td><code>0.123</code></td>
+<td><code>&#123;:.2%&#125;</code></td>
+<td><code>&#39;12.30%&#39;</code></td>
+<td>百分比格式</td>
+</tr>
+<tr>
+<td><code>123456789</code></td>
+<td><code>&#123;:.2e&#125;</code></td>
+<td><code>&#39;1.23e+08&#39;</code></td>
+<td>科学计数法格式</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>copy from <a target="_blank" rel="noopener" href="https://github.com/jackfrued/Python-Core-50-Courses/blob/master/">jackfrued’s repository</a></p>
+</blockquote>
+<h4 id="代码优化"><a href="#代码优化" class="headerlink" title="代码优化"></a>代码优化</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>) :</span><br><span class="line">    <span class="keyword">for</span> y <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>) :</span><br><span class="line">        <span class="built_in">print</span> (<span class="string">f&#x27;<span class="subst">&#123;x&#125;</span><span class="subst">&#123;y&#125;</span> &#x27;</span> ,end =<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">        <span class="comment">#a += 1</span></span><br><span class="line">    <span class="built_in">print</span> (<span class="string">&#x27;\n&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="代码逻辑"><a href="#代码逻辑" class="headerlink" title="代码逻辑"></a>代码逻辑</h4><ul>
+<li>观察需要打印的内容，刚好是其所在位置的坐标数字</li>
+<li>直接双重循环，打印数字即可。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/07/30/python-draw-square/" data-id="clkjdd1cq003198aj26y3erdd" data-title="使用python打印数字矩阵python-draw-square" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Minecraft/">Minecraft</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E7%B1%BB/">分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E5%8F%91/">开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A4%BE%E5%9B%A2/">社团</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blander/" rel="tag">Blander</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CAD/" rel="tag">CAD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GUI/" rel="tag">GUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Novelai/" rel="tag">Novelai</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSD1309/" rel="tag">SSD1309</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STEAM/" rel="tag">STEAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STEAM%E7%A4%BE/" rel="tag">STEAM社</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VNC/" rel="tag">VNC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/" rel="tag">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arduino/" rel="tag">arduino</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/colour/" rel="tag">colour</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/learn/" rel="tag">learn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mc/" rel="tag">mc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/micro-bit/" rel="tag">micro:bit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nextcloud/" rel="tag">nextcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag">学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%87%E7%AD%BE/" rel="tag">标签</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" rel="tag">树莓派</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%86%E8%88%AA%E6%9D%AF/" rel="tag">领航杯</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Blander/" style="font-size: 10px;">Blander</a> <a href="/tags/CAD/" style="font-size: 12px;">CAD</a> <a href="/tags/GUI/" style="font-size: 10px;">GUI</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/Novelai/" style="font-size: 10px;">Novelai</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SSD1309/" style="font-size: 12px;">SSD1309</a> <a href="/tags/STEAM/" style="font-size: 10px;">STEAM</a> <a href="/tags/STEAM%E7%A4%BE/" style="font-size: 14px;">STEAM社</a> <a href="/tags/VNC/" style="font-size: 10px;">VNC</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/arduino/" style="font-size: 12px;">arduino</a> <a href="/tags/colour/" style="font-size: 10px;">colour</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/learn/" style="font-size: 10px;">learn</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mc/" style="font-size: 12px;">mc</a> <a href="/tags/micro-bit/" style="font-size: 16px;">micro:bit</a> <a href="/tags/nextcloud/" style="font-size: 10px;">nextcloud</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/python/" style="font-size: 18px;">python</a> <a href="/tags/windows/" style="font-size: 12px;">windows</a> <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 12px;">学习</a> <a href="/tags/%E6%A0%87%E7%AD%BE/" style="font-size: 12px;">标签</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" style="font-size: 12px;">树莓派</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">网络</a> <a href="/tags/%E9%A2%86%E8%88%AA%E6%9D%AF/" style="font-size: 10px;">领航杯</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">July 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">January 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">August 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/1000/12/">December 1000</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/07/26/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-HC-SR04/">linux-pi-HC-SR04</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-python-yolo5/">linux-python-yolo5</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-SSD1309/">linux-pi-SSD1309</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-MPU6050/">MPU6050-pi</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

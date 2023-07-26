@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>arduino与RFID-RC522模块实现IC卡读取与写入（待整理） | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="https:&#x2F;&#x2F;blog.csdn.net&#x2F;weixin_43031092&#x2F;article&#x2F;details&#x2F;108651982 简介单片机：Arduino Uno额外库：MFRC522（可直接在库管理器下载） S50 IC卡 采用NXP MF1 IC S50制作的非接触智能卡，通常简称S50卡或Mifare 1K，符合ISO14443A标准；存储容量：8Kbit，16个分区，每分区两组密码。 枯叶">
+<meta property="og:type" content="article">
+<meta property="og:title" content="arduino与RFID-RC522模块实现IC卡读取与写入（待整理）">
+<meta property="og:url" content="http://example.com/2023/01/06/arduino-RFID-RC522/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="https:&#x2F;&#x2F;blog.csdn.net&#x2F;weixin_43031092&#x2F;article&#x2F;details&#x2F;108651982 简介单片机：Arduino Uno额外库：MFRC522（可直接在库管理器下载） S50 IC卡 采用NXP MF1 IC S50制作的非接触智能卡，通常简称S50卡或Mifare 1K，符合ISO14443A标准；存储容量：8Kbit，16个分区，每分区两组密码。 枯叶">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-01-06T01:20:51.000Z">
+<meta property="article:modified_time" content="2023-07-23T14:19:13.067Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-arduino-RFID-RC522" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/06/arduino-RFID-RC522/" class="article-date">
+  <time class="dt-published" datetime="2023-01-06T01:20:51.000Z" itemprop="datePublished">2023-01-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      arduino与RFID-RC522模块实现IC卡读取与写入（待整理）
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43031092/article/details/108651982">https://blog.csdn.net/weixin_43031092/article/details/108651982</a></p>
+<p>简介<br>单片机：Arduino Uno<br>额外库：MFRC522（可直接在库管理器下载）</p>
+<p>S50 IC卡 采用NXP MF1 IC S50制作的非接触智能卡，通常简称S50卡或Mifare 1K，符合ISO14443A标准；存储容量：8Kbit，16个分区，每分区两组密码。</p>
+<p>枯叶笑与东方大叔的IC卡小结<br>分类 IC - ID<br>市场上常用的卡片就两种，IC卡和ID卡，这两者的区别就是IC卡有存储芯片（如M1,UID,CUID,FUID,UFUID），而 ID卡只是一个卡号（ 全称为身份识别卡，是一种不可写入的感应卡，含固定的编号.卡号在封卡前写入后不可再更改）。CPU卡因为价格太高，没有推广起来</p>
+<p>IC卡的芯片，目前市场上常用的有两种，一种是价格较高的飞利浦原装芯片，一种是上海复旦芯片；原装飞利浦芯片IC卡，市场拿货价不超过3元，例如公交卡，国产芯片IC卡，价格几毛钱，常用于电梯、停车场、食堂就餐、水卡</p>
+<p>IC卡和ID卡都可以用于一卡通系统，各有优缺点：</p>
+<p>ID卡，因为只是ID号，没有内置存储芯片，因此，当ID卡用于一卡通系统时，必须要电脑开着，因为，你消费扣款或充值，都是从电脑数据库里加加减减，这类似于磁条性质的银行卡，卡片本身没有钱，你取钱存钱，其实都是在银行数据库里加减</p>
+<p>优点：因为是从电脑数据库里直接加减，因此，充值或取款，卡片无需到场，刷卡数据实时传输到电脑<br>缺点：电脑坏了或通讯有问题，整套系统都瘫痪（脱机消费模式也行，这里不具体讲）<br>IC卡，常用的公交卡、地铁卡都是IC卡，内置芯片，0-15 共16个扇区，可以写入数据</p>
+<p>优点：因为钱是直接存储在卡里面，因此，消费时，无需联网，跟电脑无关，直接从卡里面扣钱<br>缺点：充值时，卡片必须到场 （省事的方法，补贴机之类），刷卡数据暂时储存在刷卡机里，待电脑开机后，采集消费数据到电脑<br>IC细分类<br>M1 卡<br>普通IC卡，0扇区不可以修改，其他扇区可反复擦写，我们使用的电梯卡、门禁卡等智能卡发卡商所使用的都是 M1 卡，可以理解为物业发的原卡。</p>
+<p>UID 卡<br>普通复制卡，可以重复擦写所有扇区，主要应用在IC卡复制上，遇到带有防火墙的读卡器就会失效。</p>
+<p>CUID 卡<br>可擦写防屏蔽卡，可以重复擦写所有扇区，UID卡复制无效的情况下使用，可以绕过防火墙。<br>（防屏蔽就是防止某些设备里面有检测机制能够检查出卡片是否为复制卡，cuid卡比较常用，需要注意第二次使用需要格式化，还有说明一下 0扇区就是机器与卡片的桥梁用来存放对应信息。）</p>
+<p>FUID 卡<br>不可擦写防屏蔽卡，此卡的特点0扇区只能写入一次，写入一次变成 M1 卡，CUID 复制没用的情况下使用，可以绕过防火墙。</p>
+<p>UFUID 卡<br>高级复制卡，我们就理解为是 UID 和 FUID 的合成卡，需要封卡操作，不封卡就是 UID 卡，封卡后就变为 M1 卡。</p>
+<p>工具<br>ACR122<br>使用最多的读卡器，很流行，大抵是因为网络上流传了非常强大的GUI改卡读卡复制卡软件吧。</p>
+<p>Proxmark3<br>国外的开源硬件，由FPGA驱动。性能十分强大，集嗅探、读取、克隆于一体，IC卡和ID卡通杀。</p>
+<p>PN532<br>由NXP出品，是一款高度集成的载波的13.56MHz传输模块，基于80C51内核有40KROM、1KRAM。某宝价格为几十元，非常便宜。只能用来读取IC卡，不能读取ID卡和CPU卡。</p>
+<p>入门<br>引脚接线<br>常用接线也在示例程序中写明，这里我使用的是Arduino Uno，所以接线参考前两列即可。</p>
+<ul>
+<li>Typical pin layout used:</li>
+<li><hr>
+</li>
+<li><pre><code>        MFRC522      Arduino       Arduino   Arduino    Arduino          Arduino
+</code></pre>
+</li>
+<li><pre><code>        Reader/PCD   Uno/101       Mega      Nano v3    Leonardo/Micro   Pro Micro
+</code></pre>
+</li>
+<li>Signal      Pin          Pin           Pin       Pin        Pin              Pin</li>
+<li><hr>
+</li>
+<li>RST&#x2F;Reset   RST          9             5         D9         RESET&#x2F;ICSP-5     RST</li>
+<li>SPI SS      SDA(SS)      10            53        D10        10               10</li>
+<li>SPI MOSI    MOSI         11 &#x2F; ICSP-4   51        D11        ICSP-4           16</li>
+<li>SPI MISO    MISO         12 &#x2F; ICSP-1   50        D12        ICSP-1           14</li>
+<li>SPI SCK     SCK          13 &#x2F; ICSP-3   52        D13        ICSP-3           15<br> *&#x2F;<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>即（左侧为RFID-RC522引脚，右侧为Uno引脚）<br>RST &lt;———-&gt; 9<br>SDA(SS) &lt;———-&gt; 10<br>MOSI &lt;———-&gt; 11<br>MISO &lt;———-&gt; 12<br>SCK &lt;———-&gt; 13<br>3.3V &lt;———-&gt; 3.3V<br>GND &lt;———-&gt; GND</li>
+</ul>
+<p>读取 UNID &lt;-&gt; 卡号 &lt;-&gt; ID号<br>这里使用的是MFRC522库中的示例-ReadUNID，读取卡号。<br>据说每一张卡的ID都不一样-,-读取卡号就能判断身份，不过最好是先尝试写入数据（尝试修改卡号），能修改的卡说明是复制卡，这就需要认真对待这样卡的安全性了。</p>
+<p>Sketch</p>
+<p>#include &lt;SPI.h&gt;<br>#include &lt;MFRC522.h&gt;</p>
+<p>#define SS_PIN 10<br>#define RST_PIN 9</p>
+<p>MFRC522 rfid(SS_PIN, RST_PIN); &#x2F;&#x2F; Instance of the class</p>
+<p>MFRC522::MIFARE_Key key; </p>
+<p>&#x2F;&#x2F; Init array that will store new NUID<br>byte nuidPICC[4];</p>
+<p>void setup() {<br>  Serial.begin(9600);<br>  SPI.begin(); &#x2F;&#x2F; Init SPI bus<br>  Serial.println(F(“Start——————–”));<br>  rfid.PCD_Init(); &#x2F;&#x2F; Init MFRC522 </p>
+<p>  for (byte i &#x3D; 0; i &lt; 6; i++) {<br>    key.keyByte[i] &#x3D; 0xFF;<br>  }</p>
+<p>  Serial.println(F(“This code scan the MIFARE Classsic NUID.”));<br>  Serial.print(F(“Using the following key:”));<br>  printHex(key.keyByte, MFRC522::MF_KEY_SIZE);<br>}</p>
+<p>void loop() {</p>
+<p>  &#x2F;&#x2F; Reset the loop if no new card present on the sensor&#x2F;reader. This saves the entire process when idle.<br>  if ( ! rfid.PICC_IsNewCardPresent())<br>    return;</p>
+<p>  &#x2F;&#x2F; Verify if the NUID has been readed<br>  if ( ! rfid.PICC_ReadCardSerial())<br>    return;</p>
+<p>  Serial.print(F(“PICC type: “));<br>  MFRC522::PICC_Type piccType &#x3D; rfid.PICC_GetType(rfid.uid.sak);<br>  Serial.println(rfid.PICC_GetTypeName(piccType));</p>
+<p>  &#x2F;&#x2F; Check is the PICC of Classic MIFARE type<br>  if (piccType !&#x3D; MFRC522::PICC_TYPE_MIFARE_MINI &amp;&amp;<br>    piccType !&#x3D; MFRC522::PICC_TYPE_MIFARE_1K &amp;&amp;<br>    piccType !&#x3D; MFRC522::PICC_TYPE_MIFARE_4K) {<br>    Serial.println(F(“Your tag is not of type MIFARE Classic.”));<br>    return;<br>  }</p>
+<p>  if (rfid.uid.uidByte[0] !&#x3D; nuidPICC[0] ||<br>    rfid.uid.uidByte[1] !&#x3D; nuidPICC[1] ||<br>    rfid.uid.uidByte[2] !&#x3D; nuidPICC[2] ||<br>    rfid.uid.uidByte[3] !&#x3D; nuidPICC[3] ) {<br>    Serial.println(F(“A new card has been detected.”));</p>
+<pre><code>// Store NUID into nuidPICC array
+for (byte i = 0; i &lt; 4; i++) &#123;
+  nuidPICC[i] = rfid.uid.uidByte[i];
+&#125;
+
+Serial.println(F(&quot;The NUID tag is:&quot;));
+Serial.print(F(&quot;In hex: &quot;));
+printHex(rfid.uid.uidByte, rfid.uid.size);
+Serial.println();
+Serial.print(F(&quot;In dec: &quot;));
+printDec(rfid.uid.uidByte, rfid.uid.size);
+Serial.println();
+</code></pre>
+<p>  }<br>  else Serial.println(F(“Card read previously.”));</p>
+<p>  &#x2F;&#x2F; Halt PICC<br>  rfid.PICC_HaltA();</p>
+<p>  &#x2F;&#x2F; Stop encryption on PCD<br>  rfid.PCD_StopCrypto1();<br>}</p>
+<p>&#x2F;**</p>
+<ul>
+<li>Helper routine to dump a byte array as hex values to Serial.<br> *&#x2F;<br>void printHex(byte *buffer, byte bufferSize) {<br>  for (byte i &#x3D; 0; i &lt; bufferSize; i++) {<br> Serial.print(buffer[i] &lt; 0x10 ? “ 0” : “ “);<br> Serial.print(buffer[i], HEX);<br>  }<br>}</li>
+</ul>
+<p>&#x2F;**</p>
+<ul>
+<li>Helper routine to dump a byte array as dec values to Serial.<br> *&#x2F;<br>void printDec(byte *buffer, byte bufferSize) {<br>  for (byte i &#x3D; 0; i &lt; bufferSize; i++) {<br> Serial.print(buffer[i] &lt; 0x10 ? “ 0” : “ “);<br> Serial.print(buffer[i], DEC);<br>  }<br>}<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br>24<br>25<br>26<br>27<br>28<br>29<br>30<br>31<br>32<br>33<br>34<br>35<br>36<br>37<br>38<br>39<br>40<br>41<br>42<br>43<br>44<br>45<br>46<br>47<br>48<br>49<br>50<br>51<br>52<br>53<br>54<br>55<br>56<br>57<br>58<br>59<br>60<br>61<br>62<br>63<br>64<br>65<br>66<br>67<br>68<br>69<br>70<br>71<br>72<br>73<br>74<br>75<br>76<br>77<br>78<br>79<br>80<br>81<br>82<br>83<br>84<br>85<br>86<br>87<br>88<br>89<br>90<br>91<br>92<br>93<br>94<br>95<br>96<br>97<br>98<br>99<br>结果<br>打开Arduino的串口监视器，下载好程序，把IC卡刷到RFID-RC522模块上有标记线圈的位置，就能在串口监视器中看到其编号（饭卡、银行卡刷不出来。。。。。）</li>
+</ul>
+<p>写入&amp;&amp;读取个人信息：名+姓氏<br>接线请往上爬，一模一样。</p>
+<p>Sketch-写入<br>rfid_write_personal_data.ino</p>
+<p>#include &lt;SPI.h&gt;<br>#include &lt;MFRC522.h&gt;</p>
+<p>#define RST_PIN         9           &#x2F;&#x2F; Configurable, see typical pin layout above<br>#define SS_PIN          10          &#x2F;&#x2F; Configurable, see typical pin layout above</p>
+<p>MFRC522 mfrc522(SS_PIN, RST_PIN);   &#x2F;&#x2F; Create MFRC522 instance</p>
+<p>void setup() {<br>  Serial.begin(9600);        &#x2F;&#x2F; Initialize serial communications with the PC<br>  SPI.begin();               &#x2F;&#x2F; Init SPI bus<br>  mfrc522.PCD_Init();        &#x2F;&#x2F; Init MFRC522 card<br>  Serial.println(F(“Write personal data on a MIFARE PICC “));<br>}</p>
+<p>void loop() {</p>
+<p>  &#x2F;&#x2F; Prepare key - all keys are set to FFFFFFFFFFFFh at chip delivery from the factory.<br>  MFRC522::MIFARE_Key key;<br>  for (byte i &#x3D; 0; i &lt; 6; i++) key.keyByte[i] &#x3D; 0xFF;</p>
+<p>  &#x2F;&#x2F; Reset the loop if no new card present on the sensor&#x2F;reader. This saves the entire process when idle.<br>  if ( ! mfrc522.PICC_IsNewCardPresent()) {<br>    return;<br>  }</p>
+<p>  &#x2F;&#x2F; Select one of the cards<br>  if ( ! mfrc522.PICC_ReadCardSerial()) {<br>    return;<br>  }</p>
+<p>  Serial.print(F(“Card UID:”));    &#x2F;&#x2F;Dump UID<br>  for (byte i &#x3D; 0; i &lt; mfrc522.uid.size; i++) {<br>    Serial.print(mfrc522.uid.uidByte[i] &lt; 0x10 ? “ 0” : “ “);<br>    Serial.print(mfrc522.uid.uidByte[i], HEX);<br>  }<br>  Serial.print(F(“ PICC type: “));   &#x2F;&#x2F; Dump PICC type<br>  MFRC522::PICC_Type piccType &#x3D; mfrc522.PICC_GetType(mfrc522.uid.sak);<br>  Serial.println(mfrc522.PICC_GetTypeName(piccType));</p>
+<p>  byte buffer[34];<br>  byte block;<br>  MFRC522::StatusCode status;<br>  byte len;</p>
+<p>  Serial.setTimeout(20000L) ;     &#x2F;&#x2F; wait until 20 seconds for input from serial<br>  &#x2F;&#x2F; Ask personal data: Family name<br>  Serial.println(F(“Type Family name, ending with #”));<br>  len &#x3D; Serial.readBytesUntil(‘#’, (char *) buffer, 30) ; &#x2F;&#x2F; read family name from serial<br>  for (byte i &#x3D; len; i &lt; 30; i++) buffer[i] &#x3D; ‘ ‘;     &#x2F;&#x2F; pad with spaces</p>
+<p>  block &#x3D; 1;<br>  &#x2F;&#x2F;Serial.println(F(“Authenticating using key A…”));<br>  status &#x3D; mfrc522.PCD_Authenticate(MFRC522::PICC_CMD_MF_AUTH_KEY_A, block, &amp;key, &amp;(mfrc522.uid));<br>  if (status !&#x3D; MFRC522::STATUS_OK) {<br>    Serial.print(F(“PCD_Authenticate() failed: “));<br>    Serial.println(mfrc522.GetStatusCodeName(status));<br>    return;<br>  }<br>  else Serial.println(F(“PCD_Authenticate() success: “));</p>
+<p>  &#x2F;&#x2F; Write block<br>  status &#x3D; mfrc522.MIFARE_Write(block, buffer, 16);<br>  if (status !&#x3D; MFRC522::STATUS_OK) {<br>    Serial.print(F(“MIFARE_Write() failed: “));<br>    Serial.println(mfrc522.GetStatusCodeName(status));<br>    return;<br>  }<br>  else Serial.println(F(“MIFARE_Write() success: “));</p>
+<p>  block &#x3D; 2;<br>  &#x2F;&#x2F;Serial.println(F(“Authenticating using key A…”));<br>  status &#x3D; mfrc522.PCD_Authenticate(MFRC522::PICC_CMD_MF_AUTH_KEY_A, block, &amp;key, &amp;(mfrc522.uid));<br>  if (status !&#x3D; MFRC522::STATUS_OK) {<br>    Serial.print(F(“PCD_Authenticate() failed: “));<br>    Serial.println(mfrc522.GetStatusCodeName(status));<br>    return;<br>  }</p>
+<p>  &#x2F;&#x2F; Write block<br>  status &#x3D; mfrc522.MIFARE_Write(block, &amp;buffer[16], 16);<br>  if (status !&#x3D; MFRC522::STATUS_OK) {<br>    Serial.print(F(“MIFARE_Write() failed: “));<br>    Serial.println(mfrc522.GetStatusCodeName(status));<br>    return;<br>  }<br>  else Serial.println(F(“MIFARE_Write() success: “));</p>
+<p>  &#x2F;&#x2F; Ask personal data: First name<br>  Serial.println(F(“Type First name, ending with #”));<br>  len &#x3D; Serial.readBytesUntil(‘#’, (char *) buffer, 20) ; &#x2F;&#x2F; read first name from serial<br>  for (byte i &#x3D; len; i &lt; 20; i++) buffer[i] &#x3D; ‘ ‘;     &#x2F;&#x2F; pad with spaces</p>
+<p>  block &#x3D; 4;<br>  &#x2F;&#x2F;Serial.println(F(“Authenticating using key A…”));<br>  status &#x3D; mfrc522.PCD_Authenticate(MFRC522::PICC_CMD_MF_AUTH_KEY_A, block, &amp;key, &amp;(mfrc522.uid));<br>  if (status !&#x3D; MFRC522::STATUS_OK) {<br>    Serial.print(F(“PCD_Authenticate() failed: “));<br>    Serial.println(mfrc522.GetStatusCodeName(status));<br>    return;<br>  }</p>
+<p>  &#x2F;&#x2F; Write block<br>  status &#x3D; mfrc522.MIFARE_Write(block, buffer, 16);<br>  if (status !&#x3D; MFRC522::STATUS_OK) {<br>    Serial.print(F(“MIFARE_Write() failed: “));<br>    Serial.println(mfrc522.GetStatusCodeName(status));<br>    return;<br>  }<br>  else Serial.println(F(“MIFARE_Write() success: “));</p>
+<p>  block &#x3D; 5;<br>  &#x2F;&#x2F;Serial.println(F(“Authenticating using key A…”));<br>  status &#x3D; mfrc522.PCD_Authenticate(MFRC522::PICC_CMD_MF_AUTH_KEY_A, block, &amp;key, &amp;(mfrc522.uid));<br>  if (status !&#x3D; MFRC522::STATUS_OK) {<br>    Serial.print(F(“PCD_Authenticate() failed: “));<br>    Serial.println(mfrc522.GetStatusCodeName(status));<br>    return;<br>  }</p>
+<p>  &#x2F;&#x2F; Write block<br>  status &#x3D; mfrc522.MIFARE_Write(block, &amp;buffer[16], 16);<br>  if (status !&#x3D; MFRC522::STATUS_OK) {<br>    Serial.print(F(“MIFARE_Write() failed: “));<br>    Serial.println(mfrc522.GetStatusCodeName(status));<br>    return;<br>  }<br>  else Serial.println(F(“MIFARE_Write() success: “));</p>
+<p>  Serial.println(“ “);<br>  mfrc522.PICC_HaltA(); &#x2F;&#x2F; Halt PICC<br>  mfrc522.PCD_StopCrypto1();  &#x2F;&#x2F; Stop encryption on PCD</p>
+<p>}<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br>24<br>25<br>26<br>27<br>28<br>29<br>30<br>31<br>32<br>33<br>34<br>35<br>36<br>37<br>38<br>39<br>40<br>41<br>42<br>43<br>44<br>45<br>46<br>47<br>48<br>49<br>50<br>51<br>52<br>53<br>54<br>55<br>56<br>57<br>58<br>59<br>60<br>61<br>62<br>63<br>64<br>65<br>66<br>67<br>68<br>69<br>70<br>71<br>72<br>73<br>74<br>75<br>76<br>77<br>78<br>79<br>80<br>81<br>82<br>83<br>84<br>85<br>86<br>87<br>88<br>89<br>90<br>91<br>92<br>93<br>94<br>95<br>96<br>97<br>98<br>99<br>100<br>101<br>102<br>103<br>104<br>105<br>106<br>107<br>108<br>109<br>110<br>111<br>112<br>113<br>114<br>115<br>116<br>117<br>118<br>119<br>120<br>121<br>122<br>123<br>124<br>125<br>126<br>127<br>128<br>129<br>130<br>131<br>132<br>133<br>134<br>135<br>Result</p>
+<p>例如我第一次输入 Smith#<br>第二次输入 Rick#</p>
+<p>Sketch-读取<br>#include &lt;SPI.h&gt;<br>#include &lt;MFRC522.h&gt;</p>
+<p>#define RST_PIN         9           &#x2F;&#x2F; Configurable, see typical pin layout above<br>#define SS_PIN          10          &#x2F;&#x2F; Configurable, see typical pin layout above</p>
+<p>MFRC522 mfrc522(SS_PIN, RST_PIN);   &#x2F;&#x2F; Create MFRC522 instance</p>
+<p>&#x2F;&#x2F;*****************************************************************************************&#x2F;&#x2F;<br>void setup() {<br>  Serial.begin(9600);                                           &#x2F;&#x2F; Initialize serial communications with the PC<br>  SPI.begin();                                                  &#x2F;&#x2F; Init SPI bus<br>  mfrc522.PCD_Init();                                              &#x2F;&#x2F; Init MFRC522 card<br>  Serial.println(F(“Read personal data on a MIFARE PICC:”));    &#x2F;&#x2F;shows in serial that it is ready to read<br>}</p>
+<p>&#x2F;&#x2F;*****************************************************************************************&#x2F;&#x2F;<br>void loop() {</p>
+<p>  &#x2F;&#x2F; Prepare key - all keys are set to FFFFFFFFFFFFh at chip delivery from the factory.<br>  MFRC522::MIFARE_Key key;<br>  for (byte i &#x3D; 0; i &lt; 6; i++) key.keyByte[i] &#x3D; 0xFF;</p>
+<p>  &#x2F;&#x2F;some variables we need<br>  byte block;<br>  byte len;<br>  MFRC522::StatusCode status;</p>
+<p>  &#x2F;&#x2F;——————————————-</p>
+<p>  &#x2F;&#x2F; Reset the loop if no new card present on the sensor&#x2F;reader. This saves the entire process when idle.<br>  if ( ! mfrc522.PICC_IsNewCardPresent()) {<br>    return;<br>  }</p>
+<p>  &#x2F;&#x2F; Select one of the cards<br>  if ( ! mfrc522.PICC_ReadCardSerial()) {<br>    return;<br>  }</p>
+<p>  Serial.println(F(“<strong>Card Detected:</strong>“));</p>
+<p>  &#x2F;&#x2F;——————————————-</p>
+<p>  mfrc522.PICC_DumpDetailsToSerial(&amp;(mfrc522.uid)); &#x2F;&#x2F;dump some details about the card</p>
+<p>  &#x2F;&#x2F;mfrc522.PICC_DumpToSerial(&amp;(mfrc522.uid));      &#x2F;&#x2F;uncomment this to see all blocks in hex</p>
+<p>  &#x2F;&#x2F;——————————————-</p>
+<p>  Serial.print(F(“Name: “));</p>
+<p>  byte buffer1[18];</p>
+<p>  block &#x3D; 4;<br>  len &#x3D; 18;</p>
+<p>  &#x2F;&#x2F;——————————————- GET FIRST NAME<br>  status &#x3D; mfrc522.PCD_Authenticate(MFRC522::PICC_CMD_MF_AUTH_KEY_A, 4, &amp;key, &amp;(mfrc522.uid)); &#x2F;&#x2F;line 834 of MFRC522.cpp file<br>  if (status !&#x3D; MFRC522::STATUS_OK) {<br>    Serial.print(F(“Authentication failed: “));<br>    Serial.println(mfrc522.GetStatusCodeName(status));<br>    return;<br>  }</p>
+<p>  status &#x3D; mfrc522.MIFARE_Read(block, buffer1, &amp;len);<br>  if (status !&#x3D; MFRC522::STATUS_OK) {<br>    Serial.print(F(“Reading failed: “));<br>    Serial.println(mfrc522.GetStatusCodeName(status));<br>    return;<br>  }</p>
+<p>  &#x2F;&#x2F;PRINT FIRST NAME<br>  for (uint8_t i &#x3D; 0; i &lt; 16; i++)<br>  {<br>    if (buffer1[i] !&#x3D; 32)<br>    {<br>      Serial.write(buffer1[i]);<br>    }<br>  }<br>  Serial.print(“ “);</p>
+<p>  &#x2F;&#x2F;—————————————- GET LAST NAME</p>
+<p>  byte buffer2[18];<br>  block &#x3D; 1;</p>
+<p>  status &#x3D; mfrc522.PCD_Authenticate(MFRC522::PICC_CMD_MF_AUTH_KEY_A, 1, &amp;key, &amp;(mfrc522.uid)); &#x2F;&#x2F;line 834<br>  if (status !&#x3D; MFRC522::STATUS_OK) {<br>    Serial.print(F(“Authentication failed: “));<br>    Serial.println(mfrc522.GetStatusCodeName(status));<br>    return;<br>  }</p>
+<p>  status &#x3D; mfrc522.MIFARE_Read(block, buffer2, &amp;len);<br>  if (status !&#x3D; MFRC522::STATUS_OK) {<br>    Serial.print(F(“Reading failed: “));<br>    Serial.println(mfrc522.GetStatusCodeName(status));<br>    return;<br>  }</p>
+<p>  &#x2F;&#x2F;PRINT LAST NAME<br>  for (uint8_t i &#x3D; 0; i &lt; 16; i++) {<br>    Serial.write(buffer2[i] );<br>  }</p>
+<p>  &#x2F;&#x2F;—————————————-</p>
+<p>  Serial.println(F(“\n<strong>End Reading</strong>\n”));</p>
+<p>  delay(1000); &#x2F;&#x2F;change value if you want to read cards faster</p>
+<p>  mfrc522.PICC_HaltA();<br>  mfrc522.PCD_StopCrypto1();<br>}<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br>24<br>25<br>26<br>27<br>28<br>29<br>30<br>31<br>32<br>33<br>34<br>35<br>36<br>37<br>38<br>39<br>40<br>41<br>42<br>43<br>44<br>45<br>46<br>47<br>48<br>49<br>50<br>51<br>52<br>53<br>54<br>55<br>56<br>57<br>58<br>59<br>60<br>61<br>62<br>63<br>64<br>65<br>66<br>67<br>68<br>69<br>70<br>71<br>72<br>73<br>74<br>75<br>76<br>77<br>78<br>79<br>80<br>81<br>82<br>83<br>84<br>85<br>86<br>87<br>88<br>89<br>90<br>91<br>92<br>93<br>94<br>95<br>96<br>97<br>98<br>99<br>100<br>101<br>102<br>103<br>104<br>105<br>106<br>107<br>108<br>109<br>110<br>111<br>112<br>113<br>114<br>115<br>116<br>Result</p>
+<p>正如上面所输入的一样-.-</p>
+<p>读取扇区数据<br>以S50为例，读取其中16个扇区的全部数据,烧录程序后刷一下就能在串口监视器看到所有扇区对应的数据了</p>
+<p>Sketch<br>Dumpinfo.info</p>
+<p>#include &lt;SPI.h&gt;<br>#include &lt;MFRC522.h&gt;</p>
+<p>#define RST_PIN         9          &#x2F;&#x2F; Configurable, see typical pin layout above<br>#define SS_PIN          10         &#x2F;&#x2F; Configurable, see typical pin layout above</p>
+<p>MFRC522 mfrc522(SS_PIN, RST_PIN);  &#x2F;&#x2F; Create MFRC522 instance</p>
+<p>void setup() {<br>    Serial.begin(9600);		&#x2F;&#x2F; Initialize serial communications with the PC<br>    while (!Serial);		&#x2F;&#x2F; Do nothing if no serial port is opened (added for Arduinos based on ATMEGA32U4)<br>    SPI.begin();			&#x2F;&#x2F; Init SPI bus<br>    mfrc522.PCD_Init();		&#x2F;&#x2F; Init MFRC522<br>    delay(4);				&#x2F;&#x2F; Optional delay. Some board do need more time after init to be ready, see Readme<br>    mfrc522.PCD_DumpVersionToSerial();	&#x2F;&#x2F; Show details of PCD - MFRC522 Card Reader details<br>    Serial.println(F(“Scan PICC to see UID, SAK, type, and data blocks…”));<br>}</p>
+<p>void loop() {<br>    &#x2F;&#x2F; Reset the loop if no new card present on the sensor&#x2F;reader. This saves the entire process when idle.<br>    if ( ! mfrc522.PICC_IsNewCardPresent()) {<br>        return;<br>    }</p>
+<pre><code>// Select one of the cards
+if ( ! mfrc522.PICC_ReadCardSerial()) &#123;
+    return;
+&#125;
+
+// Dump debug info about the card; PICC_HaltA() is automatically called
+mfrc522.PICC_DumpToSerial(&amp;(mfrc522.uid));
+</code></pre>
+<p>}<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br>24<br>25<br>26<br>27<br>28<br>29<br>30<br>31<br>32<br>Result</p>
+<p>References<br>Arduino教程 RFID-RC522读IC卡门禁原理<br>Introduction to NFC<br>产品资料 提取码: qi6v<br>M1 : S50和S70<br>IC卡小结<br>————————————————<br>版权声明：本文为CSDN博主「Kearney form An idea」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43031092/article/details/108651982">https://blog.csdn.net/weixin_43031092/article/details/108651982</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/leytton/article/details/73480974">https://blog.csdn.net/leytton/article/details/73480974</a></p>
+<p>【文章特色：1、提出IC卡破解原理和简单有效的防御方法2、网上其他文章对于硬件如何接线说得模糊不清】<br>1、序言<br>先说下简单门禁系统的原理：</p>
+<p>(1)IC卡激活：门禁卡管理员将卡片放到读卡器、这时软件读取到IC卡的UID序列号信息(相当于身份证号码)，将这个UID录入数据库激活IC卡。</p>
+<p>(2)刷卡：刷卡时读卡器读取到UID，查询数据库，如果数据库中存在这个UID则表示有效用户,继而控制继电器断电，此时电磁锁开门。</p>
+<p>不亦买的RC522模块采用SPI通信、据说也有串口通信的不过成本较高。大家可以看看这个模块的主要配件：卡和读卡器。</p>
+<p>2、加载RC522库文件<br> Arduino本身有个操作RC5200的库，如下图所示，打开Arduino开发工具中管理库</p>
+<p>搜索”RC522”，选择”MFRC522”安装即可</p>
+<p>点击”More info”可以跳转到github地址<a target="_blank" rel="noopener" href="https://github.com/miguelbalboa/rfid">https://github.com/miguelbalboa/rfid</a> ，下文会有提及。</p>
+<p>安装完毕后，可以看到关于MFRC522的库示例，有读取UID、获取区块信息、修改UID、卡片信息复制等</p>
+<p>注：一般而言IC卡是不能修改0扇区0区块的UID和厂商信息数据，这些是生产时就确定下来的的(关于IC卡的存储结构有空再发文介绍，小伙伴们可以去网上查阅这方面资料也挺多的)，能够全扇区修改的俗称UID卡才支持修改UID，一些不负责的门禁系统厂家仅根据UID来判断用户身份是不可靠的，一个简单的方法是在读之前先写UID操作，如果可写那么这张卡就是UID卡即复制卡，判断无效，系统也可记录是哪张IC卡被复制了用于追溯非法行为，仅供交流与学习，请勿用于非法用途哦</p>
+<p>3、模块引脚接线<br>此处是网络上大部分相关文章没有提及的，只告诉了如何接线，却不告诉我们为什么这样接，甚至连Arduino版本都不说清楚。</p>
+<p>我们打开ReadNUID的示例里面有各种版本Arduino与RC522的引脚连接图，我们按照这个接线即可。在上文提及的github项目主页也有介绍。</p>
+<p>RC522一共8个引脚，如图所示：</p>
+<p>3.3V供电、GND接地不用多说，IRQ是中断才用到的此处没有用到可以不接，其余5个引脚接法如下表所示：</p>
+<p> &#x2F;* Typical pin layout used:</p>
+<ul>
+<li><hr>
+</li>
+<li><pre><code>        MFRC522      Arduino       Arduino   Arduino    Arduino          Arduino
+</code></pre>
+</li>
+<li><pre><code>        Reader/PCD   Uno/101       Mega      Nano v3    Leonardo/Micro   Pro Micro
+</code></pre>
+</li>
+<li>Signal      Pin          Pin           Pin       Pin        Pin              Pin</li>
+<li><hr>
+</li>
+<li>RST&#x2F;Reset   RST          9             5         D9         RESET&#x2F;ICSP-5     RST</li>
+<li>SPI SS      SDA(SS)      10            53        D10        10               10</li>
+<li>SPI MOSI    MOSI         11 &#x2F; ICSP-4   51        D11        ICSP-4           16</li>
+<li>SPI MISO    MISO         12 &#x2F; ICSP-1   50        D12        ICSP-1           14</li>
+<li>SPI SCK     SCK          13 &#x2F; ICSP-3   52        D13        ICSP-3           15<br> *&#x2F;</li>
+</ul>
+<p>4、程序代码<br>此处测试的Arduino型号是Arduino Nano V3.0，其他型号请结合上表修改引脚号。</p>
+<p>示例代码读取UID，并将其分别以十进制和十六进制输出到串口，简化版如下：</p>
+<p>#include &lt;SPI.h&gt;<br>#include &lt;MFRC522.h&gt;</p>
+<p>#define SS_PIN 10<br>#define RST_PIN 9</p>
+<p>MFRC522 rfid(SS_PIN, RST_PIN); &#x2F;&#x2F;实例化类</p>
+<p>&#x2F;&#x2F; 初始化数组用于存储读取到的NUID<br>byte nuidPICC[4];</p>
+<p>void setup() {<br>  Serial.begin(9600);<br>  SPI.begin(); &#x2F;&#x2F; 初始化SPI总线<br>  rfid.PCD_Init(); &#x2F;&#x2F; 初始化 MFRC522<br>}</p>
+<p>void loop() {</p>
+<p>  &#x2F;&#x2F; 找卡<br>  if ( ! rfid.PICC_IsNewCardPresent())<br>    return;</p>
+<p>  &#x2F;&#x2F; 验证NUID是否可读<br>  if ( ! rfid.PICC_ReadCardSerial())<br>    return;</p>
+<p>  MFRC522::PICC_Type piccType &#x3D; rfid.PICC_GetType(rfid.uid.sak);</p>
+<p>  &#x2F;&#x2F; 检查是否MIFARE卡类型<br>  if (piccType !&#x3D; MFRC522::PICC_TYPE_MIFARE_MINI &amp;&amp;<br>    piccType !&#x3D; MFRC522::PICC_TYPE_MIFARE_1K &amp;&amp;<br>    piccType !&#x3D; MFRC522::PICC_TYPE_MIFARE_4K) {<br>    Serial.println(“不支持读取此卡类型”);<br>    return;<br>  }</p>
+<p>  &#x2F;&#x2F; 将NUID保存到nuidPICC数组<br>  for (byte i &#x3D; 0; i &lt; 4; i++) {<br>    nuidPICC[i] &#x3D; rfid.uid.uidByte[i];<br>  }<br>  Serial.print(“十六进制UID：”);<br>  printHex(rfid.uid.uidByte, rfid.uid.size);<br>  Serial.println();</p>
+<p>  Serial.print(“十进制UID：”);<br>  printDec(rfid.uid.uidByte, rfid.uid.size);<br>  Serial.println();</p>
+<p>  &#x2F;&#x2F; 使放置在读卡区的IC卡进入休眠状态，不再重复读卡<br>  rfid.PICC_HaltA();</p>
+<p>  &#x2F;&#x2F; 停止读卡模块编码<br>  rfid.PCD_StopCrypto1();<br>}</p>
+<p>void printHex(byte *buffer, byte bufferSize) {<br>  for (byte i &#x3D; 0; i &lt; bufferSize; i++) {<br>    Serial.print(buffer[i] &lt; 0x10 ? “ 0” : “”);<br>    Serial.print(buffer[i], HEX);<br>  }<br>}</p>
+<p>void printDec(byte *buffer, byte bufferSize) {<br>  for (byte i &#x3D; 0; i &lt; bufferSize; i++) {<br>    Serial.print(buffer[i] &lt; 0x10 ? “ 0” : “”);<br>    Serial.print(buffer[i], DEC);<br>  }<br>}</p>
+<p>5、运行结果<br>依次将卡A、卡B、卡A放到RC522读卡区，串口打印信息如下</p>
+<p>感谢梦鸽推上首页分享给更多的人看到^_^<br>【转载请注明出处: <a target="_blank" rel="noopener" href="http://blog.csdn.net/leytton/article/details/73480974%E3%80%91">http://blog.csdn.net/leytton/article/details/73480974】</a><br> PS：如果本文对您有帮助，请点个赞让我知道哦~<br>————————————————<br>版权声明：本文为CSDN博主「李乾文」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/leytton/article/details/73480974">https://blog.csdn.net/leytton/article/details/73480974</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/06/arduino-RFID-RC522/" data-id="clkjdd1ax000b98aj4dpih4in" data-title="arduino与RFID-RC522模块实现IC卡读取与写入（待整理）" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/01/10/arduino-Universal-Remote-Control/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          万能遥控器
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/01/03/mc-server-news/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">我的世界服务器2023年开新坑啦！！！</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Minecraft/">Minecraft</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E7%B1%BB/">分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E5%8F%91/">开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A4%BE%E5%9B%A2/">社团</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blander/" rel="tag">Blander</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CAD/" rel="tag">CAD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GUI/" rel="tag">GUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Novelai/" rel="tag">Novelai</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSD1309/" rel="tag">SSD1309</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STEAM/" rel="tag">STEAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STEAM%E7%A4%BE/" rel="tag">STEAM社</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VNC/" rel="tag">VNC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/" rel="tag">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arduino/" rel="tag">arduino</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/colour/" rel="tag">colour</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/learn/" rel="tag">learn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mc/" rel="tag">mc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/micro-bit/" rel="tag">micro:bit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nextcloud/" rel="tag">nextcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag">学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%87%E7%AD%BE/" rel="tag">标签</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" rel="tag">树莓派</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%86%E8%88%AA%E6%9D%AF/" rel="tag">领航杯</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Blander/" style="font-size: 10px;">Blander</a> <a href="/tags/CAD/" style="font-size: 12px;">CAD</a> <a href="/tags/GUI/" style="font-size: 10px;">GUI</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/Novelai/" style="font-size: 10px;">Novelai</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SSD1309/" style="font-size: 12px;">SSD1309</a> <a href="/tags/STEAM/" style="font-size: 10px;">STEAM</a> <a href="/tags/STEAM%E7%A4%BE/" style="font-size: 14px;">STEAM社</a> <a href="/tags/VNC/" style="font-size: 10px;">VNC</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/arduino/" style="font-size: 12px;">arduino</a> <a href="/tags/colour/" style="font-size: 10px;">colour</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/learn/" style="font-size: 10px;">learn</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mc/" style="font-size: 12px;">mc</a> <a href="/tags/micro-bit/" style="font-size: 16px;">micro:bit</a> <a href="/tags/nextcloud/" style="font-size: 10px;">nextcloud</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/python/" style="font-size: 18px;">python</a> <a href="/tags/windows/" style="font-size: 12px;">windows</a> <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 12px;">学习</a> <a href="/tags/%E6%A0%87%E7%AD%BE/" style="font-size: 12px;">标签</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" style="font-size: 12px;">树莓派</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">网络</a> <a href="/tags/%E9%A2%86%E8%88%AA%E6%9D%AF/" style="font-size: 10px;">领航杯</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">July 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">January 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">August 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/1000/12/">December 1000</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/07/26/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-HC-SR04/">linux-pi-HC-SR04</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-python-yolo5/">linux-python-yolo5</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-SSD1309/">linux-pi-SSD1309</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-MPU6050/">MPU6050-pi</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

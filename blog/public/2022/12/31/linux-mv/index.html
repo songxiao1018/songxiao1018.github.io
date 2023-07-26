@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>linux-mv | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="1、移动文件或者文件夹在当前文件夹下打开命令行，输入 mv 文件名 目的路径如果需要移动 文件夹 mv 文件夹名 目的路径验证已经移动过去 cd 目的路径ls2、移动有序文件比如源路径内部有1.png，2.png … 10000.png，你只想移动前100个图片到目的路径 mv 源路径&#x2F;{1..100}.png 目的路径             # 移动前100个图片到目的路径其中.pn">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux-mv">
+<meta property="og:url" content="http://example.com/2022/12/31/linux-mv/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1、移动文件或者文件夹在当前文件夹下打开命令行，输入 mv 文件名 目的路径如果需要移动 文件夹 mv 文件夹名 目的路径验证已经移动过去 cd 目的路径ls2、移动有序文件比如源路径内部有1.png，2.png … 10000.png，你只想移动前100个图片到目的路径 mv 源路径&#x2F;{1..100}.png 目的路径             # 移动前100个图片到目的路径其中.pn">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-12-31T03:38:45.000Z">
+<meta property="article:modified_time" content="2023-07-23T14:19:11.700Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-linux-mv" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/12/31/linux-mv/" class="article-date">
+  <time class="dt-published" datetime="2022-12-31T03:38:45.000Z" itemprop="datePublished">2022-12-31</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      linux-mv
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>1、移动文件或者文件夹<br>在当前文件夹下打开命令行，输入</p>
+<p>mv 文件名 目的路径<br>如果需要移动 文件夹</p>
+<p>mv 文件夹名 目的路径<br>验证已经移动过去</p>
+<p>cd 目的路径<br>ls<br>2、移动有序文件<br>比如源路径内部有1.png，2.png … 10000.png，你只想移动前100个图片到目的路径</p>
+<p>mv 源路径&#x2F;{1..100}.png 目的路径             # 移动前100个图片到目的路径<br>其中.png是文件共有后缀，当然也可以替换成共有前缀。</p>
+<p>比如移动第100，200，300，400，500等9张图片到目的路径：</p>
+<p>mv 源路径&#x2F;00{1..5}00.png 目的路径           # 移动名称为100的整数倍的图片到目的路径<br>3、移动间隔文件<br>可以在上面{}中间多增加..表示间距</p>
+<p>比如移动第1，6，11，16…. 96等20张图片到目的路径：</p>
+<p>mv 源路径&#x2F;00{001..100..5}.png 目的路径             # 间隔5移动图像<br>4、移动指定文件<br>可以用*（匹配任意），？（匹配单个）等匹配指定文件</p>
+<p>mv 源路径&#x2F;*.jpg 目的路径       # 移动所有jpg后缀文件<br>mv 源路径&#x2F;?.jpg 目的路径       # 移动0.jpg-9.jpg,因为？匹配一个字符<br>tip： 1、写文件名时可以先写开头几个字母，然后使用 ctrl+tab或tab（看不同电脑设置）补充完整文件名</p>
+<pre><code>     2、如果需要复制，则将 mv 更改为 cp
+
+     3、如需  python复制、移动文件到指定文件夹  戳这里        
+</code></pre>
+<p>————————————————<br>版权声明：本文为CSDN博主「是暮涯啊」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/longshaonihaoa/article/details/80945812">https://blog.csdn.net/longshaonihaoa/article/details/80945812</a></p>
+<hr>
+<p><a target="_blank" rel="noopener" href="http://c.biancheng.net/view/749.html">http://c.biancheng.net/view/749.html</a><br>mv 命令（move 的缩写），既可以在不同的目录之间移动文件或目录，也可以对文件和目录进行重命名。该命令的基本格式如下：<br>[root@localhost ~]# mv 【选项】 源文件 目标文件</p>
+<p>选项：<br>-f：强制覆盖，如果目标文件已经存在，则不询问，直接强制覆盖；<br>-i：交互移动，如果目标文件已经存在，则询问用户是否覆盖（默认选项）；<br>-n：如果目标文件已经存在，则不会覆盖移动，而且不询问用户；<br>-v：显示文件或目录的移动过程；<br>-u：若目标文件已经存在，但两者相比，源文件更新，则会对目标文件进行升级；</p>
+<p>需要注意的是，同 rm 命令类似，mv 命令也是一个具有破坏性的命令，如果使用不当，很可能给系统带来灾难性的后果。</p>
+<p>【例 1】移动文件或目录。<br>[root@localhost ~]# mv cangls &#x2F;tmp<br>#移动之后，源文件会被删除，类似剪切<br>[root@localhost ~]# mkdir movie<br>[root@localhost ~]# mv movie&#x2F; &#x2F;tmp<br>#也可以移动目录。和 rm、cp 不同的是，mv 移动目录不需要加入 “-r” 选项</p>
+<p>如果移动的目标位置已经存在同名的文件，则同样会提示是否覆盖，因为 mv 命令默认执行的也是 “mv -i” 的别名，例如：<br>[root@localhost ~]# touch cangls<br>#重新建立文件<br>[root@localhost ~]# mv cangls &#x2F;tmp<br>mv:县否覆盖”tmp&#x2F;cangls”？y<br>#由于 &#x2F;tmp 目录下已经存在 cangls 文件，所以会提示是否覆盖，需要手工输入 y 覆盖移动</p>
+<p>【例 2】强制移动。<br>之前说过，如果目标目录下已经存在同名文件，则会提示是否覆盖，需要手工确认。这时如果移动的同名文件较多，则需要一个一个文件进行确认，很不方便。</p>
+<p>如果我们确认需要覆盖已经存在的同名文件，则可以使用 “-f” 选项进行强制移动，这就不再需要用户手工确认了。例如：<br>[root@localhost ~]# touch cangls<br>#重新建立文件<br>[root@localhost ~]# mv -f cangls &#x2F;tmp<br>#就算 &#x2F;tmp&#x2F; 目录下已经存在同名的文件，由于”-f”选项的作用，所以会强制覆盖</p>
+<p>【例 3】不覆盖移动。<br>既然可以强制覆盖移动，那也有可能需要不覆盖的移动。如果需要移动几百个同名文件，但是不想覆盖，这时就需要 “-n” 选项的帮助了。例如：<br>[root@localhost ~]# ls &#x2F;tmp<br>&#x2F;tmp&#x2F;bols &#x2F;tmp&#x2F;cangls<br>#在&#x2F;tmp&#x2F;目录下已经存在bols、cangls文件了<br>[root@localhost ~]# mv -vn bols cangls lmls &#x2F;tmp&#x2F;、<br>“lmls”-&gt;”&#x2F;tmp&#x2F;lmls”<br>#再向 &#x2F;tmp&#x2F; 目录中移动同名文件，如果使用了 “-n” 选项，则可以看到只移动了 lmls，而同名的 bols 和 cangls 并没有移动（”-v” 选项用于显示移动过程）</p>
+<p>【例 4】改名。<br>如果源文件和目标文件在同一目录中，那就是改名。例如：<br>[root@localhost ~]# mv bols lmls<br>#把 bols 改名为 lmls</p>
+<p>目录也可以按照同样的方法改名。</p>
+<p>【例 5】显示移动过程。<br>如果我们想要知道在移动过程中到底有哪些文件进行了移动，则可以使用 “-v” 选项来查看详细的移动信息。例如：<br>[root@localhost ~]# touch test1.txt test2.txt test3.txt<br>#建立三个测试文件<br>[root@localhost ~]# mv -v *.txt &#x2F;tmp<br>“test1.txt” -&gt; “&#x2F;tmp&#x2F;test1.txt”<br>“test2.txt” -&gt; “&#x2F;tmp&#x2F;test2.txt”<br>“test3.txt” -&gt; “&#x2F;tmp&#x2F;test3.txt”<br>#加入”-v”选项，可以看到有哪些文件进行了移动</p>
+<p>关注公众号「站长严长生」，在手机上阅读所有教程，随时随地都能学习。本公众号由C语言中文网站长亲自运营，长期更新，坚持原创。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/12/31/linux-mv/" data-id="clkjdd1bk001398aj893o6e9a" data-title="linux-mv" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/01/03/mc-server-news/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          我的世界服务器2023年开新坑啦！！！
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/12/31/linux-zip-tar/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">linux-zip-tar</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Minecraft/">Minecraft</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E7%B1%BB/">分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E5%8F%91/">开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A4%BE%E5%9B%A2/">社团</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blander/" rel="tag">Blander</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CAD/" rel="tag">CAD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GUI/" rel="tag">GUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Novelai/" rel="tag">Novelai</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSD1309/" rel="tag">SSD1309</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STEAM/" rel="tag">STEAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STEAM%E7%A4%BE/" rel="tag">STEAM社</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VNC/" rel="tag">VNC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/" rel="tag">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arduino/" rel="tag">arduino</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/colour/" rel="tag">colour</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/learn/" rel="tag">learn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mc/" rel="tag">mc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/micro-bit/" rel="tag">micro:bit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nextcloud/" rel="tag">nextcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag">学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%87%E7%AD%BE/" rel="tag">标签</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" rel="tag">树莓派</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%86%E8%88%AA%E6%9D%AF/" rel="tag">领航杯</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Blander/" style="font-size: 10px;">Blander</a> <a href="/tags/CAD/" style="font-size: 12px;">CAD</a> <a href="/tags/GUI/" style="font-size: 10px;">GUI</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/Novelai/" style="font-size: 10px;">Novelai</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SSD1309/" style="font-size: 12px;">SSD1309</a> <a href="/tags/STEAM/" style="font-size: 10px;">STEAM</a> <a href="/tags/STEAM%E7%A4%BE/" style="font-size: 14px;">STEAM社</a> <a href="/tags/VNC/" style="font-size: 10px;">VNC</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/arduino/" style="font-size: 12px;">arduino</a> <a href="/tags/colour/" style="font-size: 10px;">colour</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/learn/" style="font-size: 10px;">learn</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mc/" style="font-size: 12px;">mc</a> <a href="/tags/micro-bit/" style="font-size: 16px;">micro:bit</a> <a href="/tags/nextcloud/" style="font-size: 10px;">nextcloud</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/python/" style="font-size: 18px;">python</a> <a href="/tags/windows/" style="font-size: 12px;">windows</a> <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 12px;">学习</a> <a href="/tags/%E6%A0%87%E7%AD%BE/" style="font-size: 12px;">标签</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" style="font-size: 12px;">树莓派</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">网络</a> <a href="/tags/%E9%A2%86%E8%88%AA%E6%9D%AF/" style="font-size: 10px;">领航杯</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">July 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">January 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">August 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/1000/12/">December 1000</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/07/26/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-HC-SR04/">linux-pi-HC-SR04</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-python-yolo5/">linux-python-yolo5</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-SSD1309/">linux-pi-SSD1309</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-MPU6050/">MPU6050-pi</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

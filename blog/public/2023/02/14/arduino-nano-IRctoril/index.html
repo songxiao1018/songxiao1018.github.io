@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>基于Arduino的简易万能遥控器 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="基于Arduino的简易万能遥控器1. 介绍本项目是基于Arduino的万能遥控器，可以通过本遥控器控制电脑、电视、空调、机顶盒等设备。本项目的遥控器是基于Arduino Nano开发的，可以通过USB接口连接电脑，直接下载程序。同时，用户可以自己设定按键，实现自定义遥控器。 1.1 产品面向群体本产品面向的群体是需要使用遥控器控制电脑、电视、空调、机顶盒等设备的用户。同时针对老龄化的用户本项目提">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于Arduino的简易万能遥控器">
+<meta property="og:url" content="http://example.com/2023/02/14/arduino-nano-IRctoril/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="基于Arduino的简易万能遥控器1. 介绍本项目是基于Arduino的万能遥控器，可以通过本遥控器控制电脑、电视、空调、机顶盒等设备。本项目的遥控器是基于Arduino Nano开发的，可以通过USB接口连接电脑，直接下载程序。同时，用户可以自己设定按键，实现自定义遥控器。 1.1 产品面向群体本产品面向的群体是需要使用遥控器控制电脑、电视、空调、机顶盒等设备的用户。同时针对老龄化的用户本项目提">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/">
+<meta property="og:image" content="http://example.com/">
+<meta property="og:image" content="http://example.com/">
+<meta property="og:image" content="http://example.com/">
+<meta property="article:published_time" content="2023-02-13T16:08:04.000Z">
+<meta property="article:modified_time" content="2023-07-23T14:19:13.304Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="arduino">
+<meta property="article:tag" content="CAD">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-arduino-nano-IRctoril" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/02/14/arduino-nano-IRctoril/" class="article-date">
+  <time class="dt-published" datetime="2023-02-13T16:08:04.000Z" itemprop="datePublished">2023-02-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%BC%80%E5%8F%91/">开发</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      基于Arduino的简易万能遥控器
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="基于Arduino的简易万能遥控器"><a href="#基于Arduino的简易万能遥控器" class="headerlink" title="基于Arduino的简易万能遥控器"></a>基于Arduino的简易万能遥控器</h1><h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1. 介绍"></a>1. 介绍</h2><p>本项目是基于Arduino的万能遥控器，可以通过本遥控器控制电脑、电视、空调、机顶盒等设备。本项目的遥控器是基于Arduino Nano开发的，可以通过USB接口连接电脑，直接下载程序。同时，用户可以自己设定按键，实现自定义遥控器。</p>
+<h3 id="1-1-产品面向群体"><a href="#1-1-产品面向群体" class="headerlink" title="1.1 产品面向群体"></a>1.1 产品面向群体</h3><p>本产品面向的群体是需要使用遥控器控制电脑、电视、空调、机顶盒等设备的用户。同时针对老龄化的用户本项目提出了简化按键数量，放大按键体积的理念，使得老年人也可以轻松使用本遥控器。</p>
+<h3 id="1-2-产品优势"><a href="#1-2-产品优势" class="headerlink" title="1.2 产品优势"></a>1.2 产品优势</h3><ul>
+<li>通过USB接口连接电脑，方便固件下载；</li>
+<li>通过Arduino IED开发，简单易用；</li>
+<li>针对特殊群体设计，简化按键数量，放大按键体积；</li>
+</ul>
+<h2 id="2-产品外观"><a href="#2-产品外观" class="headerlink" title="2. 产品外观"></a>2. 产品外观</h2><p>（本产品正处于开发阶段，未进行外壳设计）</p>
+<p><img src="/" alt="正面"></p>
+<p><img src="/" alt="背面"></p>
+<h2 id="2-硬件设计"><a href="#2-硬件设计" class="headerlink" title="2. 硬件设计"></a>2. 硬件设计</h2><h3 id="2-1-硬件boom表"><a href="#2-1-硬件boom表" class="headerlink" title="2.1 硬件boom表"></a>2.1 硬件boom表</h3><table>
+<thead>
+<tr>
+<th>原件名称</th>
+<th>原件型号</th>
+<th>代号</th>
+<th>数量</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Arduino Nano</td>
+<td>Arduino Nano</td>
+<td>Arduino Nano</td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td>电容</td>
+<td>100nF</td>
+<td>C1</td>
+<td>2</td>
+<td>10% 50V</td>
+</tr>
+<tr>
+<td>电容</td>
+<td>220uF</td>
+<td>C2</td>
+<td>2</td>
+<td>25V</td>
+</tr>
+<tr>
+<td>电阻</td>
+<td>220</td>
+<td>R1</td>
+<td>2</td>
+<td>0.1% 125mW</td>
+</tr>
+<tr>
+<td>AMS1117</td>
+<td>AMS1117-3.3</td>
+<td>AMS1117</td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td>红外发射二极管</td>
+<td>IRM-3638</td>
+<td>IRM-3638</td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td>红外接收二极管</td>
+<td>TSOP4838</td>
+<td>TSOP4838</td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td>按键</td>
+<td>6x6x4.5mm</td>
+<td>K1</td>
+<td>8</td>
+<td></td>
+</tr>
+<tr>
+<td>自恢复保险丝</td>
+<td>5.5A</td>
+<td>F1</td>
+<td>1</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="2-2-原理图"><a href="#2-2-原理图" class="headerlink" title="2.2 原理图"></a>2.2 原理图</h3><p><img src="/" alt="Image: image"></p>
+<p><a href="files/keyboard-nano/keyboard-nano.pdf">pdf</a></p>
+<h3 id="2-3-PCB"><a href="#2-3-PCB" class="headerlink" title="2.3 PCB"></a>2.3 PCB</h3><p><img src="/" alt="Image: image"></p>
+<p><a href="files/keyboard-nano/keyboard-nano-pcb.pdf">pdf</a></p>
+<h2 id="3-软件"><a href="#3-软件" class="headerlink" title="3. 软件"></a>3. 软件</h2><h3 id="3-1-红外部分"><a href="#3-1-红外部分" class="headerlink" title="3.1 红外部分"></a>3.1 红外部分</h3><h4 id="3-1-1-红外发射与接收原理"><a href="#3-1-1-红外发射与接收原理" class="headerlink" title="3.1.1 红外发射与接收原理"></a>3.1.1 红外发射与接收原理</h4><p>红外发射原理是通过红外发射二极管发射红外信号，通过红外接收二极管接收红外信号。红外发射二极管的引脚分别为GND、VCC，其中GND为地，VCC为电源同时为信号输入。红外接收二极管的引脚分别为GND、VCC、OUT，其中GND为地，VCC为电源，OUT为输出。红外发射二极管的VCC引脚连接到Arduino NANO的D3引脚。红外接收二极管的VCC引脚连接到Arduino NANO的VCC引脚，OUT引脚连接到Arduino的D2引脚。</p>
+<h4 id="3-1-2-红外发射与接收代码"><a href="#3-1-2-红外发射与接收代码" class="headerlink" title="3.1.2 红外发射与接收代码"></a>3.1.2 红外发射与接收代码</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;IRremote.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//红外 接收</span></span><br><span class="line"><span class="type">int</span> RECV_PIN = <span class="number">2</span>;</span><br><span class="line">IRrecv <span class="title function_">irrecv</span><span class="params">(RECV_PIN)</span>;</span><br><span class="line">decode_results results;</span><br><span class="line"></span><br><span class="line"><span class="comment">//红外 发射</span></span><br><span class="line">IRsend irsend;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">setup</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    <span class="comment">//红外 初始化</span></span><br><span class="line">    Serial.begin(<span class="number">9600</span>);</span><br><span class="line">    irrecv.enableIRIn(); <span class="comment">// Start the receiver</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">loop</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 红外 发射</span></span><br><span class="line">    irsend.sendNEC(<span class="number">0xFF18E7</span>, <span class="number">32</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 红外 接收</span></span><br><span class="line">    <span class="keyword">if</span> (irrecv.decode(&amp;results)) &#123;</span><br><span class="line">        Serial.println(results.value, HEX);</span><br><span class="line">        irrecv.resume(); <span class="comment">// Receive the next value</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-按键部分"><a href="#3-2-按键部分" class="headerlink" title="3.2 按键部分"></a>3.2 按键部分</h3><h4 id="3-2-1-按键原理"><a href="#3-2-1-按键原理" class="headerlink" title="3.2.1 按键原理"></a>3.2.1 按键原理</h4><p>按键原理是通过Arduino的数字输入引脚读取按键的状态，当按键按下时，引脚电平为低，当按键松开时，引脚电平为高。Arduino的数字输入引脚分别为D2、D3、D4、D5、D6、D7、D8、D9、D10、D11、D12、D13。本项目按键的引脚分别为D6、D7、D8、D9、D10、D11、D12、D13这8个。</p>
+<h4 id="3-2-2-按键代码"><a href="#3-2-2-按键代码" class="headerlink" title="3.2.2 按键代码"></a>3.2.2 按键代码</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 按键 初始化</span></span><br><span class="line"><span class="type">int</span> button6 = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> button7 = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> button8 = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> button9 = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> button10 = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> button11 = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> button12 = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> button13 = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">setup</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 按键 初始化</span></span><br><span class="line">    pinMode(<span class="number">6</span>, INPUT);</span><br><span class="line">    pinMode(<span class="number">7</span>, INPUT);</span><br><span class="line">    pinMode(<span class="number">8</span>, INPUT);</span><br><span class="line">    pinMode(<span class="number">9</span>, INPUT);</span><br><span class="line">    pinMode(<span class="number">10</span>, INPUT);</span><br><span class="line">    pinMode(<span class="number">11</span>, INPUT);</span><br><span class="line">    pinMode(<span class="number">12</span>, INPUT);</span><br><span class="line">    pinMode(<span class="number">13</span>, OUTPUT);  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">loop</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 按键 读取</span></span><br><span class="line">    button6  = digitalRead(<span class="number">6</span>);</span><br><span class="line">    button7  = digitalRead(<span class="number">7</span>);</span><br><span class="line">    button8  = digitalRead(<span class="number">8</span>);</span><br><span class="line">    button9  = digitalRead(<span class="number">9</span>);</span><br><span class="line">    button10 = digitalRead(<span class="number">10</span>);</span><br><span class="line">    button11 = digitalRead(<span class="number">11</span>);</span><br><span class="line">    button12 = digitalRead(<span class="number">12</span>);</span><br><span class="line">  </span><br><span class="line">    <span class="comment">// 数据 发射</span></span><br><span class="line">    <span class="keyword">if</span> (button6  == HIGH) &#123;digitalWrite(<span class="number">13</span>, HIGH);irsend.sendNEC(<span class="number">0xFF18E7</span>, <span class="number">32</span>);delay(<span class="number">100</span>);&#125;<span class="keyword">else</span> &#123;digitalWrite(<span class="number">13</span>, LOW);&#125;</span><br><span class="line">    <span class="keyword">if</span> (button7  == HIGH) &#123;digitalWrite(<span class="number">13</span>, HIGH);irsend.sendNEC(<span class="number">0xFFA857</span>, <span class="number">32</span>);delay(<span class="number">100</span>);&#125;<span class="keyword">else</span> &#123;digitalWrite(<span class="number">13</span>, LOW);&#125;</span><br><span class="line">    <span class="keyword">if</span> (button8  == HIGH) &#123;digitalWrite(<span class="number">13</span>, HIGH);irsend.sendNEC(<span class="number">0xFF30CF</span>, <span class="number">32</span>);delay(<span class="number">100</span>);&#125;<span class="keyword">else</span> &#123;digitalWrite(<span class="number">13</span>, LOW);&#125;</span><br><span class="line">    <span class="keyword">if</span> (button9  == HIGH) &#123;digitalWrite(<span class="number">13</span>, HIGH);irsend.sendNEC(<span class="number">0xFFD02F</span>, <span class="number">32</span>);delay(<span class="number">100</span>);&#125;<span class="keyword">else</span> &#123;digitalWrite(<span class="number">13</span>, LOW);&#125;</span><br><span class="line">    <span class="keyword">if</span> (button10 == HIGH) &#123;digitalWrite(<span class="number">13</span>, HIGH);irsend.sendNEC(<span class="number">0xFF728D</span>, <span class="number">32</span>);delay(<span class="number">100</span>);&#125;<span class="keyword">else</span> &#123;digitalWrite(<span class="number">13</span>, LOW);&#125;</span><br><span class="line">    <span class="keyword">if</span> (button11 == HIGH) &#123;digitalWrite(<span class="number">13</span>, HIGH);irsend.sendNEC(<span class="number">0xFF926D</span>, <span class="number">32</span>);delay(<span class="number">100</span>);&#125;<span class="keyword">else</span> &#123;digitalWrite(<span class="number">13</span>, LOW);&#125;</span><br><span class="line">    <span class="keyword">if</span> (button12 == HIGH) &#123;digitalWrite(<span class="number">13</span>, HIGH);irsend.sendNEC(<span class="number">0xFF02FD</span>, <span class="number">32</span>);delay(<span class="number">100</span>);&#125;<span class="keyword">else</span> &#123;digitalWrite(<span class="number">13</span>, LOW);&#125;</span><br><span class="line">    <span class="keyword">if</span> (button13 == HIGH) &#123;irsend.sendNEC(<span class="number">0xFF926D</span>, <span class="number">32</span>);delay(<span class="number">100</span>);&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-效果"><a href="#4-效果" class="headerlink" title="4. 效果"></a>4. 效果</h2><p>当按下按键时，红外发射二极管发射红外信号。<br>当红外接收二极管接收到红外信号，Arduino NANO通过串口打印红外信号的值。</p>
+<h2 id="5-参考"><a href="#5-参考" class="headerlink" title="5. 参考"></a>5. 参考</h2><h2 id="6-未来计划"><a href="#6-未来计划" class="headerlink" title="6. 未来计划"></a>6. 未来计划</h2><ul>
+<li>加入蓝牙模块，实现蓝牙遥控。</li>
+<li>加入WiFi模块，实现WiFi遥控。</li>
+<li>加入LED灯珠，实现按键按下时亮灯。</li>
+<li>加入OLED屏幕，实现屏幕显示遥控器的按键状态。</li>
+<li>加入文件读取与写入，实现遥控器的按键状态保存与实时修改。</li>
+</ul>
+<h2 id="7-附录"><a href="#7-附录" class="headerlink" title="7. 附录"></a>7. 附录</h2><h3 id="7-1-完整代码"><a href="#7-1-完整代码" class="headerlink" title="7.1 完整代码"></a>7.1 完整代码</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;IRremote.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 按键 初始化</span></span><br><span class="line"><span class="type">int</span> button6 = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> button7 = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> button8 = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> button9 = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> button10 = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> button11 = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> button12 = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> button13 = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//红外 初始化</span></span><br><span class="line"><span class="type">int</span> RECV_PIN = <span class="number">2</span>;</span><br><span class="line">IRrecv <span class="title function_">irrecv</span><span class="params">(RECV_PIN)</span>;</span><br><span class="line">decode_results results;</span><br><span class="line"></span><br><span class="line">IRsend irsend;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">setup</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">  <span class="comment">// 按键 初始化</span></span><br><span class="line">  pinMode(<span class="number">6</span>, INPUT);</span><br><span class="line">  pinMode(<span class="number">7</span>, INPUT);</span><br><span class="line">  pinMode(<span class="number">8</span>, INPUT);</span><br><span class="line">  pinMode(<span class="number">9</span>, INPUT);</span><br><span class="line">  pinMode(<span class="number">10</span>, INPUT);</span><br><span class="line">  pinMode(<span class="number">11</span>, INPUT);</span><br><span class="line">  pinMode(<span class="number">12</span>, INPUT);</span><br><span class="line">  pinMode(<span class="number">13</span>, OUTPUT);  </span><br><span class="line"></span><br><span class="line">  <span class="comment">//红外 初始化</span></span><br><span class="line">  Serial.begin(<span class="number">9600</span>);</span><br><span class="line">  irrecv.enableIRIn(); <span class="comment">// Start the receiver</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">loop</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">  button6  = digitalRead(<span class="number">6</span>);</span><br><span class="line">  button7  = digitalRead(<span class="number">7</span>);</span><br><span class="line">  button8  = digitalRead(<span class="number">8</span>);</span><br><span class="line">  button9  = digitalRead(<span class="number">9</span>);</span><br><span class="line">  button10 = digitalRead(<span class="number">10</span>);</span><br><span class="line">  button11 = digitalRead(<span class="number">11</span>);</span><br><span class="line">  button12 = digitalRead(<span class="number">12</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">if</span> (button6  == HIGH) &#123;digitalWrite(<span class="number">13</span>, HIGH);irsend.sendNEC(<span class="number">0xFF18E7</span>, <span class="number">32</span>);delay(<span class="number">100</span>);&#125;<span class="keyword">else</span> &#123;digitalWrite(<span class="number">13</span>, LOW);&#125;</span><br><span class="line">  <span class="keyword">if</span> (button7  == HIGH) &#123;digitalWrite(<span class="number">13</span>, HIGH);irsend.sendNEC(<span class="number">0xFFA857</span>, <span class="number">32</span>);delay(<span class="number">100</span>);&#125;<span class="keyword">else</span> &#123;digitalWrite(<span class="number">13</span>, LOW);&#125;</span><br><span class="line">  <span class="keyword">if</span> (button8  == HIGH) &#123;digitalWrite(<span class="number">13</span>, HIGH);irsend.sendNEC(<span class="number">0xFF30CF</span>, <span class="number">32</span>);delay(<span class="number">100</span>);&#125;<span class="keyword">else</span> &#123;digitalWrite(<span class="number">13</span>, LOW);&#125;</span><br><span class="line">  <span class="keyword">if</span> (button9  == HIGH) &#123;digitalWrite(<span class="number">13</span>, HIGH);irsend.sendNEC(<span class="number">0xFFD02F</span>, <span class="number">32</span>);delay(<span class="number">100</span>);&#125;<span class="keyword">else</span> &#123;digitalWrite(<span class="number">13</span>, LOW);&#125;</span><br><span class="line">  <span class="keyword">if</span> (button10 == HIGH) &#123;digitalWrite(<span class="number">13</span>, HIGH);irsend.sendNEC(<span class="number">0xFF728D</span>, <span class="number">32</span>);delay(<span class="number">100</span>);&#125;<span class="keyword">else</span> &#123;digitalWrite(<span class="number">13</span>, LOW);&#125;</span><br><span class="line">  <span class="keyword">if</span> (button11 == HIGH) &#123;digitalWrite(<span class="number">13</span>, HIGH);irsend.sendNEC(<span class="number">0xFF926D</span>, <span class="number">32</span>);delay(<span class="number">100</span>);&#125;<span class="keyword">else</span> &#123;digitalWrite(<span class="number">13</span>, LOW);&#125;</span><br><span class="line">  <span class="keyword">if</span> (button12 == HIGH) &#123;digitalWrite(<span class="number">13</span>, HIGH);irsend.sendNEC(<span class="number">0xFF02FD</span>, <span class="number">32</span>);delay(<span class="number">100</span>);&#125;<span class="keyword">else</span> &#123;digitalWrite(<span class="number">13</span>, LOW);&#125;</span><br><span class="line">  <span class="comment">// if (button13 == HIGH) &#123;irsend.sendNEC(0xFF926D, 32);delay(100);&#125;</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (irrecv.decode(&amp;results)) &#123;</span><br><span class="line">    Serial.println(results.value, HEX);</span><br><span class="line">    irrecv.resume();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-2-红外信号的读取"><a href="#7-2-红外信号的读取" class="headerlink" title="7.2 红外信号的读取"></a>7.2 红外信号的读取</h3><p>红外信号的值可以通过Arduino的串口打印出来，然后通过修改代码中的红外信号值，实现遥控器的按键状态的修改。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/02/14/arduino-nano-IRctoril/" data-id="clkjdd1b5000k98aje7hl98bo" data-title="基于Arduino的简易万能遥控器" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CAD/" rel="tag">CAD</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/arduino/" rel="tag">arduino</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/02/28/zhongxueshenrenzhi/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          中学生认知与学习
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/01/26/Screamcut-Snipaste/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Screamcut-Snipaste</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Minecraft/">Minecraft</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E7%B1%BB/">分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E5%8F%91/">开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A4%BE%E5%9B%A2/">社团</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blander/" rel="tag">Blander</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CAD/" rel="tag">CAD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GUI/" rel="tag">GUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Novelai/" rel="tag">Novelai</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSD1309/" rel="tag">SSD1309</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STEAM/" rel="tag">STEAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STEAM%E7%A4%BE/" rel="tag">STEAM社</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VNC/" rel="tag">VNC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/" rel="tag">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arduino/" rel="tag">arduino</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/colour/" rel="tag">colour</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/learn/" rel="tag">learn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mc/" rel="tag">mc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/micro-bit/" rel="tag">micro:bit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nextcloud/" rel="tag">nextcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag">学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%87%E7%AD%BE/" rel="tag">标签</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" rel="tag">树莓派</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%86%E8%88%AA%E6%9D%AF/" rel="tag">领航杯</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Blander/" style="font-size: 10px;">Blander</a> <a href="/tags/CAD/" style="font-size: 12px;">CAD</a> <a href="/tags/GUI/" style="font-size: 10px;">GUI</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/Novelai/" style="font-size: 10px;">Novelai</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SSD1309/" style="font-size: 12px;">SSD1309</a> <a href="/tags/STEAM/" style="font-size: 10px;">STEAM</a> <a href="/tags/STEAM%E7%A4%BE/" style="font-size: 14px;">STEAM社</a> <a href="/tags/VNC/" style="font-size: 10px;">VNC</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/arduino/" style="font-size: 12px;">arduino</a> <a href="/tags/colour/" style="font-size: 10px;">colour</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/learn/" style="font-size: 10px;">learn</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mc/" style="font-size: 12px;">mc</a> <a href="/tags/micro-bit/" style="font-size: 16px;">micro:bit</a> <a href="/tags/nextcloud/" style="font-size: 10px;">nextcloud</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/python/" style="font-size: 18px;">python</a> <a href="/tags/windows/" style="font-size: 12px;">windows</a> <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 12px;">学习</a> <a href="/tags/%E6%A0%87%E7%AD%BE/" style="font-size: 12px;">标签</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" style="font-size: 12px;">树莓派</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">网络</a> <a href="/tags/%E9%A2%86%E8%88%AA%E6%9D%AF/" style="font-size: 10px;">领航杯</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">July 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">January 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">August 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/1000/12/">December 1000</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/07/26/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-HC-SR04/">linux-pi-HC-SR04</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-python-yolo5/">linux-python-yolo5</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-SSD1309/">linux-pi-SSD1309</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/linux-pi-MPU6050/">MPU6050-pi</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

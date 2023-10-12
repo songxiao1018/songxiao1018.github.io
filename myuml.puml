@@ -1,0 +1,3 @@
+@startuml 你好
+
+my -> you : hello
